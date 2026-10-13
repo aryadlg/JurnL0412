@@ -11920,7 +11920,7 @@ function gears(host,D){var items=D.items||[],N=items.length||8,Nc=34,No=14,m=3.4
  h+='</g></svg></div><div class="an-side"><div class="an-hint">Touche un engrenage pour voir son rôle'+(sc.length?', ou choisis un exemple réel :':'.')+'</div>'+(sc.length?'<div class="an-scn">'+sc.map(function(s,i){return '<button type="button" data-s="'+i+'">'+esc(s.t)+'</button>';}).join('')+'</div>':'')+'<div class="an-info"></div></div></div>';
  host.innerHTML=h;var svg=host.querySelector('svg'),info=host.querySelector('.an-info'),on={},t0=null,ang=0,sp=1;
  var outs=[].slice.call(host.querySelectorAll('.ga-o')),cg=host.querySelector('.ga-c');
- function frame(ts){if(!host.isConnected)return;if(t0==null)t0=ts;var dt=Math.min(64,ts-t0);t0=ts;ang+=dt*0.012*sp;cg.setAttribute('transform','rotate('+ang.toFixed(2)+')');
+ function frame(ts){if(!host.isConnected)return;if(!host.offsetParent||document.hidden){t0=null;host.__raf=setTimeout(function(){host.__raf=requestAnimationFrame(frame);},700);return;}if(t0==null)t0=ts;var dt=Math.min(64,ts-t0);t0=ts;ang+=dt*0.012*sp;cg.setAttribute('transform','rotate('+ang.toFixed(2)+')');
   outs.forEach(function(g,i){var a=(-90+i*360/N);var r=-(Nc/No)*ang+a*(1+Nc/No)+180/No;g.querySelector('.ga-rot').setAttribute('transform','rotate('+r.toFixed(2)+')');});
   host.__raf=requestAnimationFrame(frame);}
  if(!rm())host.__raf=requestAnimationFrame(frame);else frame(0);
@@ -12003,7 +12003,10 @@ function carry(host,D){
   host.querySelectorAll('[data-k]').forEach(function(b){b.classList.toggle('on',+b.dataset.k===k);});host.querySelector('.cr-info').innerHTML='<div class="an-it"><b>'+esc(s.t)+'</b><p>'+esc(s.d)+'</p></div>';}
  host.querySelectorAll('[data-k]').forEach(function(b){b.onclick=function(){set(+b.dataset.k);};});set(0);}
 
-window.__anim={gears:gears,flow:flow,liquid:liquid,seesaw:seesaw,dotplot:dotplot,stir:stir,carry:carry};
+var SAFE=false;try{SAFE=/[?&#]secours/.test(location.href)||localStorage.getItem('mf_safe')==='1';}catch(x){}
+function safe(f){return function(h,d){if(SAFE){h.innerHTML='<div class="frm-small">Animations en pause (mode secours).</div>';return;}return f(h,d);};}
+window.__anim={gears:safe(gears),flow:flow,liquid:safe(liquid),seesaw:safe(seesaw),dotplot:safe(dotplot),stir:safe(stir),carry:safe(carry)};window.__animSafe=SAFE;
+var __unused={gears:gears,flow:flow,liquid:liquid,seesaw:seesaw,dotplot:dotplot,stir:stir,carry:carry};
 })();
 
 (function(){/* v52 : onglet Formation */
@@ -12046,7 +12049,7 @@ function F(){if(!DB.formation){DB.formation={done:{},hidden:{},notes:{},cur:null
 var st={edit:true,showHidden:false,sideOpen:false};var tSave=null;
 var HIST=[],lastSnap=null,lastKey=null;
 function fkey(o){var c={};for(var k in o)if(['cur','last','view','theme','badgeSeen'].indexOf(k)<0)c[k]=o[k];return JSON.stringify(c);}
-function snapNow(){var cur=JSON.stringify(DB.formation||{}),ky=fkey(DB.formation||{});if(lastSnap!==null&&ky!==lastKey){HIST.push(lastSnap);var mx=cur.length>3e6?5:20;while(HIST.length>mx)HIST.shift();}lastSnap=cur;lastKey=ky;}
+function snapNow(){var cur=JSON.stringify(DB.formation||{}),ky=fkey(DB.formation||{});if(lastSnap!==null&&ky!==lastKey){HIST.push(lastSnap);var mx=cur.length>12e6?0:cur.length>4e6?2:cur.length>1.5e6?6:20;while(HIST.length>mx)HIST.shift();}lastSnap=cur;lastKey=ky;}
 function persist(){clearTimeout(tSave);tSave=setTimeout(function(){snapNow();try{save();}catch(e){}updUndo();},400);}
 function updUndo(){var b=document.querySelector('#frmRoot [data-a="undo"]');if(b){b.disabled=!HIST.length;b.textContent='↶ Annuler'+(HIST.length?' ('+HIST.length+')':'');}}
 function undo(){clearTimeout(tSave);snapNow();if(!HIST.length){try{toast('Rien à annuler');}catch(e){}return;}lastSnap=HIST.pop();try{DB.formation=JSON.parse(lastSnap);lastKey=fkey(DB.formation);}catch(e){return;}try{save();}catch(e){}render();try{toast('Annulé ✓');}catch(e){}}
@@ -12075,7 +12078,8 @@ function statusOf(id){var f=F(),n=f.notes[id];var s=n&&n.status;if(s)return s;re
 function themeStats(tid){var f=F(),all=ORDER.filter(function(i){return LS[i].theme===tid&&!f.hidden[i];});var d=all.filter(function(i){return f.done[i];}).length;return {n:all.length,d:d,next:all.find(function(i){return !f.done[i];})};}
 function root(){return document.getElementById('frmRoot');}
 function pct(s){return s.n?Math.round(s.d*100/s.n):0;}
-function render(){var r=root();if(!r)return;var f=F();if(lastSnap===null){lastSnap=JSON.stringify(DB.formation);lastKey=fkey(DB.formation);}f.view=f.view||'home';if(f.view==='lesson'&&!LS[f.cur])f.view='home';
+function render(){try{render0();}catch(err){var r=root();if(r)r.innerHTML='<div class="fc" style="margin:20px 0"><div class="fc-h"><span>Oups, cette page n\'a pas pu s\'afficher</span></div><div class="frm-small" style="margin:8px 0 12px">Fais une capture de ce message pour Claude : <b>'+String(err&&err.message||err).replace(/</g,'&lt;')+'</b></div><button class="frm-btn dark" data-a="frmhome">Revenir à l\'accueil Formation</button></div>';var b=r&&r.querySelector('[data-a="frmhome"]');if(b)b.onclick=function(){var f=F();f.view='home';st.box=null;st.ind=null;st.org=false;st.splay=null;render();};try{console.error(err);}catch(x){}}}
+function render0(){var r=root();if(!r)return;var f=F();if(lastSnap===null){lastSnap=JSON.stringify(DB.formation);lastKey=fkey(DB.formation);}f.view=f.view||'home';if(f.view==='lesson'&&!LS[f.cur])f.view='home';
  var h='<div class="fundo"><button class="frm-btn" data-a="undo"'+(HIST.length?'':' disabled')+' title="Annuler la dernière modification (⌘Z)">↶ Annuler'+(HIST.length?' ('+HIST.length+')':'')+'</button></div><nav class="fnav"><button data-go="home" class="'+(f.view==='home'?'on':'')+'"><span class="fnav-t">Accueil</span><span class="fnav-s">Formation</span></button>';
  COURSE.forEach(function(t){var s=themeStats(t.id),on=(f.view==='toc'||f.view==='lesson')&&f.theme===t.id;h+='<button data-toc="'+t.id+'" class="'+(on?'on':'')+'"><span class="fnav-t">'+e(t.short.split(' · ')[0])+'</span><span class="fnav-s">'+e(t.short.split(' · ')[1]||t.name)+' · '+s.d+'/'+s.n+'</span><i style="width:'+pct(s)+'%"></i></button>';});
  h+='<button data-go="tools" class="ftool'+(f.view==='tools'?' on':'')+'"><span class="fnav-t">🧰 Boîte à outils</span><span class="fnav-s">Fiches de triche · tickers · liens</span></button></nav>';
@@ -12431,7 +12435,7 @@ function wirePoster(id,n){var r=root();
  r.querySelectorAll('[data-aidel]').forEach(function(b){b.onclick=function(){if(confirm('Supprimer cette image ?')){n.ai.splice(+b.dataset.aidel,1);touch(id);render();}};});
  r.querySelectorAll('[data-aicap]').forEach(function(el){el.onclick=function(){var i=+el.dataset.aicap;inlineEdit(el,n.ai[i].cap,false,function(v){if(v!==null){n.ai[i].cap=v;touch(id);}render();});};});
  r.querySelectorAll('.poster img[data-zoom],.pp-ai img[data-zoom]').forEach(function(im){im.onclick=function(){var z=document.createElement('div');z.className='frm-zoom';z.innerHTML='<img src="'+im.src+'" alt="">';z.onclick=function(){z.remove();};document.body.appendChild(z);};});}
-function readImageResizedBig(file,cb){var rd=new FileReader();rd.onload=function(){var img=new Image();img.onload=function(){var max=1800,w=img.width,h=img.height;if(w>max){h=Math.round(h*max/w);w=max;}var c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);try{cb(c.toDataURL('image/jpeg',0.8));}catch(x){cb(rd.result);}};img.onerror=function(){cb(rd.result);};img.src=rd.result;};rd.readAsDataURL(file);}
+function readImageResizedBig(file,cb){var rd=new FileReader();rd.onload=function(){var img=new Image();img.onload=function(){var max=1500,w=img.width,h=img.height;if(w>max){h=Math.round(h*max/w);w=max;}var c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);try{cb(c.toDataURL('image/jpeg',0.76));}catch(x){cb(rd.result);}};img.onerror=function(){cb(rd.result);};img.src=rd.result;};rd.readAsDataURL(file);}
 
 /* ---- Lot 1 : calendrier ↔ fiches, quiz patterns ---- */
 var INDRX=[['corecpi',/core\s*(cpi|hicp)|(cpi|ipc|hicp).*(core|sous-jacent|hors)|sous-jacente/i],['pce',/\bPCE\b/i],['ppi',/\bPPI\b|prix à la production/i],['cpi',/\bCPI\b|\bHICP\b|\bIPCH?\b|inflation/i],['nfp',/non.?farm|\bNFP\b|payroll|unemployment rate|taux de chômage|average hourly|salaire horaire|employment change/i],['claims',/jobless|claims|inscriptions au chômage|demandes d'allocation/i],['ism',/\bISM\b|\bPMI\b/i],['zew',/\bZEW\b/i],['ifo',/\bIfo\b/i],['durables',/durable/i],['pending',/pending home|promesses de vente/i],['newhome',/new home|maisons neuves/i],['permis',/building permit|housing start|permis de construire|mises en chantier/i],['michigan',/michigan/i],['retail',/retail sales|ventes au détail/i],['ip',/industrial production|production industrielle/i],['pib',/\bGDP\b|\bPIB\b/i]];
@@ -13760,7 +13764,7 @@ function renderMonthView(){
 (function(){/* v70 : grande mise à jour — outils trades + objets du mois */
 'use strict';
 function e(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-function tdP(d){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Paris'}).format(d||new Date());}
+var __fmtP=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Paris'});function tdP(d){return __fmtP.format(d||new Date());}
 function num(v){return v!==''&&v!=null&&!isNaN(+v);}
 function accF(){var a=document.getElementById('acctGlobal');return a?a.value:'';}
 function TR(all){var acc=accF();return (DB.trades||[]).filter(function(t){return t.type==='Trade'&&t.date&&num(t.pl)&&(all||!acc||t.account===acc);}).sort(function(a,b){return ((a.date||'')+(a.entryTime||'')).localeCompare((b.date||'')+(b.entryTime||''));});}
@@ -13868,7 +13872,7 @@ function ringsDay(d,byDay){var S=(DB.sheets||{})[d]||{},md=MD(),T=byDay?(byDay[d
 window.__ringsDay=ringsDay;
 function addD(d,k){var x=new Date(d+'T12:00:00');x.setDate(x.getDate()+k);return tdP(x);}
 window.__ringsRuns=function(){var T=TR(true),by={};T.forEach(function(t){(by[t.date]=by[t.date]||[]).push(t);});var md=MD(),ks=Object.keys(by).concat(Object.keys(md)).sort();if(!ks.length)return {n:0,cur:0};
-  var d=ks[0],today=tdP(),c=0,n=0,cur=0;while(d<=today){var w=new Date(d+'T12:00:00').getDay();if(w>0&&w<6){var R=ringsDay(d,by);if(R.all){c++;cur++;if(c===5){n++;c=0;}}else if(d!==today){c=0;cur=0;}}d=addD(d,1);}
+  var today=tdP(),lim=addD(today,-400),d=ks.filter(function(k){return /^\d{4}-\d{2}-\d{2}$/.test(k)&&k>=lim;})[0]||today,c=0,n=0,cur=0,guard=0;while(d<=today&&guard++<500){var w=new Date(d+'T12:00:00').getDay();if(w>0&&w<6){var R=ringsDay(d,by);if(R.all){c++;cur++;if(c===5){n++;c=0;}}else if(d!==today){c=0;cur=0;}}d=addD(d,1);}
   return {n:n,cur:cur};};
 function ring(r,frac,col,i){var C=2*Math.PI*r,f=Math.max(0,Math.min(1,frac));return '<circle cx="60" cy="60" r="'+r+'" class="v7-rg-bg"/><circle cx="60" cy="60" r="'+r+'" class="v7-rg" style="stroke:'+col+';stroke-dasharray:'+C.toFixed(1)+';--off:'+(C*(1-f)).toFixed(1)+';--C:'+C.toFixed(1)+';--d:'+(i*160)+'ms" transform="rotate(-90 60 60)"/>';}
 var RC=['#B89A4E','#2DB8A8','#9F7BD9'];
@@ -13901,7 +13905,7 @@ function clockHTML(ctx){var now=new Date(),hp=now.getHours()+now.getMinutes()/60
   return '<section class="fc v7-clock"><div class="fc-h"><span>Horloge des sessions</span><b>'+hm(hp)+'</b></div><div class="v7-ck-in">'+g+'<div class="v7-ck-l">'+rows.map(function(r){return '<div class="'+(r.open?'on':'')+'"><i style="background:'+r.c+'"></i>'+e(r.n)+'<small>'+hm(r.a)+' – '+hm(r.b)+'</small></div>';}).join('')+
    '<div class="v7-ck-x">'+e(as)+(open.length?'':'')+(nx&&!open.length?'<br>'+e(nx.n)+' ouvre dans '+dur(nx.w):'')+'</div>'+(nev?'<div class="v7-ck-x">Prochaine annonce : <b>'+e(nev.time)+'</b> '+e(String(nev.title||'').split('\n')[0].slice(0,46))+'</div>':'')+'</div></div></section>';}
 var ckT=null;
-window.__v70Today=function(host,ctx){var k=host.querySelector('.td-kpis');if(!k)return;var w=document.createElement('div');w.className='v7-today';w.innerHTML=clockHTML(ctx)+ringsHTML(ctx.d)+gaugeHTML(ctx.D);k.parentNode.insertBefore(w,k.nextSibling);
+window.__v70Today=function(host,ctx){if(window.__animSafe)return;var k=host.querySelector('.td-kpis');if(!k)return;var w=document.createElement('div');w.className='v7-today';w.innerHTML=clockHTML(ctx)+ringsHTML(ctx.d)+gaugeHTML(ctx.D);k.parentNode.insertBefore(w,k.nextSibling);
   clearInterval(ckT);ckT=setInterval(function(){var c=host.querySelector('.v7-clock');if(!c||!c.offsetParent){return;}var n=document.createElement('div');n.innerHTML=clockHTML(ctx);c.replaceWith(n.firstChild);},60000);};
 
 /* ================= 10. Objets du mois (Calendrier) ================= */
