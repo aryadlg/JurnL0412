@@ -1316,6 +1316,14 @@ html.nuit .fdv button.on{background:rgba(255,255,255,.1)}
 .fimg-add small{font-size:11px;opacity:.6}
 .fimg-in{position:absolute!important;inset:0;width:100%!important;height:100%!important;opacity:0;cursor:pointer;font-size:0}
 button.fimg-paste{background:transparent}
+/* glossaire : doublons regroupés */
+.gl-srcs{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.gl-n{display:block;font-size:10.5px;letter-spacing:.04em;text-transform:none;font-weight:400;opacity:.6;margin-top:2px}
+.gl-alt{font-size:12.5px;opacity:.8;margin-top:5px;padding-left:10px;border-left:2px solid var(--ln,#D8D2C4)}
+.gl-alt span{font-size:11px;opacity:.75}
+@media (max-width:640px){.gl-srcs{align-items:flex-start;flex-direction:row;flex-wrap:wrap}}
+/* plan macro du jour : cases lisibles */
+#mpCard textarea[data-mpk]{min-height:64px;overflow:hidden;resize:vertical}
 
 /* ===== v51 : drag, fiche éclair, recherche, check-list ===== */
 .momentum-chip{cursor:grab;user-select:none;-webkit-user-select:none}
@@ -12432,11 +12440,14 @@ function glosData(){var T=TB(),f=F(),out=[];T.glos=T.glos||[];
  (T.ind||[]).forEach(function(i){out.push({w:i.name,d:i.phrase,src:'Indicateur',ind:i.id});});
  out.sort(function(a,b){return pnorm(a.w).localeCompare(pnorm(b.w));});return out;}
 function glosPage(B){var G=glosData(),q=pnorm(st.gq||''),flt=st.gf||'all';var L=G.filter(function(g){return (!q||pnorm(g.w+' '+g.d).indexOf(q)>=0)&&(flt==='all'||(flt==='form'&&(g.lesson||g.box))||(flt==='man'&&g.man!=null)||(flt==='pat'&&g.pat)||(flt==='ind'&&g.ind));});
- var letters={};L.forEach(function(g){var c=pnorm(g.w).charAt(0).toUpperCase();if(!/[A-Z]/.test(c))c='#';(letters[c]=letters[c]||[]).push(g);});
+ var gk=function(w){return pnorm(String(w||'').replace(/\([^)]*\)/g,'')).replace(/[^a-z0-9€]+/g,' ').trim();},GR={},GO=[];L.forEach(function(g){var k=gk(g.w)||pnorm(g.w);if(!GR[k]){GR[k]={w:g.w,items:[]};GO.push(GR[k]);}GR[k].items.push(g);if(g.man!=null)GR[k].w=g.w;});
+ GO.forEach(function(x){x.items.sort(function(a,b){return (b.man!=null)-(a.man!=null)||String(b.d||'').length-String(a.d||'').length;});});
+ var letters={};GO.forEach(function(g){var c=pnorm(g.w).charAt(0).toUpperCase();if(!/[A-Z]/.test(c))c='#';(letters[c]=letters[c]||[]).push(g);});
  var h='<div class="fp"><div class="fp-head"><div class="frm-crumb"><button class="crumb" data-a="hall">Boîte à outils</button> › Glossaire</div><div class="ftitle">Glossaire</div><div class="frm-small">Rempli automatiquement avec les définitions de tes fiches de formation, tes patterns et tes indicateurs. Tu peux aussi ajouter tes propres mots.</div></div>';
- h+='<div class="pbar"><input class="chip-in" data-a="gq" placeholder="🔍 Chercher un mot…" value="'+e(st.gq||'')+'" style="width:240px"><div class="ffilt">'+[['all','Tout ('+G.length+')'],['form','Formation'],['man','Mes mots'],['pat','Patterns'],['ind','Indicateurs']].map(function(x){return '<button data-gf="'+x[0]+'" class="'+(flt===x[0]?'on':'')+'">'+x[1]+'</button>';}).join('')+'</div><button class="frm-btn dark" data-a="gadd">+ Ajouter un mot</button></div>';
+ h+='<div class="pbar"><input class="chip-in" data-a="gq" placeholder="🔍 Chercher un mot…" value="'+e(st.gq||'')+'" style="width:240px"><div class="ffilt">'+[['all','Tout'],['form','Formation'],['man','Mes mots'],['pat','Patterns'],['ind','Indicateurs']].map(function(x){return '<button data-gf="'+x[0]+'" class="'+(flt===x[0]?'on':'')+'">'+x[1]+'</button>';}).join('')+'</div><button class="frm-btn dark" data-a="gadd">+ Ajouter un mot</button></div>';
  h+='<div class="gaz">'+Object.keys(letters).sort().map(function(c){return '<a href="#" data-gl="'+c+'">'+c+'</a>';}).join('')+'</div><div class="glist">';
- Object.keys(letters).sort().forEach(function(c){h+='<div class="gl-l" id="gl-'+c+'">'+c+'</div>'+letters[c].map(function(g){var gi=G.indexOf(g);return '<div class="gl-r"><div class="gl-w">'+e(g.w)+'</div><div class="gl-d">'+e(g.d||'…')+'</div><button class="gl-s" data-gsrc="'+gi+'">'+e(g.src)+' ›</button>'+(g.man!=null?'<button class="fl-x" data-gdel="'+g.man+'">✕</button>':'')+'</div>';}).join('');});
+ Object.keys(letters).sort().forEach(function(c){h+='<div class="gl-l" id="gl-'+c+'">'+c+'</div>'+letters[c].map(function(grp){var I=grp.items,m=I[0],seen={},oth=[];seen[pnorm(m.d||'')]=1;I.slice(1).forEach(function(x){var k=pnorm(x.d||'');if(k&&!seen[k]){seen[k]=1;oth.push(x);}});
+  return '<div class="gl-r'+(I.length>1?' gl-multi':'')+'"><div class="gl-w">'+e(grp.w)+(I.length>1?'<small class="gl-n">'+I.length+' fiches</small>':'')+'</div><div class="gl-d">'+e(m.d||'…')+oth.map(function(x){return '<div class="gl-alt"><span>'+e(x.src)+' :</span> '+e(x.d)+'</div>';}).join('')+'</div><div class="gl-srcs">'+I.map(function(x){return '<button class="gl-s" data-gsrc="'+G.indexOf(x)+'">'+e(x.src)+' ›</button>';}).join('')+'</div>'+I.filter(function(x){return x.man!=null;}).map(function(x){return '<button class="fl-x" data-gdel="'+x.man+'" title="Supprimer de Mon glossaire">✕</button>';}).join('')+'</div>';}).join('');});
  if(!L.length)h+='<div class="frm-empty">Aucun mot.</div>';
  return h+'</div>'+boxWindows(B)+'</div>';}
 function wireLot4(B){var r=root();if(B.k==='fier'&&window.__fierWire)window.__fierWire(r);if(B.k==='quo')wireQuotes();if(B.k==='glos'){var T=TB(),G=glosData();
@@ -13652,6 +13663,23 @@ function drawBias(){var hv=document.getElementById('homeView');if(!hv)return;var
 window.__v7Bias=drawBias;
 setInterval(function(){var hv=document.getElementById('homeView');if(hv&&hv.offsetParent&&!document.getElementById('v7Bias'))try{drawBias();}catch(x){}},1500);
 if(typeof window.show==='function'){var _sh=window.show;window.show=function(v){var r=_sh.apply(this,arguments);if(v==='macro')setTimeout(function(){try{drawBias();}catch(x){}},120);return r;};}
+/* ================= 12. Plan macro du jour : cases bien dépliées ================= */
+function mpGrow(){document.querySelectorAll('#mpCard [data-mpk]').forEach(function(t){if(!t.offsetParent)return;var rows=+t.getAttribute('rows')||2,lh=parseFloat(getComputedStyle(t).lineHeight)||20,min=Math.round(rows*lh+18);t.style.height='auto';t.style.height=Math.max(min,t.scrollHeight+2)+'px';});}
+window.__mpGrow=mpGrow;
+setInterval(function(){var c=document.getElementById('mpCard');if(!c||!c.offsetParent)return;var bad=[].some.call(c.querySelectorAll('[data-mpk]'),function(t){return t.offsetHeight<34||t.scrollHeight>t.clientHeight+4;});if(bad)mpGrow();},900);
+window.addEventListener('resize',function(){clearTimeout(window.__mpgT);window.__mpgT=setTimeout(mpGrow,200);});
+if(typeof window.show==='function'){var _sh2=window.show;window.show=function(v){var r=_sh2.apply(this,arguments);if(v==='macro'){setTimeout(mpGrow,80);setTimeout(mpGrow,400);}return r;};}
+
+/* ================= 13. TradingView : taux courts & STIR ================= */
+function stirTv(){try{if(typeof DB==='undefined'||!DB.formation||!DB.formation.notes)return;var T=DB.formation.tools;if(!T||T.stirTv)return;var n=DB.formation.notes['box-tv'];if(!n||!n.layout)return;
+  if(!n.layout.some(function(w){return w.t==='table'&&/stir/i.test(w.title||'');}))n.layout.unshift({id:'wstir',t:'table',w:2,title:'Taux courts & STIR (attentes du marché)',d:{cols:['Devise','Ce que c\'est','Ticker TradingView','Comment le lire'],rows:[
+   ['USD','Fed funds futures (contrat le plus proche)','CBOT:ZQ1!','Prix = 100 − taux Fed attendu pour le mois'],
+   ['USD','SOFR 3 mois (contrat le plus proche)','CME:SR31!','Prix = 100 − taux attendu. Onglet « Forward curve » = toute la courbe des attentes'],
+   ['AUD','Taux interbancaire 30 jours (ASX)','ASX24:IB1!','Prix = 100 − taux RBA attendu (données parfois en différé)'],
+   ['EUR · GBP · JPY','€STR, SONIA, TONA','peu fiables sur TradingView','Lire Forexlive / Reuters ou le tableau de probabilités']]}});
+  T.stirTv=1;try{save();}catch(x){}}catch(x){}}
+setTimeout(stirTv,3000);setInterval(stirTv,5000);
+
 })();
 
 </script>
