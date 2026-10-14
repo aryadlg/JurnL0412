@@ -1609,6 +1609,15 @@ html.nuit .an{--a-ink:#E6E3EE;--a-mut:#9a9fb2;--a-ln:#3a4560;--a-pkf:#3a2440;--a
 .spi-dot{fill:var(--a-pk)}.an-spi.brk .spi-dot{fill:var(--a-mt)}.an-spi.brk .spi-a{stroke:var(--a-mt)}.an-spi.brk .spi-n circle{stroke:var(--a-mt)}
 .spi-pv{font-size:22px;text-anchor:middle;fill:var(--a-ink);font-variant-numeric:tabular-nums;font-weight:300}.spi-pl{font-size:8.5px;letter-spacing:.12em;text-anchor:middle;fill:var(--a-mut);text-transform:uppercase}
 @media(max-width:520px){.tr-ch text,.tr-h,.tr-pm,.th-l,.rg-at,.fx-n,.spi-n text{font-size:10.5px}.rg-q text{font-size:11px}}
+/* v86 · animations à la demande */
+.an-idle{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 2px}
+.an-go{font:inherit;font-size:13px;border:1px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:8px 18px;cursor:pointer;opacity:.85;transition:opacity .2s}
+.an-go:hover{opacity:1}
+.an-idle span{font-size:12px;opacity:.55}
+.an-bar{display:flex;justify-content:flex-end;margin-top:6px}
+.an-stop{font:inherit;font-size:11px;border:0;background:transparent;color:inherit;opacity:.45;cursor:pointer;padding:4px 6px}.an-stop:hover{opacity:.8}
+.an-off *{animation-play-state:paused!important}
+.an-wait .an-info::after{content:'⏸ temps de lecture…';display:block;font-size:10.5px;opacity:.5;margin-top:8px;letter-spacing:.04em}
 /* v85 · Les données économiques */
 .dc-cal{display:flex;flex-direction:column;border-top:1px solid var(--a-ln)}
 .dc-hd{display:grid;grid-template-columns:44px 46px 1fr;gap:8px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--a-mut);padding:6px 4px}
@@ -12156,6 +12165,18 @@ try{renderMacroFiches();}catch(e){}
 var NS='http://www.w3.org/2000/svg';
 function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function rm(){return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;}
+/* v86 : temps de lecture + lecteur avec pause */
+function rd(s){var n=String(s||'').replace(/<[^>]+>/g,'').length;return Math.min(16000,Math.max(4500,2000+n*60));}
+function PC(host,btn,endLabel){var o={t:0,hold:0,on:false,paused:false,done:false,raf:null,prev:null,fn:null},L0=btn?btn.textContent:'';
+ function lab(){if(!btn)return;btn.textContent=o.on?(o.paused?'▶ Reprendre':'❚❚ Pause'):(o.done&&endLabel?endLabel:L0);btn.classList.toggle('on',o.on&&!o.paused);}
+ function f(ts){if(!host.isConnected||!o.on)return;if(o.prev==null)o.prev=ts;var dt=Math.min(64,ts-o.prev);o.prev=ts;
+  if(!o.paused&&!host.__off&&!document.hidden){if(o.hold>0){o.hold-=dt;if(o.hold<=0)host.classList.remove('an-wait');}else{o.t+=dt;if(o.fn(o.t)===false){o.on=false;o.done=true;host.classList.remove('an-wait');lab();return;}}}
+  o.raf=requestAnimationFrame(f);}
+ o.start=function(fn){cancelAnimationFrame(o.raf);o.fn=fn;o.t=0;o.hold=0;o.prev=null;o.on=true;o.paused=false;o.done=false;host.classList.remove('an-wait');lab();if(rm()){var g=0;while(fn(1e9)!==false&&g++<5000){}o.hold=0;o.on=false;o.done=true;lab();return;}o.raf=requestAnimationFrame(f);};
+ o.wait=function(ms){if(rm()||!o.on)return;o.hold=ms;host.classList.add('an-wait');};
+ o.toggle=function(){if(!o.on)return false;o.paused=!o.paused;o.prev=null;lab();return true;};
+ o.stop=function(){cancelAnimationFrame(o.raf);o.on=false;o.paused=false;o.hold=0;host.classList.remove('an-wait');lab();};
+ return o;}
 /* ---------- 1. Engrenages ---------- */
 function gearPath(n,r,m){var ra=r+m,rd=r-1.2*m,p='',st=2*Math.PI/n;for(var i=0;i<n;i++){var a=i*st,pts=[[rd,a-st*0.5],[rd,a-st*0.28],[ra,a-st*0.13],[ra,a+st*0.13],[rd,a+st*0.28],[rd,a+st*0.5]];pts.forEach(function(q,j){var x=(q[0]*Math.cos(q[1])).toFixed(2),y=(q[0]*Math.sin(q[1])).toFixed(2);p+=(i===0&&j===0?'M':'L')+x+' '+y;});}return p+'Z';}
 function gearSVG(n,r,m,cls,inner){var hole=cls==='c'?r*0.46:r*0.32,sp='';for(var k=0;k<5;k++){var a=k*2*Math.PI/5;sp+='<circle cx="'+(r*0.62*Math.cos(a)).toFixed(1)+'" cy="'+(r*0.62*Math.sin(a)).toFixed(1)+'" r="'+(r*0.14).toFixed(1)+'" class="ga-sp"/>';}
@@ -12169,7 +12190,7 @@ function gears(host,D){var items=D.items||[],N=items.length||8,Nc=34,No=14,m=3.4
  h+='</g></svg></div><div class="an-side"><div class="an-hint">Touche un engrenage pour voir son rôle'+(sc.length?', ou choisis un exemple réel :':'.')+'</div>'+(sc.length?'<div class="an-scn">'+sc.map(function(s,i){return '<button type="button" data-s="'+i+'">'+esc(s.t)+'</button>';}).join('')+'</div>':'')+'<div class="an-info"></div></div></div>';
  host.innerHTML=h;var svg=host.querySelector('svg'),info=host.querySelector('.an-info'),on={},t0=null,ang=0,sp=1;
  var outs=[].slice.call(host.querySelectorAll('.ga-o')),cg=host.querySelector('.ga-c');
- function frame(ts){if(!host.isConnected)return;if(!host.offsetParent||document.hidden){t0=null;host.__raf=setTimeout(function(){host.__raf=requestAnimationFrame(frame);},700);return;}if(t0==null)t0=ts;var dt=Math.min(64,ts-t0);t0=ts;ang+=dt*0.012*sp;cg.setAttribute('transform','rotate('+ang.toFixed(2)+')');
+ function frame(ts){if(!host.isConnected)return;if(!host.offsetParent||document.hidden||host.__off){t0=null;host.__raf=setTimeout(function(){host.__raf=requestAnimationFrame(frame);},700);return;}if(t0==null)t0=ts;var dt=Math.min(64,ts-t0);t0=ts;ang+=dt*0.012*sp;cg.setAttribute('transform','rotate('+ang.toFixed(2)+')');
   outs.forEach(function(g,i){var a=(-90+i*360/N);var r=-(Nc/No)*ang+a*(1+Nc/No)+180/No;g.querySelector('.ga-rot').setAttribute('transform','rotate('+r.toFixed(2)+')');});
   host.__raf=requestAnimationFrame(frame);}
  if(!rm())host.__raf=requestAnimationFrame(frame);else frame(0);
@@ -12185,7 +12206,7 @@ function flow(host,D){var items=D.items||[],n=items.length;if(!n){host.innerHTML
  function go(i){cur=Math.max(-1,Math.min(n-1,i));st.forEach(function(s,k){s.classList.toggle('done',k<cur);s.classList.toggle('on',k===cur);});ar.forEach(function(a,k){a.classList.toggle('done',k<cur);a.classList.toggle('run',k===cur-1);});
   if(cur<0){d.innerHTML='';cnt.textContent='';return;}cnt.textContent=(cur+1)+' / '+n;d.innerHTML='<div class="af-card" style="--k:'+cur+'"><b>'+esc(items[cur].t)+'</b>'+(items[cur].d?'<p>'+esc(items[cur].d)+'</p>':'')+'</div>';}
  function stop(){clearTimeout(tm);tm=null;host.querySelector('.af-play').textContent='▶ Jouer le schéma';}
- host.querySelector('.af-play').onclick=function(){if(tm){stop();return;}this.textContent='❚❚ Pause';if(cur>=n-1)go(-1);(function nx(){go(cur+1);if(cur<n-1)tm=setTimeout(nx,2600);else{tm=null;host.querySelector('.af-play').textContent='↺ Rejouer';}})();};
+ host.querySelector('.af-play').onclick=function(){if(tm){stop();return;}this.textContent='❚❚ Pause';if(cur>=n-1)go(-1);(function nx(){go(cur+1);if(cur<n-1)tm=setTimeout(nx,rd(items[cur].t+' '+(items[cur].d||'')));else{tm=null;host.querySelector('.af-play').textContent='↺ Rejouer';}})();};
  host.querySelector('.af-prev').onclick=function(){stop();go(cur-1);};host.querySelector('.af-next').onclick=function(){stop();go(cur+1);};
  st.forEach(function(s){s.onclick=function(){stop();go(+s.dataset.i);};});}
 /* ---------- 3. Robinet de liquidité (QE / QT) ---------- */
@@ -12281,7 +12302,7 @@ function surprise(host,D){var L=D.labels||['Thème sous-jacent','Surprise','Chan
   ball.setAttribute('cx',i<1?X[0]+R:i<2?X[1]+R:X[2]-R);ball.classList.toggle('vis',i>0);
   info.innerHTML='<div class="an-it"><b>'+(i+1)+'. '+esc(L[i])+'</b><p>'+esc(TX[i])+(i===2?' '+esc(OUT[out]):'')+'</p></div>';}
  function setO(o){out=o;root.setAttribute('data-o',o);host.querySelectorAll('[data-o]').forEach(function(b){b.classList.toggle('on',b.dataset.o===o);});if(cur===2){root.classList.remove('rd');void root.offsetWidth;root.classList.add('rd');show(2);}}
- function play(){tm.forEach(clearTimeout);tm=[];root.classList.remove('rd');void root.offsetWidth;root.classList.add('rd');[0,1,2].forEach(function(i){tm.push(setTimeout(function(){show(i);},i*2400));});}
+ function play(){tm.forEach(clearTimeout);tm=[];root.classList.remove('rd');void root.offsetWidth;root.classList.add('rd');var acc=0;[0,1,2].forEach(function(i){tm.push(setTimeout(function(){show(i);},acc));acc+=rd(L[i]+' '+TX[i]);});}
  host.querySelector('.su-play').onclick=play;
  host.querySelectorAll('.su-st,.su-lt').forEach(function(g){g.addEventListener('click',function(){tm.forEach(clearTimeout);root.classList.add('rd');show(+g.dataset.st);});});
  host.querySelectorAll('[data-o]').forEach(function(b){b.onclick=function(){setO(b.dataset.o);};});
@@ -12318,9 +12339,9 @@ function diverge(host,D){var pair=D.pair==='eu'?'eu':'uj',N=36,k=N-1,raf=null;
   q('.dv-rg').value=k;}
  function play(){cancelAnimationFrame(raf);var t0=null;(function st(ts){if(!host.isConnected)return;if(!t0)t0=ts;k=Math.min(N-1,Math.floor((ts-t0)/170));draw();if(k<N-1)raf=requestAnimationFrame(st);})(performance.now());raf=requestAnimationFrame(function f(ts){});}
  function setP(p){pair=p;host.querySelectorAll('[data-pr]').forEach(function(b){b.classList.toggle('on',b.dataset.pr===p);});k=N-1;draw();}
- q('.dv-play').onclick=function(){cancelAnimationFrame(raf);var t0=performance.now();(function st(){if(!host.isConnected)return;k=Math.min(N-1,Math.floor((performance.now()-t0)/170));draw();if(k<N-1)raf=requestAnimationFrame(st);})();};
- q('.dv-rg').oninput=function(){cancelAnimationFrame(raf);k=+this.value;draw();};
- host.querySelectorAll('[data-pr]').forEach(function(b){b.onclick=function(){cancelAnimationFrame(raf);setP(b.dataset.pr);};});setP(pair);}
+ var pc=PC(host,q('.dv-play'));q('.dv-play').onclick=function(){if(pc.toggle())return;var le=-1;k=-1;pc.start(function(t){var nk=Math.min(N-1,Math.floor(t/280));if(nk!==k){k=nk;draw();EV[pair].forEach(function(e,j){if(e[0]===k&&j>le){le=j;pc.wait(rd(e[1]+' '+e[2]));}});}return k<N-1;});};
+ q('.dv-rg').oninput=function(){pc.stop();k=+this.value;draw();};
+ host.querySelectorAll('[data-pr]').forEach(function(b){b.onclick=function(){pc.stop();setP(b.dataset.pr);};});setP(pair);}
 /* ---------- 10. Les deux opportunités (cycles de taux) ---------- */
 function cycles(host,D){
  var C=[{t:'Meilleure opportunité',d:'Une banque centrale fait un pivot DOVISH (elle commence à baisser après avoir monté), l\'autre fait un pivot HAWKISH (elle commence à monter après avoir baissé). Je vends la devise dovish et j\'achète la devise hawkish : les deux cycles démarrent, la tendance peut durer longtemps.',m:[[0.255,'Pivot dovish','dn','above'],[0.7,'Pivot hawkish','up','below']]},
@@ -12332,7 +12353,7 @@ function cycles(host,D){
  var raf=null;
  function sel(i){cancelAnimationFrame(raf);cards.forEach(function(c,j){c.classList.toggle('on',j===i);});host.querySelector('.an-info').innerHTML='<div class="an-it"><b>'+esc(C[i].t)+'</b><p>'+esc(C[i].d)+'</p></div>';
   var c=cards[i],p=c.querySelector('.cy-p'),dot=c.querySelector('.cy-dot'),L=c.__L,t0=performance.now();cards.forEach(function(o){o.querySelector('.cy-dot').style.opacity=0;});dot.style.opacity=1;
-  (function st(){if(!host.isConnected||!c.classList.contains('on'))return;var u=((performance.now()-t0)/3600)%1;var pt=p.getPointAtLength(L*u);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);if(host.offsetParent)raf=requestAnimationFrame(st);else setTimeout(function(){raf=requestAnimationFrame(st);},700);})();}
+  (function st(){if(!host.isConnected||!c.classList.contains('on'))return;var u=((performance.now()-t0)/3600)%1;var pt=p.getPointAtLength(L*u);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);if(host.offsetParent&&!host.__off)raf=requestAnimationFrame(st);else setTimeout(function(){raf=requestAnimationFrame(st);},700);})();}
  cards.forEach(function(c,i){c.onclick=function(){sel(i);};});sel(0);}
 
 /* ---------- 11. La barre des attentes ---------- */
@@ -12362,10 +12383,10 @@ function rumour(host,D){var M=D.meetings||[['16 mars','+0,25'],['15 juin','+0,75
  var ln=host.querySelector('.ru-ln'),dot=host.querySelector('.ru-dot'),L=ln.getTotalLength?ln.getTotalLength():800,raf=null;ln.style.strokeDasharray=L;ln.style.strokeDashoffset=0;
  function info(t,d){host.querySelector('.an-info').innerHTML='<div class="an-it"><b>'+esc(t)+'</b><p>'+esc(d)+'</p></div>';}
  info('Le schéma de 2022','Avant chaque réunion, le dollar monte (« la rumeur » : la Fed sera ultra hawkish). Le jour J, la Fed monte comme prévu : pas de surprise, déception → l\'USD corrige. Puis la tendance de fond haussière reprend. Touche ▶ pour le voir.');
- host.querySelector('.ru-play').onclick=function(){cancelAnimationFrame(raf);var t0=performance.now(),dur=7000,last=-1;host.querySelectorAll('.ru-m').forEach(function(m){m.classList.remove('on');});
-  (function st(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/dur);ln.style.strokeDashoffset=L*(1-u);var pt=ln.getPointAtLength(L*u);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);
-   var idx=Math.floor((pt.x-20)/seg-0.7+1);for(var j=0;j<n;j++){var mx=20+j*seg+seg*0.7;if(pt.x>=mx&&j>last){last=j;host.querySelector('.ru-m[data-i="'+j+'"]').classList.add('on');host.querySelector('.af-cnt').textContent='FOMC '+(j+1)+' / '+n;info('FOMC du '+M[j][0]+' 2022 · '+M[j][1]+' point',(j===0?'Première hausse. ':'')+'Hausse attendue par tout le monde : le dollar avait déjà monté avant. Pas de surprise → l\'USD corrige à court terme, puis la tendance haussière reprend.');}}
-   if(u<1)raf=requestAnimationFrame(st);else info('Ce qu\'il faut retenir','Le thème de fond (Fed hawkish) n\'a pas changé de l\'année : l\'USD finit 2022 en hausse (DXY d\'environ 96 à 103, avec un sommet vers 114,8 fin septembre). La vraie baisse de fin d\'année vient d\'une autre surprise : l\'inflation qui ralentit (CPI de novembre). Les corrections après chaque FOMC étaient des opportunités à court terme, pas des changements de tendance.');})();};}
+ var pc=PC(host,host.querySelector('.ru-play'),'↺ Rejouer 2022');host.querySelector('.ru-play').onclick=function(){if(pc.toggle())return;var dur=10000,last=-1;host.querySelectorAll('.ru-m').forEach(function(m){m.classList.remove('on');});
+  pc.start(function(t){var u=Math.min(1,t/dur);ln.style.strokeDashoffset=L*(1-u);var pt=ln.getPointAtLength(L*u);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);
+   var idx=Math.floor((pt.x-20)/seg-0.7+1);for(var j=0;j<n;j++){var mx=20+j*seg+seg*0.7;if(pt.x>=mx&&j>last){last=j;host.querySelector('.ru-m[data-i="'+j+'"]').classList.add('on');host.querySelector('.af-cnt').textContent='FOMC '+(j+1)+' / '+n;info('FOMC du '+M[j][0]+' 2022 · '+M[j][1]+' point',(j===0?'Première hausse. ':'')+'Hausse attendue par tout le monde : le dollar avait déjà monté avant. Pas de surprise → l\'USD corrige à court terme, puis la tendance haussière reprend.');pc.wait(rd(host.querySelector('.an-info').textContent));}}
+   if(u>=1){info('Ce qu\'il faut retenir','Le thème de fond (Fed hawkish) n\'a pas changé de l\'année : l\'USD finit 2022 en hausse (DXY d\'environ 96 à 103, avec un sommet vers 114,8 fin septembre). La vraie baisse de fin d\'année vient d\'une autre surprise : l\'inflation qui ralentit (CPI de novembre). Les corrections après chaque FOMC étaient des opportunités à court terme, pas des changements de tendance.');return false;}});};}
 
 /* ---------- 13. Les 3 cycles emboîtés ---------- */
 function cycles3(host,D){var C=[['court','Court terme','croissance + inflation · ≈ 6-24 mois','#E46FA0',0.95,12,0],['moyen','Moyen terme','cycle économique / dette · ≈ 2-8 ans','#D9A85F',0.3,32,1.2],['long','Long terme','tendance séculaire · ≈ 5-10+ ans','#2DB8A8',0.11,42,3.6]];
@@ -12376,7 +12397,7 @@ function cycles3(host,D){var C=[['court','Court terme','croissance + inflation �
  var q=function(s){return host.querySelector(s);};
  function draw(){C.forEach(function(c){var p=[];for(var i=0;i<=N;i++){var x=10+(W-20)*i/N;p.push(x.toFixed(1)+','+(H/2-y(c,i)).toFixed(1));}var l=q('.c3-l[data-c="'+c[0]+'"]');l.setAttribute('points',p.join(' '));l.style.opacity=on[c[0]]?(sum?0.22:1):0;});
   var s=[];for(var i=0;i<=N;i++){var v=0;C.forEach(function(c){if(on[c[0]])v+=y(c,i);});s.push((10+(W-20)*i/N).toFixed(1)+','+(H/2-v*0.5).toFixed(1));}var sl=q('.c3-s');sl.setAttribute('points',s.join(' '));sl.style.opacity=sum?1:0;}
- function loop(){if(!host.isConnected)return;if(host.offsetParent&&!document.hidden){ph+=0.03;draw();raf=requestAnimationFrame(loop);}else setTimeout(function(){raf=requestAnimationFrame(loop);},700);}
+ function loop(){if(!host.isConnected)return;if(host.offsetParent&&!document.hidden&&!host.__off){ph+=0.03;draw();raf=requestAnimationFrame(loop);}else setTimeout(function(){raf=requestAnimationFrame(loop);},700);}
  function info(){q('.an-info').innerHTML=sum?'<div class="an-it"><b>Ce que voit le marché</b><p>Les 3 cycles s\'additionnent : un creux du cycle court peut tomber pendant une hausse du cycle long. Il faut toujours savoir dans quel cycle on se place avant d\'interpréter une donnée.</p></div>':'<div class="an-it"><b>3 cycles emboîtés</b><p>Touche un cycle pour l\'afficher ou le cacher. Le court terme bouge vite et fort, le moyen terme fait les grandes phases, le long terme donne la tendance de fond.</p></div>';}
  host.querySelectorAll('[data-k]').forEach(function(b){b.onclick=function(){on[b.dataset.k]=on[b.dataset.k]?0:1;b.classList.toggle('on',!!on[b.dataset.k]);draw();};});
  q('.c3-sum').onclick=function(){sum=!sum;this.classList.toggle('on',sum);this.textContent=sum?'↺ Voir les cycles séparés':'＋ Additionner les 3 cycles';draw();info();};
@@ -12395,8 +12416,8 @@ function phases(host,D){var P=[['early','Early cycle','#2DB8A8','La croissance r
  function show(i,move){cur=i;var p=P[i];host.querySelectorAll('.ph-z').forEach(function(z){z.classList.toggle('on',+z.dataset.i===i);});host.querySelectorAll('[data-p]').forEach(function(b){b.classList.toggle('on',+b.dataset.p===i);});
   if(move!==false){var pt=pa.getPointAtLength(xAt((Z[i][0]+Z[i][1])/2));dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);}
   host.querySelector('.an-info').innerHTML='<div class="an-it" style="border-color:'+p[2]+'"><b style="color:'+p[2]+'">'+p[1]+'</b><p>'+esc(p[3])+'</p></div><div class="ph-g">'+p[4].map(function(r){return '<div><small>'+r[0]+'</small><b class="'+r[2]+'">'+r[1]+'</b></div>';}).join('')+'</div>';}
- host.querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){cancelAnimationFrame(raf);show(+b.dataset.p);};});
- host.querySelector('.ph-play').onclick=function(){cancelAnimationFrame(raf);var s=xAt(Z[0][0]),e=xAt(Z[3][1]),t0=performance.now(),dur=8000;(function st(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/dur),pt=pa.getPointAtLength(s+(e-s)*u);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);for(var i=0;i<4;i++)if(pt.x>=Z[i][0]&&pt.x<Z[i][1]&&cur!==i)show(i,false);if(u<1)raf=requestAnimationFrame(st);})();};
+ host.querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){pc.stop();show(+b.dataset.p);};});
+ var pc=PC(host,host.querySelector('.ph-play'),'↺ Reparcourir le cycle');host.querySelector('.ph-play').onclick=function(){if(pc.toggle())return;cur=-1;var s=xAt(Z[0][0]),e=xAt(Z[3][1]),dur=9000;pc.start(function(t){var u=Math.min(1,t/dur),pt=pa.getPointAtLength(s+(e-s)*u);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);for(var i=0;i<4;i++)if(pt.x>=Z[i][0]&&pt.x<Z[i][1]&&cur!==i){show(i,false);pc.wait(rd(P[i][3])+2000);}return u<1;});};
  show(0);}
 /* ---------- 15. S&P 500 · un cycle complet (2022-2024) ---------- */
 function spx(host,D){var V=[4766,4516,4374,4530,4132,4132,3785,4130,3955,3586,3872,4080,3840,4077,3970,4109,4169,4180,4450,4589,4508,4288,4194,4568,4770,4846,5096,5254,5036,5278,5460];
@@ -12413,8 +12434,8 @@ function spx(host,D){var V=[4766,4516,4374,4530,4132,4132,3785,4130,3955,3586,38
   var last=null;q('.sp-ev').innerHTML=E.filter(function(e){return e[0]<=k;}).map(function(e){last=e;return '<circle cx="'+x(e[0])+'" cy="'+y(V[e[0]])+'" r="2.6" class="dv-em"/>';}).join('');
   q('.dv-now').innerHTML='<b>'+M[k%12]+' '+(2021+Math.ceil(k/12))+'</b> · S&P 500 ≈ '+V[k].toLocaleString('fr-FR')+' (clôture du mois)';
   var h=last?'<div class="an-it"><b>'+esc(last[1])+'</b><p>'+esc(last[2])+'</p></div>':'';if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}q('.sp-rg').value=k;}
- q('.sp-play').onclick=function(){cancelAnimationFrame(raf);var t0=performance.now();(function st(){if(!host.isConnected)return;k=Math.min(N-1,Math.floor((performance.now()-t0)/230));draw();if(k<N-1)raf=requestAnimationFrame(st);})();};
- q('.sp-rg').oninput=function(){cancelAnimationFrame(raf);k=+this.value;draw();};draw();}
+ var pc=PC(host,q('.sp-play'));q('.sp-play').onclick=function(){if(pc.toggle())return;k=-1;pc.start(function(t){var nk=Math.min(N-1,Math.floor(t/320));if(nk!==k){k=nk;draw();E.forEach(function(e){if(e[0]===k)pc.wait(rd(e[1]+' '+e[2]));});}return k<N-1;});};
+ q('.sp-rg').oninput=function(){pc.stop();k=+this.value;draw();};draw();}
 
 /* ---------- 16. Ranger les données : croissance / inflation ---------- */
 function tri(host,D){var CH=[['PIB','g',100,118,'Le produit intérieur brut : toute la richesse produite. La mesure la plus large de la croissance.'],['Emploi (NFP)','g',96,146,'Les créations d\'emplois du mois aux États-Unis. Plus d\'emplois = plus de revenus = plus de consommation.'],['Chômage','g',100,174,'Le taux de chômage : quand il baisse, l\'économie va bien. Il réagit souvent en retard.'],['Ventes au détail','g',112,202,'Ce que les ménages dépensent en magasin et en ligne : la consommation, moteur n°1 de l\'économie américaine.'],['IPC (CPI)','i',278,124,'L\'indice des prix à la consommation : l\'inflation que vivent les ménages. La donnée la plus suivie par la Fed (avec le PCE).'],['IPP (PPI)','i',282,154,'L\'indice des prix à la production : les prix payés par les entreprises. Souvent en avance sur l\'IPC.'],['Salaire moyen','i',276,184,'La rémunération horaire moyenne : si les salaires montent vite, les prix suivent (inflation des services).']];
@@ -12481,13 +12502,13 @@ function regime(host,D){var Q={exp:[1,1],ref:[1,0],def:[0,1],sta:[0,0]},px=268,p
  function put(x,y,keep){px=Math.max(26,Math.min(W-20,x));py=Math.max(18,Math.min(H-20,y));q('.rg-dot').setAttribute('cx',px);q('.rg-dot').setAttribute('cy',py);q('.rg-halo').setAttribute('cx',px);q('.rg-halo').setAttribute('cy',py);
   if(keep){trail.push(px.toFixed(1)+','+py.toFixed(1));if(trail.length>60)trail.shift();q('.rg-tr').setAttribute('d',trail.length>1?'M'+trail.join(' L'):'');}show(which(px,py));}
  function pt(e){var r=svg.getBoundingClientRect();return [(e.clientX-r.left)/r.width*W,(e.clientY-r.top)/r.height*H];}
- var drag=false;svg.addEventListener('pointerdown',function(e){drag=true;cancelAnimationFrame(raf);trail=[];try{svg.setPointerCapture(e.pointerId);}catch(x){}var p=pt(e);put(p[0],p[1],true);e.preventDefault();});
+ var drag=false;svg.addEventListener('pointerdown',function(e){drag=true;pc.stop();cancelAnimationFrame(raf);trail=[];try{svg.setPointerCapture(e.pointerId);}catch(x){}var p=pt(e);put(p[0],p[1],true);e.preventDefault();});
  svg.addEventListener('pointermove',function(e){if(!drag)return;var p=pt(e);put(p[0],p[1],true);});
  svg.addEventListener('pointerup',function(){drag=false;});svg.addEventListener('pointercancel',function(){drag=false;});
  var C={exp:[222,182],ref:[222,68],def:[78,182],sta:[78,68]};
- function glide(k){cancelAnimationFrame(raf);var a=[px,py],b=C[k],t0=performance.now();trail=[];(function s(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/(rm()?1:600)),e=1-Math.pow(1-u,3);put(a[0]+(b[0]-a[0])*e,a[1]+(b[1]-a[1])*e,true);if(u<1)raf=requestAnimationFrame(s);})();}
+ function glide(k){pc.stop();cancelAnimationFrame(raf);var a=[px,py],b=C[k],t0=performance.now();trail=[];(function s(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/(rm()?1:600)),e=1-Math.pow(1-u,3);put(a[0]+(b[0]-a[0])*e,a[1]+(b[1]-a[1])*e,true);if(u<1)raf=requestAnimationFrame(s);})();}
  host.querySelectorAll('[data-b]').forEach(function(b){b.onclick=function(){glide(b.dataset.b);};});
- q('.rg-play').onclick=function(){cancelAnimationFrame(raf);trail=[];var t0=performance.now(),dur=rm()?1:9000;(function s(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/dur),a=u*Math.PI*2+0.6,x=cx+78*Math.cos(a)+Math.sin(a*3)*8,y=cy+62*Math.sin(a);put(x,y,true);if(u<1)raf=requestAnimationFrame(s);})();};
+ var pc=PC(host,q('.rg-play'),'↺ Refaire le tour');q('.rg-play').onclick=function(){if(pc.toggle())return;trail=[];cur=null;var dur=10000;pc.start(function(t){var u=Math.min(1,t/dur),a=u*Math.PI*2+0.6,x=cx+78*Math.cos(a)+Math.sin(a*3)*8,y=cy+62*Math.sin(a),pv=cur;put(x,y,true);if(cur!==pv&&u<1){var r=REG.filter(function(z){return z[0]===cur;})[0];if(r)pc.wait(rd(r[7])+2500);}return u<1;});};
  put(222,182,false);}
 /* ---------- 19. Où va le capital selon le régime ---------- */
 function flux(host,D){var P=[['Actions','#2DB8A8'],['Obligations','#4F78AE'],['Matières premières','#D9A85F']];
@@ -12504,7 +12525,7 @@ function flux(host,D){var P=[['Actions','#2DB8A8'],['Obligations','#4F78AE'],['M
   var h='<div class="an-it" style="border-color:'+reg[2]+'"><b style="color:'+reg[2]+'">'+reg[1]+'</b><p>'+NOTE[r]+'</p></div>';if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}if(rm()){lv=tg.slice();draw();}}
  function draw(){X.forEach(function(x,i){var top=160-120*lv[i];var w=host.querySelector('.fx-wv[data-i="'+i+'"]'),d='M'+(x-32)+' 162 L'+(x-32)+' '+top.toFixed(1);for(var s=0;s<=16;s++){var xx=x-32+s*4;d+=' L'+xx+' '+(top+Math.sin(ph*2+s*0.7+i)*1.6).toFixed(1);}d+=' L'+(x+32)+' 162Z';w.setAttribute('d',d);});
   q('.fx-p').innerHTML=pts.map(function(p){var u=p.t,x=p.a+(p.b-p.a)*u,y=40-Math.sin(u*Math.PI)*34;return '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="2.2" style="fill:'+p.c+'" opacity="'+(1-Math.abs(u-0.5)).toFixed(2)+'"/>';}).join('');}
- function loop(){if(!host.isConnected)return;if(host.offsetParent&&!document.hidden){ph+=0.05;var src=[],dst=[];for(var i=0;i<3;i++){lv[i]+=(tg[i]-lv[i])*0.03;if(tg[i]-lv[i]<-0.01||tg[i]<0.3)src.push(i);if(tg[i]-lv[i]>0.01||tg[i]>0.7)dst.push(i);}
+ function loop(){if(!host.isConnected)return;if(host.offsetParent&&!document.hidden&&!host.__off){ph+=0.05;var src=[],dst=[];for(var i=0;i<3;i++){lv[i]+=(tg[i]-lv[i])*0.03;if(tg[i]-lv[i]<-0.01||tg[i]<0.3)src.push(i);if(tg[i]-lv[i]>0.01||tg[i]>0.7)dst.push(i);}
   if(src.length&&dst.length&&Math.random()<0.16){var a=src[Math.floor(Math.random()*src.length)],b=dst[Math.floor(Math.random()*dst.length)];if(a!==b)pts.push({a:X[a],b:X[b],t:0,c:P[b][1]});}
   pts.forEach(function(p){p.t+=0.018;});pts=pts.filter(function(p){return p.t<1;});draw();raf=requestAnimationFrame(loop);}else setTimeout(function(){raf=requestAnimationFrame(loop);},700);}
  host.querySelectorAll('[data-r]').forEach(function(b){b.onclick=function(){set(b.dataset.r);};});
@@ -12527,9 +12548,9 @@ function lchart(host,C){var N=C.S[0][2].length,W=380,H=200,mn=C.mn,mx=C.mx,on=C.
   else{var last=null;C.E.forEach(function(e){if(e[0]-C.y0<=k)last=e;});h=last?'<div class="an-it"><b>'+esc(last[1])+'</b><p>'+esc(last[2])+'</p></div>':'';}
   if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}q('.lc-rg').value=k;
   host.querySelectorAll('.lc-b').forEach(function(r){r.classList.toggle('on',+r.dataset.i===band);});host.querySelectorAll('[data-b]').forEach(function(b){b.classList.toggle('on',+b.dataset.b===band);});}
- q('.lc-play').onclick=function(){cancelAnimationFrame(raf);band=-1;var t0=performance.now();(function s(){if(!host.isConnected)return;k=rm()?N-1:Math.min(N-1,Math.floor((performance.now()-t0)/C.sp));draw();if(k<N-1)raf=requestAnimationFrame(s);})();};
- q('.lc-rg').oninput=function(){cancelAnimationFrame(raf);band=-1;k=+this.value;draw();};
- host.querySelectorAll('[data-b]').forEach(function(b){b.onclick=function(){cancelAnimationFrame(raf);var i=+b.dataset.b;band=band===i?-1:i;if(band>=0)k=C.B[i][1]-C.y0;draw();};});
+ var pc=PC(host,q('.lc-play'));q('.lc-play').onclick=function(){if(pc.toggle())return;band=-1;k=-1;pc.start(function(t){var nk=Math.min(N-1,Math.floor(t/(C.sp*1.4)));if(nk!==k){k=nk;draw();C.E.forEach(function(e){if(e[0]-C.y0===k)pc.wait(rd(e[1]+' '+e[2]));});}return k<N-1;});};
+ q('.lc-rg').oninput=function(){pc.stop();band=-1;k=+this.value;draw();};
+ host.querySelectorAll('[data-b]').forEach(function(b){b.onclick=function(){pc.stop();var i=+b.dataset.b;band=band===i?-1:i;if(band>=0)k=C.B[i][1]-C.y0;draw();};});
  host.querySelectorAll('.lc-k [data-k]').forEach(function(b){b.onclick=function(){var i=+b.dataset.k;on[i]=on[i]?0:1;b.classList.toggle('on',!!on[i]);draw();};});
  draw();}
 function usmacro(host,D){return lchart(host,{y0:1970,mn:-4,mx:17,T:[0,5,10,15],YL:[1970,1980,1990,2000,2010,2020],sp:150,
@@ -12673,17 +12694,17 @@ function dchoc(host,D){var SC=[{t:'Programmé · NFP 14h30',ev:14.5,lab:'NFP 14h
   '<text x="30" y="52" class="ex-t dk-ccy" style="text-anchor:start"></text><line x1="30" x2="370" y1="100" y2="100" class="ds-g"/><line class="dk-ev dv-el" y1="40" y2="200"/><text class="ex-t mid dk-evl" y="44"></text><polyline class="dk-p" points=""/><circle r="3" class="dk-dot"/>'+
   '<text x="30" y="166" class="ex-t" style="text-anchor:start">volatilité</text><path class="dk-v" d=""/><line x1="30" x2="370" y1="204" y2="204" class="ds-g"/>'+
   [0,6,12,18,24].map(function(h){return '<text x="'+X(h)+'" y="216" class="ex-t mid">'+h+'h</text>';}).join('')+'</svg>'+
-  '<div class="an-side"><div class="an-scn">'+SC.map(function(s,i){return '<button type="button" data-s="'+i+'">'+s.t+'</button>';}).join('')+'<button type="button" class="dk-go">▶ Rejouer</button></div><div class="an-info"></div></div></div></div>';
+  '<div class="an-side"><div class="an-scn">'+SC.map(function(s,i){return '<button type="button" data-s="'+i+'">'+s.t+'</button>';}).join('')+'<button type="button" class="dk-go">▶ Lancer</button></div><div class="an-info"></div></div></div></div>';
  var q=function(s){return host.querySelector(s);},lastS=-1;
  function pts(S,k){var o=[],ov=[];for(var i=0;i<=k;i++){var h=i/N*24;o.push(X(h).toFixed(1)+','+(100-S.f(h)*70).toFixed(1));}return o.join(' ');}
  function vpath(S,k){var d='M30 204';for(var i=0;i<=k;i++){var h=i/N*24;d+=' L'+X(h).toFixed(1)+' '+(204-Math.min(1,S.v(h))*30).toFixed(1);}return d+' L'+X(k/N*24).toFixed(1)+' 204Z';}
  function frame(k){var S=SC[cur],h=k/N*24;q('.dk-p').setAttribute('points',pts(S,k));q('.dk-v').setAttribute('d',vpath(S,k));q('.dk-dot').setAttribute('cx',X(h).toFixed(1));q('.dk-dot').setAttribute('cy',(100-S.f(h)*70).toFixed(1));
-  var si=0;S.st.forEach(function(s,i){if(h>=s[0])si=i;});if(si!==lastS){lastS=si;var s=S.st[si];q('.an-info').innerHTML='<div class="an-it"'+(si?' style="border-color:'+(cur?'var(--a-pk)':'var(--a-mt)')+'"':'')+'><b>'+s[1]+'</b><p>'+s[2]+'</p>'+(k>=N?'':'')+'</div>';}
+  var si=0;S.st.forEach(function(s,i){if(h>=s[0])si=i;});if(si!==lastS){lastS=si;var s=S.st[si];if(k<N)pc.wait(rd(s[1]+' '+s[2]));q('.an-info').innerHTML='<div class="an-it"'+(si?' style="border-color:'+(cur?'var(--a-pk)':'var(--a-mt)')+'"':'')+'><b>'+s[1]+'</b><p>'+s[2]+'</p>'+(k>=N?'':'')+'</div>';}
   if(k>=N)q('.an-info').innerHTML+='<div class="an-it" style="margin-top:10px;border-color:var(--a-ink)"><b>'+(cur?'Volatilité longue':'Volatilité courte')+'</b><p>'+(cur?'Un événement non programmé crée la surprise : la volatilité est plus forte et surtout plus longue, chaque session découvrant la nouvelle à son tour.':'Un événement programmé est attendu par tout le monde au même moment : le choc est vif mais vite absorbé.')+'</p></div>';}
  function play(i){cur=i;lastS=-1;cancelAnimationFrame(raf);var S=SC[i];host.querySelectorAll('[data-s]').forEach(function(b){b.classList.toggle('on',+b.dataset.s===i);});q('.an-dk').setAttribute('data-m',i);
   q('.dk-ev').setAttribute('x1',X(S.ev));q('.dk-ev').setAttribute('x2',X(S.ev));q('.dk-evl').setAttribute('x',X(S.ev));q('.dk-evl').textContent=S.lab;q('.dk-ccy').textContent=S.ccy;
-  if(rm()){frame(N);return;}var t0=performance.now();(function s(){if(!host.isConnected)return;var k=Math.min(N,Math.round((performance.now()-t0)/6200*N));frame(k);if(k<N)raf=requestAnimationFrame(s);})();}
- host.querySelectorAll('[data-s]').forEach(function(b){b.onclick=function(){play(+b.dataset.s);};});q('.dk-go').onclick=function(){play(cur);};
+  pc.start(function(t){var k=Math.min(N,Math.round(t/9000*N));frame(k);return k<N;});}
+ var pc=PC(host,q('.dk-go'));host.querySelectorAll('[data-s]').forEach(function(b){b.onclick=function(){play(+b.dataset.s);};});q('.dk-go').onclick=function(){if(pc.toggle())return;play(cur);};
  cur=0;lastS=-1;host.querySelectorAll('[data-s]').forEach(function(b){b.classList.toggle('on',+b.dataset.s===0);});var S0=SC[0];q('.dk-ev').setAttribute('x1',X(S0.ev));q('.dk-ev').setAttribute('x2',X(S0.ev));q('.dk-evl').setAttribute('x',X(S0.ev));q('.dk-evl').textContent=S0.lab;q('.dk-ccy').textContent=S0.ccy;frame(N);}
 /* ---------- 28. Les révisions des données ---------- */
 function drev(host,D){var M=['Mars','Avril','Mai','Juin'],V=[182,168,175],NX=148,SC=[['Révision à la baisse',112,'dn'],['Révision à la hausse',236,'up']];
@@ -13901,8 +13922,17 @@ var ANSEED={
 function anSeed(id){var S=ANSEED[id];if(!S)return;var n=note(id,true);if(n.anSeed)return;n.anSeed=1;var pos=n.layout.findIndex(function(w){return w.t==='steps';});if(pos<0)pos=n.layout.findIndex(function(w){return w.t==='key';});pos=pos<0?n.layout.length:pos+1;
  S.forEach(function(a,i){if(n.layout.some(function(w){return w.t==='anim'&&fnorm(w.title)===fnorm(a.title);}))return;n.layout.splice(pos+i,0,{id:uid(),t:'anim',w:2,title:a.title,d:JSON.parse(JSON.stringify(a.d))});});persist();}
 function anHTML(w){var k=(w.d&&w.d.kind)||'liquid';return (st.org?'<div class="an-kind"><span>Type :</span><select data-ank="'+w.id+'">'+ANK.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===k?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></div>':'')+'<div class="an-host" data-anw="'+w.id+'"></div>';}
+var AN_ON={},AN_IO=null;
+function anIO(){if(AN_IO||!window.IntersectionObserver)return AN_IO;AN_IO=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.target.isConnected){AN_IO.unobserve(e.target);return;}var o=!e.isIntersecting;e.target.__off=o;e.target.classList.toggle('an-off',o);});},{rootMargin:'150px'});return AN_IO;}
+function anMount(h,w,d){var k=d.kind||'liquid',lb=(ANK.find(function(x){return x[0]===k;})||['',''])[1];
+ function idle(){h.innerHTML='<div class="an-idle"><button type="button" class="an-go">▶ Lancer l\'animation</button><span>'+lb+'</span></div>';h.querySelector('.an-go').onclick=function(ev){ev.stopPropagation();go();};}
+ function go(){AN_ON[w.id]=1;h.innerHTML='';var live=document.createElement('div');live.className='an-live';h.appendChild(live);var bar=document.createElement('div');bar.className='an-bar';bar.innerHTML='<button type="button" class="an-stop">■ Arrêter l\'animation</button>';h.appendChild(bar);
+  try{window.__anim[k](live,d);}catch(x){live.innerHTML='<div class="frm-small">Animation indisponible.</div>';}
+  var io=anIO();if(io)io.observe(live);
+  bar.querySelector('.an-stop').onclick=function(ev){ev.stopPropagation();delete AN_ON[w.id];if(io)io.unobserve(live);live.remove();idle();};}
+ if(AN_ON[w.id])go();else idle();}
 function anWire(r,id){if(!r||!window.__anim)return;var n=id?note(id,true):null;
- r.querySelectorAll('[data-anw]').forEach(function(h){var w=null;if(n)w=n.layout.find(function(x){return x.id===h.dataset.anw;});if(!w){var B=st.box&&boxById(st.box);if(B){var nb=note('box-'+B.id,true);w=nb.layout.find(function(x){return x.id===h.dataset.anw;});}}if(!w)return;var d=w.d||(w.d=anDefault('liquid'));try{window.__anim[d.kind||'liquid'](h,d);}catch(x){h.innerHTML='<div class="frm-small">Animation indisponible.</div>';}});
+ r.querySelectorAll('[data-anw]').forEach(function(h){var w=null;if(n)w=n.layout.find(function(x){return x.id===h.dataset.anw;});if(!w){var B=st.box&&boxById(st.box);if(B){var nb=note('box-'+B.id,true);w=nb.layout.find(function(x){return x.id===h.dataset.anw;});}}if(!w)return;var d=w.d||(w.d=anDefault('liquid'));anMount(h,w,d);});
  r.querySelectorAll('[data-anflow]').forEach(function(h){if(n)window.__anim.flow(h,{items:n.steps.items});});
  r.querySelectorAll('[data-ank]').forEach(function(s){s.onchange=function(){var L=(n?n.layout:[]),w=L.find(function(x){return x.id===s.dataset.ank;});if(!w)return;var old=w.d||{};w.d=anDefault(s.value,n);if(old.note&&s.value==='liquid')w.d.note=old.note;touch(id);render();};});
  var p=r.querySelector('[data-a="splay"]');if(p)p.onclick=function(ev){ev.stopPropagation();st.splay=id;render();};var q=r.querySelector('[data-a="sstop"]');if(q)q.onclick=function(ev){ev.stopPropagation();st.splay=null;render();};}
