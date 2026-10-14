@@ -1486,6 +1486,37 @@ html.nuit .an{--a-ink:#E6E3EE;--a-mut:#9a9fb2;--a-ln:#3a4560;--a-pkf:#3a2440;--a
 @media(max-width:520px){.su-lt{font-size:11px}}
 
 .su-cloud{stroke-width:1}
+/* divergence */
+.dv-main{display:grid;grid-template-columns:minmax(260px,1.25fr) 1fr;gap:20px;align-items:center}
+@media(max-width:760px){.dv-main{grid-template-columns:1fr}}
+.dv-ax{font-size:8px;fill:var(--a-mut);text-anchor:end;font-variant-numeric:tabular-nums}.dv-ax.l{text-anchor:start;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase}
+.dv-r{fill:none;stroke-width:1.6;stroke-linejoin:round}.dv-r.a{stroke:var(--a-mt)}.dv-r.b{stroke:var(--a-pk)}
+.dv-rl{font-size:8.5px;font-weight:600}.dv-rl.a{fill:var(--a-mt)}.dv-rl.b{fill:var(--a-pk)}
+.dv-gap{fill:var(--a-ink);opacity:.18}
+.dv-p{fill:none;stroke:var(--a-ink);stroke-width:1.3;stroke-linejoin:round}
+.dv-dot{fill:var(--a-ink)}
+.dv-el{stroke:var(--a-pk);stroke-width:.6;stroke-dasharray:2 3;opacity:.55}
+.dv-em{fill:var(--a-gf);stroke:var(--a-pk);stroke-width:1.2}
+.dv-now{font-size:12.5px;line-height:1.5;margin:4px 0 10px;font-variant-numeric:tabular-nums}.dv-now .up{color:var(--a-mt);font-weight:600}
+.an-dv .an-scn button.on{background:var(--a-ink);color:var(--a-gf);border-color:var(--a-ink)}
+/* deux opportunités */
+.cy-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.cy-row{grid-template-columns:1fr}}
+.cy-c{font:inherit;color:inherit;background:transparent;border:1px solid var(--a-ln);border-radius:10px;padding:10px 10px 12px;cursor:pointer;transition:border-color .3s,background .3s;display:flex;flex-direction:column;gap:6px;align-items:center}
+.cy-c b{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;opacity:.6}
+.cy-c.on{border-color:var(--a-pk);background:var(--a-pkf)}.cy-c.on b{opacity:1;color:var(--a-pk)}
+.cy-p{fill:none;stroke:var(--a-ink);stroke-width:1.4;stroke-linecap:round}
+.cy-run{display:none}
+.cy-dot{fill:var(--a-pk);opacity:0;transition:opacity .3s}
+.cy-m path{stroke-width:1.6;stroke-linecap:round}.cy-m text{font-size:9.5px;font-weight:500}
+.cy-m.dn path{stroke:var(--a-pk)}.cy-m.dn text{fill:var(--a-pk)}
+.cy-m.up path{stroke:var(--a-mt)}.cy-m.up text{fill:var(--a-mt)}
+.cy-m.warn path{stroke:#D9A85F}.cy-m.warn text{fill:#C4913F}
+.an-cy .an-info{margin-top:12px}
+.cy-svg{max-width:300px;margin:0 auto}
+.cy-m text{font-size:10px}
+.dv-svg{max-width:520px}
+@media(max-width:520px){.dv-ax{font-size:11px}.dv-ax.l{font-size:11px}.dv-rl{font-size:11px}}
 /* ===== v74 : illustrations, stickers, animations dans les fiches ===== */
 .fp-titrow{display:flex;align-items:center;gap:16px;margin:4px 0 2px}
 .fp-titc{min-width:0;flex:1}
@@ -12104,9 +12135,57 @@ function surprise(host,D){var L=D.labels||['Thème sous-jacent','Surprise','Chan
  host.querySelectorAll('[data-o]').forEach(function(b){b.onclick=function(){setO(b.dataset.o);};});
  setO('yes');root.classList.add('rd');show(0);}
 
+/* ---------- 9. Divergence de politique monétaire (2021-2023) ---------- */
+var DV={M:['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'],
+ fed:[0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25, 0.25,0.25,0.5,0.5,1,1.75,2.5,2.5,3.25,3.25,4,4.5, 4.5,4.75,5,5,5.25,5.25,5.5,5.5,5.5,5.5,5.5,5.5],
+ boj:[-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1],
+ bce:[-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,0,0,0.75,0.75,1.5,2,2,2.5,3,3,3.25,3.5,3.5,3.75,4,4,4,4],
+ uj:[104.7,106.6,110.7,109.3,109.6,111.1,109.7,110,111.3,113.9,113.2,115.1,115.1,115,121.7,129.8,128.7,135.7,133.3,139,144.7,148.7,138,131.1,130.1,136.2,132.8,136.3,139.3,144.3,142.3,145.5,149.4,151.7,148.2,141],
+ eu:[1.213,1.207,1.173,1.202,1.223,1.186,1.187,1.181,1.158,1.156,1.133,1.137,1.123,1.122,1.107,1.054,1.073,1.048,1.022,1.005,0.98,0.988,1.04,1.07,1.086,1.058,1.084,1.102,1.069,1.091,1.1,1.084,1.057,1.057,1.089,1.104]};
+function diverge(host,D){var pair=D.pair==='eu'?'eu':'uj',N=36,k=N-1,raf=null;
+ var EV={uj:[[5,'16 juin 2021','Dot plot hawkish : la Fed annonce des hausses pour 2023. Les premiers acheteurs de USD/JPY entrent.'],[14,'16 mars 2022','1re hausse de la Fed. La BoJ reste à -0,10 % : la divergence s\'ouvre, USD/JPY décolle.'],[20,'sept.-oct. 2022','USD/JPY dépasse 150 : le Japon intervient pour soutenir le yen.'],[22,'10 nov. 2022','CPI US à 7,7 % au lieu de 7,9 % : la Fed devrait ralentir. Grosse chute (l\'élastique claque).'],[30,'juil. 2023','Dernière hausse de la Fed (5,25-5,50 %). Le dollar regagne du terrain.']],
+  eu:[[5,'16 juin 2021','Dot plot hawkish de la Fed, BCE toujours dovish : EUR/USD casse et commence à baisser.'],[14,'16 mars 2022','1re hausse de la Fed, la BCE attend : la divergence est maximale.'],[18,'21 juil. 2022','La BCE monte enfin ses taux, 4 mois après la Fed.'],[20,'sept. 2022','EUR/USD passe sous la parité (plus bas vers 0,96).'],[22,'nov. 2022','CPI US plus bas et BCE qui accélère : la divergence se referme, EUR/USD remonte.']]};
+ var W=360,H=210,x=function(i){return 34+(W-44)*i/(N-1);},yr=function(v){return 88-(v+0.6)/6.2*74;};
+ host.innerHTML='<div class="an an-dv"><div class="dv-main"><svg viewBox="0 0 '+W+' '+H+'" class="an-svg dv-svg" aria-hidden="true">'+
+  '<text x="34" y="9" class="dv-ax l">Taux directeurs</text>'+[0,2,4].map(function(v){return '<line x1="34" x2="'+(W-10)+'" y1="'+yr(v).toFixed(1)+'" y2="'+yr(v).toFixed(1)+'" class="dp-g"/><text x="29" y="'+(yr(v)+3).toFixed(1)+'" class="dv-ax">'+v+' %</text>';}).join('')+
+  '<polyline class="dv-r a"/><polyline class="dv-r b"/><text class="dv-rl a"></text><text class="dv-rl b"></text><rect class="dv-gap" width="3" rx="1.5"/>'+
+  '<text x="34" y="112" class="dv-ax l dv-pn"></text><line x1="34" x2="'+(W-10)+'" y1="202" y2="202" class="dp-g"/><polyline class="dv-p"/><circle r="3" class="dv-dot"/><g class="dv-ev"></g>'+
+  [0,12,24].map(function(i){return '<text x="'+x(i).toFixed(1)+'" y="'+(H-0)+'" class="dv-ax">'+(2021+i/12)+'</text>';}).join('')+'</svg>'+
+  '<div class="an-side"><div class="an-scn"><button type="button" data-pr="uj">USD/JPY · Fed vs BoJ</button><button type="button" data-pr="eu">EUR/USD · Fed vs BCE</button></div><div class="af-ctl"><button type="button" class="dv-play">▶ Rejouer 2021-2023</button></div><input type="range" min="0" max="'+(N-1)+'" value="'+(N-1)+'" class="se-rg dv-rg" aria-label="Date"><div class="dv-now"></div><div class="an-info"></div></div></div></div>';
+ var q=function(s){return host.querySelector(s);};
+ function draw(){var A=DV.fed,B=pair==='uj'?DV.boj:DV.bce,P=DV[pair],mn=Math.min.apply(null,P),mx=Math.max.apply(null,P),yp=function(v){return 196-(v-mn)/(mx-mn)*74;};
+  var pts=function(arr,f){var o=[];for(var i=0;i<=k;i++)o.push(x(i).toFixed(1)+','+f(arr[i]).toFixed(1));return o.join(' ');};
+  q('.dv-r.a').setAttribute('points',pts(A,yr));q('.dv-r.b').setAttribute('points',pts(B,yr));q('.dv-p').setAttribute('points',pts(P,yp));
+  q('.dv-rl.a').setAttribute('x',x(k)+4);q('.dv-rl.a').setAttribute('y',yr(A[k])+3);q('.dv-rl.a').textContent='Fed';
+  q('.dv-rl.b').setAttribute('x',x(k)+4);q('.dv-rl.b').setAttribute('y',yr(B[k])+(Math.abs(A[k]-B[k])<0.5?11:3));q('.dv-rl.b').textContent=pair==='uj'?'BoJ':'BCE';
+  var g=q('.dv-gap');g.setAttribute('x',x(k)-1.5);g.setAttribute('y',Math.min(yr(A[k]),yr(B[k])));g.setAttribute('height',Math.max(1,Math.abs(yr(A[k])-yr(B[k]))));
+  var d=q('.dv-dot');d.setAttribute('cx',x(k));d.setAttribute('cy',yp(P[k]));q('.dv-pn').textContent=pair==='uj'?'USD/JPY':'EUR/USD';
+  var E=EV[pair],last=null;q('.dv-ev').innerHTML=E.filter(function(e){return e[0]<=k;}).map(function(e){last=e;return '<line x1="'+x(e[0]).toFixed(1)+'" x2="'+x(e[0]).toFixed(1)+'" y1="16" y2="200" class="dv-el"/><circle cx="'+x(e[0]).toFixed(1)+'" cy="'+yp(P[e[0]]).toFixed(1)+'" r="2.6" class="dv-em"/>';}).join('');
+  var spread=A[k]-B[k],dec=pair==='uj'?1:3;q('.dv-now').innerHTML='<b>'+DV.M[k%12]+' '+(2021+Math.floor(k/12))+'</b> · Fed '+String(A[k]).replace('.',',')+' % · '+(pair==='uj'?'BoJ':'BCE')+' '+String(B[k]).replace('.',',')+' % · <span class="'+(spread>2?'up':'')+'">écart '+spread.toFixed(2).replace('.',',')+' pt</span> · '+(pair==='uj'?'USD/JPY ':'EUR/USD ')+P[k].toFixed(dec).replace('.',',');
+  var ih=last?'<div class="an-it"><b>'+esc(last[1])+'</b><p>'+esc(last[2])+'</p></div>':'<div class="an-it"><b>Début 2021</b><p>Fed et '+(pair==='uj'?'BoJ':'BCE')+' sont toutes les deux à des taux quasi nuls : pas encore de divergence.</p></div>';var ie=q('.an-info');if(ie.__h!==ih){ie.__h=ih;ie.innerHTML=ih;}
+  q('.dv-rg').value=k;}
+ function play(){cancelAnimationFrame(raf);var t0=null;(function st(ts){if(!host.isConnected)return;if(!t0)t0=ts;k=Math.min(N-1,Math.floor((ts-t0)/170));draw();if(k<N-1)raf=requestAnimationFrame(st);})(performance.now());raf=requestAnimationFrame(function f(ts){});}
+ function setP(p){pair=p;host.querySelectorAll('[data-pr]').forEach(function(b){b.classList.toggle('on',b.dataset.pr===p);});k=N-1;draw();}
+ q('.dv-play').onclick=function(){cancelAnimationFrame(raf);var t0=performance.now();(function st(){if(!host.isConnected)return;k=Math.min(N-1,Math.floor((performance.now()-t0)/170));draw();if(k<N-1)raf=requestAnimationFrame(st);})();};
+ q('.dv-rg').oninput=function(){cancelAnimationFrame(raf);k=+this.value;draw();};
+ host.querySelectorAll('[data-pr]').forEach(function(b){b.onclick=function(){cancelAnimationFrame(raf);setP(b.dataset.pr);};});setP(pair);}
+/* ---------- 10. Les deux opportunités (cycles de taux) ---------- */
+function cycles(host,D){
+ var C=[{t:'Meilleure opportunité',d:'Une banque centrale fait un pivot DOVISH (elle commence à baisser après avoir monté), l\'autre fait un pivot HAWKISH (elle commence à monter après avoir baissé). Je vends la devise dovish et j\'achète la devise hawkish : les deux cycles démarrent, la tendance peut durer longtemps.',m:[[0.255,'Pivot dovish','dn','above'],[0.7,'Pivot hawkish','up','below']]},
+  {t:'Opportunité dangereuse',d:'J\'achète une devise hawkish… mais qui arrive en FIN de cycle (ses taux sont déjà très hauts) face à une devise dovish. La divergence existe encore, mais le cycle peut se retourner à tout moment : prudence, stops serrés.',m:[[0.1,'Fin de cycle','warn','br'],[0.255,'Retournement','dn','above']]}];
+ var path='M12 70 C40 8 72 8 92 52 S124 128 152 104 S190 40 200 52';
+ host.innerHTML='<div class="an an-cy"><div class="cy-row">'+C.map(function(c,i){return '<button type="button" class="cy-c" data-c="'+i+'"><svg viewBox="0 -8 210 150" class="an-svg cy-svg" aria-hidden="true"><path d="'+path+'" class="cy-p"/><path d="'+path+'" class="cy-run"/><circle r="4" class="cy-dot"/><g class="cy-mk"></g></svg><b>'+esc(c.t)+'</b></button>';}).join('')+'</div><div class="an-info"></div></div>';
+ var cards=[].slice.call(host.querySelectorAll('.cy-c'));
+ cards.forEach(function(card,i){var p=card.querySelector('.cy-p'),L=p.getTotalLength?p.getTotalLength():300,mk=card.querySelector('.cy-mk');mk.innerHTML=C[i].m.map(function(m){var pt=p.getPointAtLength?p.getPointAtLength(L*m[0]):{x:0,y:0};var md=m[3]||'above',anc=md==='br'?'start':'middle',tx=md==='br'?pt.x+7:pt.x,ty=md==='above'?pt.y-10:pt.y+17;return '<g class="cy-m '+m[2]+'"><path d="M'+(pt.x-4)+' '+(pt.y-4)+' l8 8 M'+(pt.x+4)+' '+(pt.y-4)+' l-8 8"/><text text-anchor="'+anc+'" x="'+tx+'" y="'+ty+'">'+esc(m[1])+'</text></g>';}).join('');card.__L=L;});
+ var raf=null;
+ function sel(i){cancelAnimationFrame(raf);cards.forEach(function(c,j){c.classList.toggle('on',j===i);});host.querySelector('.an-info').innerHTML='<div class="an-it"><b>'+esc(C[i].t)+'</b><p>'+esc(C[i].d)+'</p></div>';
+  var c=cards[i],p=c.querySelector('.cy-p'),dot=c.querySelector('.cy-dot'),L=c.__L,t0=performance.now();cards.forEach(function(o){o.querySelector('.cy-dot').style.opacity=0;});dot.style.opacity=1;
+  (function st(){if(!host.isConnected||!c.classList.contains('on'))return;var u=((performance.now()-t0)/3600)%1;var pt=p.getPointAtLength(L*u);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);if(host.offsetParent)raf=requestAnimationFrame(st);else setTimeout(function(){raf=requestAnimationFrame(st);},700);})();}
+ cards.forEach(function(c,i){c.onclick=function(){sel(i);};});sel(0);}
+
 var SAFE=false;try{SAFE=/[?&#]secours/.test(location.href)||localStorage.getItem('mf_safe')==='1';}catch(x){}
 function safe(f){return function(h,d){if(SAFE){h.innerHTML='<div class="frm-small">Animations en pause (mode secours).</div>';return;}return f(h,d);};}
-window.__anim={gears:safe(gears),flow:flow,liquid:safe(liquid),seesaw:safe(seesaw),dotplot:safe(dotplot),stir:safe(stir),carry:safe(carry),surprise:safe(surprise)};window.__animSafe=SAFE;
+window.__anim={gears:safe(gears),flow:flow,liquid:safe(liquid),seesaw:safe(seesaw),dotplot:safe(dotplot),stir:safe(stir),carry:safe(carry),surprise:safe(surprise),diverge:safe(diverge),cycles:safe(cycles)};window.__animSafe=SAFE;
 var __unused={gears:gears,flow:flow,liquid:liquid,seesaw:seesaw,dotplot:dotplot,stir:stir,carry:carry};
 })();
 
@@ -13280,8 +13359,8 @@ function wireFiche(r,id){if(r)r.querySelectorAll('[data-tv]').forEach(function(b
 window.__ficheParse=ficheParse;window.__ficheApply=ficheApply;window.__ficheExport=ficheExport;
 
 /* ---- v74 : animations + illustrations dans les fiches ---- */
-var ANK=[['gears','⚙ Engrenages'],['flow','▶ Schéma qui se joue'],['liquid','💧 Robinet QE / QT'],['seesaw','⚖ Balançoire prix / rendement'],['dotplot','• Dot plot'],['stir','▮ Probabilités STIR'],['carry','↘ Carry trade'],['surprise','☁ Thème → surprise → long terme']];
-var ANTYPE={engrenages:'gears',engrenage:'gears',gears:'gears',robinet:'liquid',liquidite:'liquid',liquid:'liquid',balancoire:'seesaw',seesaw:'seesaw','dot plot':'dotplot',dotplot:'dotplot',probabilites:'stir',stir:'stir',carry:'carry','carry trade':'carry',schema:'flow',etapes:'flow',flow:'flow',surprise:'surprise',methode:'surprise','theme surprise':'surprise'};
+var ANK=[['gears','⚙ Engrenages'],['flow','▶ Schéma qui se joue'],['liquid','💧 Robinet QE / QT'],['seesaw','⚖ Balançoire prix / rendement'],['dotplot','• Dot plot'],['stir','▮ Probabilités STIR'],['carry','↘ Carry trade'],['surprise','☁ Thème → surprise → long terme'],['diverge','⇅ Divergence 2021-2023'],['cycles','∿ Les deux opportunités']];
+var ANTYPE={engrenages:'gears',engrenage:'gears',gears:'gears',robinet:'liquid',liquidite:'liquid',liquid:'liquid',balancoire:'seesaw',seesaw:'seesaw','dot plot':'dotplot',dotplot:'dotplot',probabilites:'stir',stir:'stir',carry:'carry','carry trade':'carry',schema:'flow',etapes:'flow',flow:'flow',surprise:'surprise',methode:'surprise','theme surprise':'surprise',divergence:'diverge',diverge:'diverge',cycles:'cycles',cycle:'cycles',opportunites:'cycles'};
 function anDefault(k,n){if(k==='gears')return {kind:k,center:'MARCHÉ',items:[{t:'Thème macro',d:''},{t:'Politique monétaire',d:''},{t:'Données économiques',d:''},{t:'Politique fiscale',d:''},{t:'Interconnexions',d:''},{t:'Géopolitique',d:''},{t:'Analyse technique',d:''},{t:'Offre et demande',d:''}],scenes:[]};
  if(k==='flow')return {kind:k,items:(n&&n.steps&&n.steps.items.length?n.steps.items:[{t:'Étape 1',d:''},{t:'Étape 2',d:''},{t:'Étape 3',d:''}]).map(function(x){return {t:x.t,d:x.d};})};
  if(k==='liquid')return {kind:k,mode:'qe'};if(k==='seesaw')return {kind:k,coupon:40,price:1000};
@@ -13295,6 +13374,7 @@ var ANSEED={
  't2-II-3':[{title:'Le robinet de liquidité',d:{kind:'liquid',mode:'qt',note:'En QT, la liquidité repart : le bilan fond, les rendements montent.'}},{title:'Prix ↔ rendement',d:{kind:'seesaw',coupon:40,price:1000}}],
  't2-II-4':[{title:'Le dot plot qui bouge',d:{kind:'dotplot',col:'Taux prévu pour fin 2024',series:[{t:'Juin 2024',d:'Médiane à 5,1 % : une seule baisse prévue dans l\'année.',dots:[[5.375,4],[5.125,7],[4.875,8]]},{t:'Sept. 2024',d:'Médiane à 4,4 % : encore 2 baisses prévues. Ce qui s\'est passé : -0,25 % en novembre et en décembre.',dots:[[4.125,1],[4.375,9],[4.625,7],[4.875,2]]}]}}],
  't2-I-5':[{title:'Thème → surprise → long terme',d:{kind:'surprise'}}],
+ 't2-II-6':[{title:'Les deux opportunités',d:{kind:'cycles'}},{title:'La divergence en direct (2021-2023)',d:{kind:'diverge',pair:'uj'}},{title:'Le carry trade USD/JPY (août 2024)',d:{kind:'carry'}}],
  't2-II-5':[{title:'Les probabilités qui bougent',d:{kind:'stir',q:'Le CPI US vient de sortir… glisse le curseur :',rows:[{t:'Baisse 0,25 %',p:86,w:75},{t:'Pause',p:14,w:25}]}}]};
 function anSeed(id){var S=ANSEED[id];if(!S)return;var n=note(id,true);if(n.anSeed)return;n.anSeed=1;var pos=n.layout.findIndex(function(w){return w.t==='steps';});if(pos<0)pos=n.layout.findIndex(function(w){return w.t==='key';});pos=pos<0?n.layout.length:pos+1;
  S.forEach(function(a,i){if(n.layout.some(function(w){return w.t==='anim'&&fnorm(w.title)===fnorm(a.title);}))return;n.layout.splice(pos+i,0,{id:uid(),t:'anim',w:2,title:a.title,d:JSON.parse(JSON.stringify(a.d))});});persist();}
@@ -13310,6 +13390,7 @@ function anParse(lines,title){var k=null,D={},items=[],scenes=[],series=[],rows=
   if(kv&&(key==='centre'||key==='center')){D.center=kv[2].trim();return;}
   if(kv&&key==='mode'){D.mode=/qt/i.test(kv[2])?'qt':'qe';return;}
   if(kv&&key==='note'){D.note=kv[2].trim();return;}
+  if(kv&&key==='paire'){D.pair=/eur/i.test(kv[2])?'eu':'uj';return;}
   if(kv&&key==='question'){D.q=kv[2].trim();return;}
   if(kv&&key==='coupon'){D.coupon=parseFloat(kv[2].replace(',','.'))||40;return;}
   if(kv&&key==='prix'){D.price=parseFloat(kv[2].replace(/\s/g,'').replace(',','.'))||1000;return;}
@@ -13322,7 +13403,7 @@ function anParse(lines,title){var k=null,D={},items=[],scenes=[],series=[],rows=
   items.push({t:pp[0].trim(),d:(pp.slice(1).join(' | ')||'').trim()});});
  if(!k)k=series.length?'dotplot':rows.length?'stir':items.length>=6?'gears':items.length?'flow':'liquid';
  var o=anDefault(k);Object.keys(D).forEach(function(x){o[x]=D[x];});if(items.length&&(k==='gears'||k==='flow'))o.items=items;if(scenes.length)o.scenes=scenes;if(series.length)o.series=series;if(rows.length)o.rows=rows;o.kind=k;return {title:title||'Animation',d:o};}
-function anExport(w){var d=w.d||{},o=['','## Animation : '+(w.title||'Animation'),'type: '+({gears:'engrenages',flow:'schéma',liquid:'robinet',seesaw:'balançoire',dotplot:'dot plot',stir:'probabilités',carry:'carry',surprise:'surprise'}[d.kind]||'robinet')];
+function anExport(w){var d=w.d||{},o=['','## Animation : '+(w.title||'Animation'),'type: '+({gears:'engrenages',flow:'schéma',liquid:'robinet',seesaw:'balançoire',dotplot:'dot plot',stir:'probabilités',carry:'carry',surprise:'surprise',diverge:'divergence',cycles:'cycles'}[d.kind]||'robinet')];
  if(d.center)o.push('centre: '+d.center);if(d.mode)o.push('mode: '+d.mode);if(d.note)o.push('note: '+d.note);if(d.q)o.push('question: '+d.q);if(d.col)o.push('colonne: '+d.col);
  (d.items||[]).forEach(function(x,i){o.push((i+1)+'. '+x.t+(x.d?' | '+x.d:''));});(d.scenes||[]).forEach(function(s){o.push('scène: '+s.t+' | '+(s.on||[]).join(',')+' | '+(s.d||''));});
  (d.series||[]).forEach(function(s){o.push('série: '+s.t+(s.d?' | '+s.d:''));s.dots.forEach(function(x){o.push(String(x[0]).replace('.',',')+' × '+x[1]);});});(d.rows||[]).forEach(function(r){o.push(r.t+' | '+r.p+' | '+r.w);});return o.join('\n');}
