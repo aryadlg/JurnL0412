@@ -1560,6 +1560,55 @@ html.nuit .an{--a-ink:#E6E3EE;--a-mut:#9a9fb2;--a-ln:#3a4560;--a-pkf:#3a2440;--a
 .sp-bl{font-size:8.5px;text-anchor:middle;letter-spacing:.06em;text-transform:uppercase}.sp-bl.late{fill:#C4913F}.sp-bl.con{fill:var(--a-pk)}.sp-bl.new{fill:var(--a-mt)}
 .sp-l{fill:none;stroke:var(--a-ink);stroke-width:1.6;stroke-linejoin:round}
 @media(max-width:520px){.sp-bl,.ph-z text{font-size:10.5px}}
+/* tri croissance / inflation */
+.tr-c{fill:none;stroke-width:1.2;transition:fill .6s}.tr-c.g{stroke:var(--a-mt)}.tr-c.i{stroke:var(--a-pk)}
+.an-tri.done .tr-c.g{fill:var(--a-mtf);fill-opacity:.5}.an-tri.done .tr-c.i{fill:var(--a-pkf);fill-opacity:.5}
+.tr-x{fill:#D9A85F;opacity:0;transition:opacity .8s .2s}.an-tri.done .tr-x{opacity:.28}
+.tr-h{font-size:9px;letter-spacing:.14em;text-anchor:middle;font-weight:600}.tr-h.g{fill:var(--a-mt)}.tr-h.i{fill:var(--a-pk)}
+.tr-ar{fill:none;stroke:#D9A85F;stroke-width:1.3;stroke-dasharray:60;stroke-dashoffset:60;transition:stroke-dashoffset .9s .6s}.an-tri.done .tr-ar{stroke-dashoffset:0}
+.tr-pm{font-size:9.5px;letter-spacing:.14em;text-anchor:middle;fill:#C4913F;font-weight:600;opacity:0;transition:opacity .6s 1.2s}.an-tri.done .tr-pm{opacity:1}
+.tr-ch{cursor:pointer}.tr-ch rect{fill:var(--a-gf);stroke:var(--a-ln);stroke-width:1;transition:all .3s}.tr-ch text{font-size:9px;text-anchor:middle;fill:var(--a-ink)}
+.tr-ch.in.g rect{stroke:var(--a-mt)}.tr-ch.in.i rect{stroke:var(--a-pk)}.tr-ch:hover rect{stroke:var(--a-ink)}
+/* thermostat */
+.th-arc{fill:none;stroke:var(--a-ln);stroke-width:1}.th-tk{stroke:var(--a-ln);stroke-width:1}
+.th-z{fill:none;stroke-width:2.2;stroke-linecap:round;opacity:.75}.th-z.d{stroke:var(--a-mt)}.th-z.h{stroke:var(--a-pk)}
+.th-l{font-size:8.5px;letter-spacing:.14em;text-anchor:middle;fill:var(--a-mut)}.th-l.d{fill:var(--a-mt)}.th-l.h{fill:var(--a-pk)}
+.th-nd line{stroke:var(--a-ink);stroke-width:1.4;stroke-linecap:round}.th-nd circle{fill:var(--a-pk)}.th-hub{fill:var(--a-gf);stroke:var(--a-ink);stroke-width:1.2}
+.th-rt{font-size:10px;letter-spacing:.16em;text-anchor:middle;fill:var(--a-ink);font-weight:600}.an-th.stag .th-rt{fill:var(--a-pk)}
+.th-s{display:grid;grid-template-columns:1fr auto;align-items:baseline;font-size:12.5px;gap:0 8px}.th-s span{opacity:.75}.th-s b{font-variant-numeric:tabular-nums;font-size:13px}.th-s input{grid-column:1/3}
+.an-th .an-scn button.on,.an-rg .an-scn button.on,.an-fx .an-scn button.on,.an-lc .an-scn button.on,.an-tri .an-scn button.on{background:var(--a-ink);color:var(--a-gf);border-color:var(--a-ink)}
+/* 4 régimes */
+.rg-svg{touch-action:none;cursor:crosshair;max-width:420px;margin:0 auto}
+.rg-ax{stroke:var(--a-ink);stroke-width:1;fill:none;opacity:.6}
+.rg-at{font-size:9px;fill:var(--a-mut);letter-spacing:.04em}.rg-at.e{text-anchor:end}
+.rg-q rect{fill-opacity:0;stroke-width:1;stroke-dasharray:3 3;stroke-opacity:.6;transition:all .35s}.rg-q text{font-size:10px;letter-spacing:.16em;text-anchor:middle;opacity:.65;transition:opacity .3s}
+.rg-q.on rect{fill-opacity:.08;stroke-dasharray:none;stroke-opacity:1}.rg-q.on text{opacity:1;font-weight:600}
+.rg-dot{fill:var(--a-ink)}.rg-halo{fill:none;stroke:var(--a-pk);stroke-width:1;animation:rgP 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes rgP{from{opacity:.9;transform:scale(.6)}to{opacity:0;transform:scale(1.9)}}
+.rg-tr{fill:none;stroke:var(--a-pk);stroke-width:1;stroke-opacity:.45;stroke-linecap:round}
+.rg-h{text-align:center;margin-top:4px}
+.rg-lb{font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin:12px 0 5px}
+.rg-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.rg-row div{border:1px solid var(--a-ln);border-radius:8px;padding:6px 8px;text-align:center}
+.rg-row small{display:block;font-size:11px;opacity:.8;line-height:1.25}.rg-a{font-size:20px;line-height:1;display:block;animation:anIn .4s ease-out}
+.rg-a.up{color:var(--a-mt)}.rg-a.dn{color:var(--a-pk)}.rg-a.mod{color:#D9A85F}
+.rg-bc{font-size:12.5px;margin-top:10px;line-height:1.45}
+/* flux de capitaux */
+.fx-jar{fill:none;stroke:var(--a-ink);stroke-width:1.1}.fx-wv{fill-opacity:.32}
+.fx-n{font-size:9.5px;text-anchor:middle;fill:var(--a-ink);letter-spacing:.03em}
+.fx-ar{font-size:14px;text-anchor:middle;font-weight:600}.fx-ar.up{fill:var(--a-mt)}.fx-ar.dn{fill:var(--a-pk)}.fx-ar.mod{fill:#D9A85F}
+/* graphiques historiques */
+.lc-b{opacity:.07;cursor:pointer;transition:opacity .3s}.lc-b.on{opacity:.2}
+.lc-z{stroke:var(--a-ink);stroke-width:.6;opacity:.5}
+.lc-l{fill:none;stroke-width:1.5;stroke-linejoin:round;transition:opacity .3s}.lc-d{transition:opacity .3s}
+.lc-cur{stroke:var(--a-ink);stroke-width:.6;stroke-dasharray:2 2;opacity:.4}
+.lc-k{flex-direction:row;flex-wrap:wrap;margin-top:8px}.lc-k button{flex:1 1 100px}
+/* spirale */
+.spi-a{fill:none;stroke:var(--a-ln);stroke-width:1.2}
+.spi-n circle{fill:var(--a-gf);stroke:var(--a-ink);stroke-width:1;transition:all .3s}.spi-n text{font-size:9px;fill:var(--a-mut);transition:fill .3s}
+.spi-n.on circle{fill:var(--a-pk);stroke:var(--a-pk)}.spi-n.on text{fill:var(--a-ink);font-weight:600}
+.spi-dot{fill:var(--a-pk)}.an-spi.brk .spi-dot{fill:var(--a-mt)}.an-spi.brk .spi-a{stroke:var(--a-mt)}.an-spi.brk .spi-n circle{stroke:var(--a-mt)}
+.spi-pv{font-size:22px;text-anchor:middle;fill:var(--a-ink);font-variant-numeric:tabular-nums;font-weight:300}.spi-pl{font-size:8.5px;letter-spacing:.12em;text-anchor:middle;fill:var(--a-mut);text-transform:uppercase}
+@media(max-width:520px){.tr-ch text,.tr-h,.tr-pm,.th-l,.rg-at,.fx-n,.spi-n text{font-size:10.5px}.rg-q text{font-size:11px}}
 /* ===== v74 : illustrations, stickers, animations dans les fiches ===== */
 .fp-titrow{display:flex;align-items:center;gap:16px;margin:4px 0 2px}
 .fp-titc{min-width:0;flex:1}
@@ -12307,9 +12356,165 @@ function spx(host,D){var V=[4766,4516,4374,4530,4132,4132,3785,4130,3955,3586,38
  q('.sp-play').onclick=function(){cancelAnimationFrame(raf);var t0=performance.now();(function st(){if(!host.isConnected)return;k=Math.min(N-1,Math.floor((performance.now()-t0)/230));draw();if(k<N-1)raf=requestAnimationFrame(st);})();};
  q('.sp-rg').oninput=function(){cancelAnimationFrame(raf);k=+this.value;draw();};draw();}
 
+/* ---------- 16. Ranger les données : croissance / inflation ---------- */
+function tri(host,D){var CH=[['PIB','g',100,118,'Le produit intérieur brut : toute la richesse produite. La mesure la plus large de la croissance.'],['Emploi (NFP)','g',96,146,'Les créations d\'emplois du mois aux États-Unis. Plus d\'emplois = plus de revenus = plus de consommation.'],['Chômage','g',100,174,'Le taux de chômage : quand il baisse, l\'économie va bien. Il réagit souvent en retard.'],['Ventes au détail','g',112,202,'Ce que les ménages dépensent en magasin et en ligne : la consommation, moteur n°1 de l\'économie américaine.'],['IPC (CPI)','i',278,124,'L\'indice des prix à la consommation : l\'inflation que vivent les ménages. La donnée la plus suivie par la Fed (avec le PCE).'],['IPP (PPI)','i',282,154,'L\'indice des prix à la production : les prix payés par les entreprises. Souvent en avance sur l\'IPC.'],['Salaire moyen','i',276,184,'La rémunération horaire moyenne : si les salaires montent vite, les prix suivent (inflation des services).']];
+ var W=380,H=272,raf=null,t0=0,done=false;
+ var st=[];[[0,1,2,3],[4,5,6]].forEach(function(row,r){var ws=row.map(function(i){return CH[i][0].length*5.2+16;}),tot=ws.reduce(function(a,b){return a+b;},0)+8*(row.length-1),x0=(W-tot)/2;row.forEach(function(i,j){st[i]=[x0,20+r*26];x0+=ws[j]+8;});});
+ host.innerHTML='<div class="an an-tri"><div class="dv-main"><svg viewBox="0 0 '+W+' '+H+'" class="an-svg" aria-hidden="true"><circle cx="146" cy="160" r="76" class="tr-c g"/><circle cx="236" cy="160" r="76" class="tr-c i"/><path d="M191 99 A76 76 0 0 1 191 221 A76 76 0 0 1 191 99Z" class="tr-x"/><text x="120" y="96" class="tr-h g">CROISSANCE</text><text x="262" y="96" class="tr-h i">INFLATION</text>'+
+  '<path d="M191 214 C191 236 191 240 191 248" class="tr-ar"/><path d="M186 243 L191 250 L196 243" class="tr-ar tr-ah"/><text x="191" y="266" class="tr-pm">POLITIQUE MONÉTAIRE</text>'+
+  CH.map(function(c,i){var w=c[0].length*5.2+16;return '<g class="tr-ch '+c[1]+'" data-i="'+i+'" transform="translate('+st[i][0]+' '+st[i][1]+')"><rect x="'+(-w/2+w/2)+'" y="-9" width="'+w+'" height="18" rx="9"/><text x="'+(w/2)+'" y="3.5">'+c[0]+'</text></g>';}).join('')+'</svg>'+
+  '<div class="an-side"><div class="an-scn"><button type="button" class="tr-go">▶ Ranger les données</button><button type="button" class="tr-rs">↺ Mélanger</button></div><div class="an-info"></div></div></div></div>';
+ var q=function(s){return host.querySelector(s);},G=host.querySelectorAll('.tr-ch');
+ function wOf(i){return CH[i][0].length*5.2+16;}
+ function place(u){G.forEach(function(g,i){var d=Math.max(0,Math.min(1,u*1.9-i*0.13)),e=d<.5?2*d*d:1-Math.pow(-2*d+2,2)/2,tx=CH[i][2]-wOf(i)/2,ty=CH[i][3],x=st[i][0]+(tx-st[i][0])*e,y=st[i][1]+(ty-st[i][1])*e-Math.sin(e*Math.PI)*26;g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');g.classList.toggle('in',d>=1);});}
+ function info(h){q('.an-info').innerHTML=h;}
+ var base='<div class="an-it"><b>Deux familles de données</b><p>Toutes les données américaines peuvent se ranger dans 2 groupes : la croissance (l\'activité) et l\'inflation (les prix). Touche ▶ pour les ranger, puis touche une donnée pour savoir ce qu\'elle mesure.</p></div>';
+ function fin(){done=true;host.querySelector('.an-tri').classList.add('done');info('<div class="an-it"><b>Le mélange des deux = la politique monétaire</b><p>La croissance dit si l\'économie s\'étend ou se contracte, l\'inflation dit comment évoluent les prix. La banque centrale regarde les deux en même temps pour décider : baisser, garder ou monter ses taux.</p></div>');}
+ q('.tr-go').onclick=function(){cancelAnimationFrame(raf);host.querySelector('.an-tri').classList.remove('done');if(rm()){place(1);fin();return;}t0=performance.now();(function s(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/2600);place(u);if(u<1)raf=requestAnimationFrame(s);else fin();})();};
+ q('.tr-rs').onclick=function(){cancelAnimationFrame(raf);done=false;host.querySelector('.an-tri').classList.remove('done');place(0);info(base);};
+ G.forEach(function(g){g.onclick=function(){var c=CH[+g.dataset.i];info('<div class="an-it" style="border-color:'+(c[1]==='g'?'var(--a-mt)':'var(--a-pk)')+'"><b>'+esc(c[0])+' · '+(c[1]==='g'?'croissance':'inflation')+'</b><p>'+esc(c[4])+'</p></div>');};});
+ place(0);info(base);}
+/* ---------- 17. Le thermostat de la banque centrale ---------- */
+function thermo(host,D){var PR=[['Croissance faible + inflation faible',0.2,1.0],['Croissance forte + inflation persistante',3.6,6.5],['Fin 2001 · après la bulle internet',0.2,1.6],['Juin 2022 · inflation record',1.9,9.1],['1980 · stagflation',-0.3,13.5]];
+ var g=2.5,inf=2.2,ang=0,raf=null;
+ host.innerHTML='<div class="an an-th"><div class="dv-main"><div><svg viewBox="0 0 300 178" class="an-svg" aria-hidden="true"><path d="M40 150 A110 110 0 0 1 260 150" class="th-arc"/>'+
+  [-90,-54,-18,18,54,90].map(function(a){var r=a*Math.PI/180,x1=150+102*Math.sin(r),y1=150-102*Math.cos(r),x2=150+112*Math.sin(r),y2=150-112*Math.cos(r);return '<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" class="th-tk"/>';}).join('')+
+  '<path d="M40 150 A110 110 0 0 1 95 55" class="th-z d"/><path d="M205 55 A110 110 0 0 1 260 150" class="th-z h"/><text x="34" y="168" class="th-l d">DOVISH</text><text x="150" y="28" class="th-l">NEUTRE</text><text x="266" y="168" class="th-l h">HAWKISH</text>'+
+  '<g class="th-nd"><line x1="150" y1="150" x2="150" y2="56" /><circle cx="150" cy="56" r="3"/></g><circle cx="150" cy="150" r="6" class="th-hub"/><text x="150" y="132" class="th-rt"></text></svg></div>'+
+  '<div class="an-side"><label class="th-s"><span>Croissance (PIB)</span><b class="th-gv"></b><input type="range" min="-3" max="7" step="0.1" class="se-rg th-g"></label><label class="th-s"><span>Inflation (IPC)</span><b class="th-iv"></b><input type="range" min="-1" max="14" step="0.1" class="se-rg th-i"></label><div class="an-scn">'+PR.map(function(p,i){return '<button type="button" data-p="'+i+'">'+p[0]+'</button>';}).join('')+'</div><div class="an-info"></div></div></div></div>';
+ var q=function(s){return host.querySelector(s);},lastH='';
+ function f(v){return (v>0?'+':'')+v.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';}
+ function target(){var s=0.65*(inf-2.2)/3.5+0.35*(g-2.2)/2.5;return Math.max(-1,Math.min(1,s));}
+ function verdict(){var s=target(),stag=g<1&&inf>4.5,t,p,c;
+  if(stag){t='Dilemme : la stagflation';p='Croissance en panne ET inflation forte. Baisser les taux relancerait l\'inflation, les monter enfonce l\'économie. Dans les années 70-80, la Fed (Volcker) a fini par monter très fort pour casser l\'inflation, au prix d\'une récession.';c='var(--a-pk)';}
+  else if(s<-0.5){t='Très dovish';p='L\'économie s\'essouffle et les prix ne montent pas : la banque centrale baisse fort ses taux, parfois jusqu\'à 0 %, et peut lancer un QE pour relancer la croissance.';c='var(--a-mt)';}
+  else if(s<-0.15){t='Dovish';p='La croissance est faible et l\'inflation sous contrôle : la banque centrale assouplit sa politique (baisses de taux) pour faire repartir l\'activité.';c='var(--a-mt)';}
+  else if(s<=0.15){t='Neutre';p='Croissance correcte, inflation proche de 2 % : la banque centrale garde ses taux. Elle ne veut ni freiner ni stimuler.';c='var(--a-ink)';}
+  else if(s<=0.5){t='Hawkish';p='La croissance tient et l\'inflation monte : la banque centrale peut se permettre de monter ses taux pour refroidir les prix, l\'économie encaisse.';c='var(--a-pk)';}
+  else {t='Très hawkish';p='L\'inflation s\'emballe : hausses de taux fortes et rapides (+0,75 point par réunion en 2022), quitte à ralentir toute l\'économie.';c='var(--a-pk)';}
+  return [t,p,c,stag];}
+ function upd(){q('.th-gv').textContent=f(g);q('.th-iv').textContent=f(inf);q('.th-g').value=g;q('.th-i').value=inf;var v=verdict(),h='<div class="an-it" style="border-color:'+v[2]+'"><b style="color:'+v[2]+'">'+v[0]+'</b><p>'+v[1]+'</p></div>';if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}q('.th-rt').textContent=v[0].toUpperCase();q('.an-th').classList.toggle('stag',v[3]);
+  host.querySelectorAll('[data-p]').forEach(function(b){var p=PR[+b.dataset.p];b.classList.toggle('on',Math.abs(p[1]-g)<0.05&&Math.abs(p[2]-inf)<0.05);});if(!raf)raf=requestAnimationFrame(tick);}
+ function tick(){if(!host.isConnected){raf=null;return;}var tg=target()*90,st=verdict()[3]&&!rm()?Math.sin(performance.now()/90)*6:0;ang+=(tg-ang)*(rm()?1:0.12);q('.th-nd').setAttribute('transform','rotate('+(ang+st).toFixed(2)+' 150 150)');if(Math.abs(tg-ang)>0.2||st){raf=requestAnimationFrame(tick);}else raf=null;}
+ q('.th-g').oninput=function(){g=+this.value;upd();};q('.th-i').oninput=function(){inf=+this.value;upd();};
+ host.querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){var p=PR[+b.dataset.p];g=p[1];inf=p[2];upd();};});
+ upd();}
+/* ---------- 18. Les 4 régimes croissance / inflation ---------- */
+var REG=[['exp','Expansion','#2DB8A8',[['Croissance','up'],['Inflation','mod'],['Chômage','dn']],[['Actions','up'],['Obligations','mod'],['Matières premières','dn']],'Neutre : rien à corriger, l\'économie tourne bien.','Années 90 (US)','La croissance augmente, l\'inflation baisse doucement (modérée) et le chômage recule. Situation idéale : moment prospère, les actions performent.'],
+ ['ref','Reflation','#D9A85F',[['Croissance','up'],['Inflation','up'],['Chômage','dn']],[['Actions','up'],['Obligations','dn'],['Matières premières','up']],'Commence à devenir hawkish : l\'inflation remonte.','2009-2011 (sortie de crise)','Croissance forte, inflation qui remonte, chômage qui baisse. Les actions montent, les obligations baissent, les matières premières profitent de l\'inflation.'],
+ ['def','Déflation','#4F78AE',[['Croissance','mod'],['Inflation','dn'],['Chômage','up']],[['Actions','dn'],['Obligations','up'],['Matières premières','dn']],'Ultra dovish : taux à 0 %, QE.','Japon années 90 (décennie perdue)','Croissance plate ou légèrement négative, prix qui baissent, chômage qui monte. Les obligations deviennent la valeur refuge : les rôles s\'inversent.'],
+ ['sta','Stagflation','#E46FA0',[['Croissance','dn'],['Inflation','up'],['Chômage','up']],[['Actions','dn'],['Obligations indexées (TIPS)','up'],['Or / matières premières','up']],'Piégée : elle finit par monter fort ses taux.','Années 70 (chocs pétroliers 1973 et 1979)','La pire : croissance en panne, inflation forte et chômage en hausse. Les actions chutent, seules les obligations indexées sur l\'inflation (TIPS) protègent, l\'or et les matières premières brillent.']];
+function arw(d){return d==='up'?'↑':d==='dn'?'↓':'↘';}
+function regime(host,D){var Q={exp:[1,1],ref:[1,0],def:[0,1],sta:[0,0]},px=268,py=150,raf=null,cur=null,lastH='';
+ var W=300,H=250,cx=150,cy=125;
+ host.innerHTML='<div class="an an-rg"><div class="dv-main"><div><svg viewBox="0 0 '+W+' '+H+'" class="an-svg rg-svg"><line x1="20" x2="'+(W-14)+'" y1="'+cy+'" y2="'+cy+'" class="rg-ax"/><line x1="'+cx+'" x2="'+cx+'" y1="'+(H-18)+'" y2="14" class="rg-ax"/><path d="M'+(W-20)+' '+(cy-4)+' L'+(W-12)+' '+cy+' L'+(W-20)+' '+(cy+4)+'" class="rg-ax"/><path d="M'+(cx-4)+' 20 L'+cx+' 12 L'+(cx+4)+' 20" class="rg-ax"/>'+
+  '<text x="'+(W-12)+'" y="'+(cy+16)+'" class="rg-at e">croissance ↑</text><text x="'+(cx+6)+'" y="16" class="rg-at">inflation ↑</text>'+
+  REG.map(function(r){var c=Q[r[0]],x=c[0]?cx+6:22,y=c[1]?cy+6:24;return '<g class="rg-q" data-r="'+r[0]+'"><rect x="'+x+'" y="'+y+'" width="'+(cx-28)+'" height="'+(cy-30)+'" rx="10" style="stroke:'+r[2]+';fill:'+r[2]+'"/><text x="'+(x+(cx-28)/2)+'" y="'+(y+(cy-30)/2+4)+'" style="fill:'+r[2]+'">'+r[1].toUpperCase()+'</text></g>';}).join('')+
+  '<path class="rg-tr"/><circle r="7" class="rg-dot"/><circle r="12" class="rg-halo"/></svg><div class="frm-small rg-h">Fais glisser le point, ou touche un régime.</div></div>'+
+  '<div class="an-side"><div class="an-scn"><button type="button" class="rg-play">▶ Faire le tour</button>'+REG.map(function(r){return '<button type="button" data-b="'+r[0]+'">'+r[1]+'</button>';}).join('')+'</div><div class="an-info"></div></div></div></div>';
+ var q=function(s){return host.querySelector(s);},svg=q('.rg-svg'),trail=[];
+ function which(x,y){return x>=cx?(y>=cy?'exp':'ref'):(y>=cy?'def':'sta');}
+ function show(k){if(k===cur)return;cur=k;var r=REG.filter(function(z){return z[0]===k;})[0];host.querySelectorAll('.rg-q').forEach(function(g){g.classList.toggle('on',g.dataset.r===k);});host.querySelectorAll('[data-b]').forEach(function(b){b.classList.toggle('on',b.dataset.b===k);});
+  var row=function(L){return '<div class="rg-row">'+L.map(function(a){return '<div><span class="rg-a '+a[1]+'">'+arw(a[1])+'</span><small>'+a[0]+'</small></div>';}).join('')+'</div>';};
+  var h='<div class="an-it" style="border-color:'+r[2]+'"><b style="color:'+r[2]+'">'+r[1]+'</b><p>'+esc(r[7])+'</p><small style="color:'+r[2]+'">Exemple : '+esc(r[6])+'</small></div><div class="rg-lb">L\'économie</div>'+row(r[3])+'<div class="rg-lb">Les actifs</div>'+row(r[4])+'<div class="rg-bc"><b>Banque centrale</b> · '+esc(r[5])+'</div>';
+  if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}}
+ function put(x,y,keep){px=Math.max(26,Math.min(W-20,x));py=Math.max(18,Math.min(H-20,y));q('.rg-dot').setAttribute('cx',px);q('.rg-dot').setAttribute('cy',py);q('.rg-halo').setAttribute('cx',px);q('.rg-halo').setAttribute('cy',py);
+  if(keep){trail.push(px.toFixed(1)+','+py.toFixed(1));if(trail.length>60)trail.shift();q('.rg-tr').setAttribute('d',trail.length>1?'M'+trail.join(' L'):'');}show(which(px,py));}
+ function pt(e){var r=svg.getBoundingClientRect();return [(e.clientX-r.left)/r.width*W,(e.clientY-r.top)/r.height*H];}
+ var drag=false;svg.addEventListener('pointerdown',function(e){drag=true;cancelAnimationFrame(raf);trail=[];try{svg.setPointerCapture(e.pointerId);}catch(x){}var p=pt(e);put(p[0],p[1],true);e.preventDefault();});
+ svg.addEventListener('pointermove',function(e){if(!drag)return;var p=pt(e);put(p[0],p[1],true);});
+ svg.addEventListener('pointerup',function(){drag=false;});svg.addEventListener('pointercancel',function(){drag=false;});
+ var C={exp:[222,182],ref:[222,68],def:[78,182],sta:[78,68]};
+ function glide(k){cancelAnimationFrame(raf);var a=[px,py],b=C[k],t0=performance.now();trail=[];(function s(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/(rm()?1:600)),e=1-Math.pow(1-u,3);put(a[0]+(b[0]-a[0])*e,a[1]+(b[1]-a[1])*e,true);if(u<1)raf=requestAnimationFrame(s);})();}
+ host.querySelectorAll('[data-b]').forEach(function(b){b.onclick=function(){glide(b.dataset.b);};});
+ q('.rg-play').onclick=function(){cancelAnimationFrame(raf);trail=[];var t0=performance.now(),dur=rm()?1:9000;(function s(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/dur),a=u*Math.PI*2+0.6,x=cx+78*Math.cos(a)+Math.sin(a*3)*8,y=cy+62*Math.sin(a);put(x,y,true);if(u<1)raf=requestAnimationFrame(s);})();};
+ put(222,182,false);}
+/* ---------- 19. Où va le capital selon le régime ---------- */
+function flux(host,D){var P=[['Actions','#2DB8A8'],['Obligations','#4F78AE'],['Matières premières','#D9A85F']];
+ var LV={exp:[0.86,0.38,0.22],ref:[0.8,0.2,0.74],def:[0.18,0.86,0.2],sta:[0.14,0.66,0.88]};
+ var NOTE={exp:'Environnement risk on : le capital part dans les actions. Les obligations perdent un peu de valeur (sans chute majeure), les matières premières sont un dégât collatéral.',ref:'Les actions montent toujours, les obligations baissent nettement (l\'inflation ronge leur rendement fixe), les matières premières profitent de l\'inflation forte.',def:'Les rôles s\'inversent : les actions et les matières premières chutent (tous les prix baissent), les obligations deviennent la valeur refuge.',sta:'Les actions chutent. Les obligations classiques souffrent aussi : seules celles indexées sur l\'inflation (TIPS) protègent l\'argent sans le faire fructifier. L\'or et les matières premières sont les meilleurs actifs.'};
+ var LB={sta:['Actions','TIPS (indexées)','Or · matières prem.']};
+ var W=360,H=206,X=[70,180,290],uid='fx'+Math.random().toString(36).slice(2,7),lv=[0.5,0.5,0.5],tg=LV.exp,k='exp',pts=[],raf=null,lastH='';
+ host.innerHTML='<div class="an an-fx"><div class="dv-main"><svg viewBox="0 0 '+W+' '+H+'" class="an-svg" aria-hidden="true">'+X.map(function(x,i){return '<clipPath id="'+uid+i+'"><rect x="'+(x-32)+'" y="40" width="64" height="120" rx="12"/></clipPath><path class="fx-wv" data-i="'+i+'" clip-path="url(#'+uid+i+')" style="fill:'+P[i][1]+'"/><rect x="'+(x-32)+'" y="40" width="64" height="120" rx="12" class="fx-jar"/><text x="'+x+'" y="178" class="fx-n" data-i="'+i+'">'+P[i][0]+'</text><text x="'+x+'" y="200" class="fx-ar" data-i="'+i+'"></text>';}).join('')+'<g class="fx-p"></g></svg></div>'+
+  '<div class="an-side"><div class="an-scn">'+REG.map(function(r){return '<button type="button" data-r="'+r[0]+'">'+r[1]+'</button>';}).join('')+'</div><div class="an-info"></div></div></div></div>';
+ var q=function(s){return host.querySelector(s);},ph=0;
+ function set(r){k=r;tg=LV[r];host.querySelectorAll('[data-r]').forEach(function(b){b.classList.toggle('on',b.dataset.r===r);});var reg=REG.filter(function(z){return z[0]===r;})[0];
+  host.querySelectorAll('.fx-n').forEach(function(t,i){t.textContent=(LB[r]||P.map(function(p){return p[0];}))[i];});
+  host.querySelectorAll('.fx-ar').forEach(function(t,i){var d=reg[4][i][1];t.textContent=arw(d);t.setAttribute('class','fx-ar '+d);});
+  var h='<div class="an-it" style="border-color:'+reg[2]+'"><b style="color:'+reg[2]+'">'+reg[1]+'</b><p>'+NOTE[r]+'</p></div>';if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}if(rm()){lv=tg.slice();draw();}}
+ function draw(){X.forEach(function(x,i){var top=160-120*lv[i];var w=host.querySelector('.fx-wv[data-i="'+i+'"]'),d='M'+(x-32)+' 162 L'+(x-32)+' '+top.toFixed(1);for(var s=0;s<=16;s++){var xx=x-32+s*4;d+=' L'+xx+' '+(top+Math.sin(ph*2+s*0.7+i)*1.6).toFixed(1);}d+=' L'+(x+32)+' 162Z';w.setAttribute('d',d);});
+  q('.fx-p').innerHTML=pts.map(function(p){var u=p.t,x=p.a+(p.b-p.a)*u,y=40-Math.sin(u*Math.PI)*34;return '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="2.2" style="fill:'+p.c+'" opacity="'+(1-Math.abs(u-0.5)).toFixed(2)+'"/>';}).join('');}
+ function loop(){if(!host.isConnected)return;if(host.offsetParent&&!document.hidden){ph+=0.05;var src=[],dst=[];for(var i=0;i<3;i++){lv[i]+=(tg[i]-lv[i])*0.03;if(tg[i]-lv[i]<-0.01||tg[i]<0.3)src.push(i);if(tg[i]-lv[i]>0.01||tg[i]>0.7)dst.push(i);}
+  if(src.length&&dst.length&&Math.random()<0.16){var a=src[Math.floor(Math.random()*src.length)],b=dst[Math.floor(Math.random()*dst.length)];if(a!==b)pts.push({a:X[a],b:X[b],t:0,c:P[b][1]});}
+  pts.forEach(function(p){p.t+=0.018;});pts=pts.filter(function(p){return p.t<1;});draw();raf=requestAnimationFrame(loop);}else setTimeout(function(){raf=requestAnimationFrame(loop);},700);}
+ host.querySelectorAll('[data-r]').forEach(function(b){b.onclick=function(){set(b.dataset.r);};});
+ set('exp');if(rm()){lv=tg.slice();draw();}else raf=requestAnimationFrame(loop);}
+/* ---------- 20-21. Graphiques historiques (US 1970-2024, Japon 1985-2010) ---------- */
+function lchart(host,C){var N=C.S[0][2].length,W=380,H=200,mn=C.mn,mx=C.mx,on=C.S.map(function(){return 1;}),k=N-1,band=-1,raf=null,lastH='';
+ var x=function(i){return 30+(W-40)*i/(N-1);},y=function(v){return 172-(v-mn)/(mx-mn)*156;};
+ function f(v){return v.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';}
+ host.innerHTML='<div class="an an-lc"><div class="dv-main"><svg viewBox="0 0 '+W+' '+H+'" class="an-svg" aria-hidden="true">'+C.B.map(function(b,i){return '<rect x="'+x(b[0]-C.y0)+'" y="14" width="'+Math.max(3,x(b[1]-C.y0)-x(b[0]-C.y0))+'" height="160" class="lc-b" data-i="'+i+'" style="fill:'+b[3]+'"/>';}).join('')+
+  C.T.map(function(v){return '<line x1="30" x2="'+(W-10)+'" y1="'+y(v)+'" y2="'+y(v)+'" class="'+(v===0?'lc-z':'dp-g')+'"/><text x="26" y="'+(y(v)+3)+'" class="dv-ax">'+v+' %</text>';}).join('')+
+  C.YL.map(function(yr){return '<text x="'+x(yr-C.y0)+'" y="'+(H-10)+'" class="dv-ax" style="text-anchor:middle">'+yr+'</text>';}).join('')+
+  C.S.map(function(s,i){return '<polyline class="lc-l" data-s="'+i+'" style="stroke:'+s[1]+'"/><circle r="2.8" class="lc-d" data-s="'+i+'" style="fill:'+s[1]+'"/>';}).join('')+'<line class="lc-cur" y1="14" y2="174"/></svg>'+
+  '<div class="c3-k lc-k">'+C.S.map(function(s,i){return '<button type="button" data-k="'+i+'" class="on"><i style="background:'+s[1]+'"></i><b>'+s[0]+'</b><small>'+s[3]+'</small></button>';}).join('')+'</div></div>'+
+  '<div class="an-side"><div class="an-scn"><button type="button" class="lc-play">▶ Rejouer '+C.y0+'-'+(C.y0+N-1)+'</button>'+C.B.map(function(b,i){return '<button type="button" data-b="'+i+'">'+b[2]+'</button>';}).join('')+'</div><input type="range" min="0" max="'+(N-1)+'" value="'+(N-1)+'" class="se-rg lc-rg"><div class="dv-now"></div><div class="an-info"></div><div class="frm-small">'+C.note+'</div></div></div></div>';
+ var q=function(s){return host.querySelector(s);};
+ function draw(){C.S.forEach(function(s,j){var p=[];for(var i=0;i<=k;i++)p.push(x(i).toFixed(1)+','+y(s[2][i]).toFixed(1));var l=q('.lc-l[data-s="'+j+'"]'),d=q('.lc-d[data-s="'+j+'"]');l.setAttribute('points',p.join(' '));l.style.opacity=on[j]?1:0;d.setAttribute('cx',x(k));d.setAttribute('cy',y(s[2][k]));d.style.opacity=on[j]?1:0;});
+  q('.lc-cur').setAttribute('x1',x(k));q('.lc-cur').setAttribute('x2',x(k));
+  q('.dv-now').innerHTML='<b>'+(C.y0+k)+'</b> · '+C.S.map(function(s){return '<span style="color:'+s[1]+'">'+s[0]+' '+f(s[2][k])+'</span>';}).join(' · ');
+  var h;if(band>=0){var b=C.B[band];h='<div class="an-it" style="border-color:'+b[3]+'"><b style="color:'+b[3]+'">'+esc(b[2])+' · '+b[0]+(b[1]>b[0]?'-'+b[1]:'')+'</b><p>'+esc(b[4])+'</p></div>';}
+  else{var last=null;C.E.forEach(function(e){if(e[0]-C.y0<=k)last=e;});h=last?'<div class="an-it"><b>'+esc(last[1])+'</b><p>'+esc(last[2])+'</p></div>':'';}
+  if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}q('.lc-rg').value=k;
+  host.querySelectorAll('.lc-b').forEach(function(r){r.classList.toggle('on',+r.dataset.i===band);});host.querySelectorAll('[data-b]').forEach(function(b){b.classList.toggle('on',+b.dataset.b===band);});}
+ q('.lc-play').onclick=function(){cancelAnimationFrame(raf);band=-1;var t0=performance.now();(function s(){if(!host.isConnected)return;k=rm()?N-1:Math.min(N-1,Math.floor((performance.now()-t0)/C.sp));draw();if(k<N-1)raf=requestAnimationFrame(s);})();};
+ q('.lc-rg').oninput=function(){cancelAnimationFrame(raf);band=-1;k=+this.value;draw();};
+ host.querySelectorAll('[data-b]').forEach(function(b){b.onclick=function(){cancelAnimationFrame(raf);var i=+b.dataset.b;band=band===i?-1:i;if(band>=0)k=C.B[i][1]-C.y0;draw();};});
+ host.querySelectorAll('.lc-k [data-k]').forEach(function(b){b.onclick=function(){var i=+b.dataset.k;on[i]=on[i]?0:1;b.classList.toggle('on',!!on[i]);draw();};});
+ draw();}
+function usmacro(host,D){return lchart(host,{y0:1970,mn:-4,mx:17,T:[0,5,10,15],YL:[1970,1980,1990,2000,2010,2020],sp:150,
+ S:[['Croissance','#2DB8A8',[0.2,3.3,5.3,5.6,-0.5,-0.2,5.4,4.6,5.5,3.2,-0.3,2.5,-1.8,4.6,7.2,4.2,3.5,3.5,4.2,3.7,1.9,-0.1,3.5,2.8,4.0,2.7,3.8,4.4,4.5,4.8,4.1,1.0,1.7,2.8,3.9,3.5,2.8,2.0,0.1,-2.6,2.7,1.6,2.3,2.1,2.5,2.9,1.8,2.5,3.0,2.5,-2.2,6.1,2.5,2.9,2.8],'PIB réel, variation annuelle'],
+  ['Inflation','#E46FA0',[5.7,4.4,3.2,6.2,11.0,9.1,5.8,6.5,7.6,11.3,13.5,10.3,6.2,3.2,4.3,3.6,1.9,3.6,4.1,4.8,5.4,4.2,3.0,3.0,2.6,2.8,3.0,2.3,1.6,2.2,3.4,2.8,1.6,2.3,2.7,3.4,3.2,2.9,3.8,-0.4,1.6,3.2,2.1,1.5,1.6,0.1,1.3,2.1,2.4,1.8,1.2,4.7,8.0,4.1,2.9],'IPC, moyenne de l\'année'],
+  ['Taux Fed','#D9A85F',[7.2,4.7,4.4,8.7,10.5,5.8,5.0,5.5,7.9,11.2,13.4,16.4,12.2,9.1,10.2,8.1,6.8,6.7,7.6,9.2,8.1,5.7,3.5,3.0,4.2,5.8,5.3,5.5,5.4,5.0,6.2,3.9,1.7,1.1,1.4,3.2,5.0,5.0,1.9,0.2,0.2,0.1,0.1,0.1,0.1,0.1,0.4,1.0,1.8,2.2,0.4,0.1,1.7,5.0,5.1],'Fed funds, moyenne de l\'année']],
+ B:[[1973,1982,'Années 70 · stagflation','#E46FA0','Chocs pétroliers de 1973 et 1979 : l\'inflation explose (12 % fin 1974, 14,8 % en mars 1980), la croissance cale et le chômage monte (près de 11 % fin 1982). La Fed monte ses taux, les baisse trop tôt, puis Paul Volcker (nommé en août 1979) les pousse vers 20 % pour casser l\'inflation. Prix à payer : deux récessions (1980 et 1981-1982).'],
+  [1991,2000,'Années 90 · expansion','#2DB8A8','La plus longue expansion de l\'époque (mars 1991 → mars 2001) : essor d\'internet, gains de productivité, croissance de 4 % et plus en fin de décennie, inflation modérée vers 2-3 %, chômage qui descend à 4 % en 2000. Les actions s\'envolent.'],
+  [2001,2003,'2001-2003 · la Fed baisse','#4F78AE','La bulle internet éclate et le 11 septembre frappe : la croissance tombe à 1 %, l\'inflation baisse. La Fed baisse ses taux agressivement : de 6,5 % début 2001 à 1,75 % fin 2001, puis 1 % en juin 2003, pour relancer la croissance.'],
+  [2009,2011,'2009-2011 · reflation','#D9A85F','Sortie de la crise des subprimes : la croissance repart (+2,7 % en 2010), l\'inflation remonte de -2 % (mi-2009) à près de 4 % (sept. 2011). Taux à 0-0,25 % dès décembre 2008 et QE. Le chômage est encore haut (10 % fin 2009) mais il baisse : c\'est la direction qui compte.'],
+  [2020,2023,'2020-2023 · COVID et inflation','#E46FA0','Choc du COVID puis relance massive : l\'inflation explose (9,1 % en juin 2022). La Fed monte de 0,25 % à 5,25-5,50 % (mars 2022 → juillet 2023). L\'inflation retombe vers 3 % mi-2023, et la croissance ralentit sans tomber en récession.']],
+ E:[[1974,'1974 · 1er choc pétrolier','Embargo de l\'OPEP (octobre 1973) : le prix du pétrole est multiplié par 4. Inflation à deux chiffres, récession.'],[1980,'1980 · le sommet de l\'inflation','14,8 % en mars 1980. Volcker serre la vis : les taux de la Fed vont jusqu\'à 20 %.'],[1983,'1983 · l\'inflation est cassée','Retombée vers 3-4 % : début d\'une longue période de taux en baisse.'],[1991,'Années 90 · expansion','Croissance solide, inflation modérée, chômage en baisse.'],[2001,'2001 · la Fed baisse fort','Après la bulle internet, la Fed baisse ses taux 11 fois en 2001.'],[2008,'2008 · crise des subprimes','Faillite de Lehman Brothers (15 sept. 2008), taux à 0 % en décembre.'],[2010,'2009-2011 · reflation','La croissance repart, l\'inflation remonte, taux toujours à 0 %.'],[2015,'Déc. 2015 · 1re hausse','Après 7 ans à 0 %, la Fed remonte enfin ses taux.'],[2020,'2020 · COVID','Récession éclair, taux à 0 % et QE massif.'],[2022,'2022 · l\'inflation explose','9,1 % en juin 2022 : la Fed monte de 0,25 à 4,5 % en un an.'],[2023,'2023-2024 · ça marche','L\'inflation retombe vers 3 %, la croissance ralentit mais tient.']],
+ note:'Moyennes annuelles (sources : BEA, BLS, Fed), arrondies. Les pics mensuels sont plus hauts.'});}
+function japon(host,D){return lchart(host,{y0:1985,mn:-6.5,mx:8,T:[-5,0,5],YL:[1985,1990,1995,2000,2005,2010],sp:260,
+ S:[['Croissance','#2DB8A8',[5.2,3.3,4.7,6.8,4.9,4.8,3.5,0.9,-0.5,1.1,2.6,3.1,1.0,-1.3,-0.3,2.8,0.4,0.0,1.5,2.2,1.8,1.4,1.5,-1.2,-5.7,4.1],'PIB réel, variation annuelle'],
+  ['Inflation','#E46FA0',[2.0,0.6,0.1,0.7,2.3,3.1,3.3,1.7,1.3,0.7,-0.1,0.1,1.8,0.7,-0.3,-0.7,-0.7,-0.9,-0.3,0.0,-0.3,0.2,0.1,1.4,-1.4,-0.7],'IPC, moyenne de l\'année'],
+  ['Chômage','#9B7FD1',[2.6,2.8,2.8,2.5,2.3,2.1,2.1,2.2,2.5,2.9,3.2,3.4,3.4,4.1,4.7,4.7,5.0,5.4,5.3,4.7,4.4,4.1,3.9,4.0,5.1,5.1],'taux de chômage']],
+ B:[[1986,1990,'La bulle','#D9A85F','Taux bas et crédit facile : l\'immobilier et la Bourse s\'envolent. Le Nikkei touche 38 915 points le 29 décembre 1989. On disait que le terrain du palais impérial valait plus que toute la Californie.'],
+  [1991,2002,'La décennie perdue','#4F78AE','La bulle éclate : la Bourse chute, l\'immobilier s\'effondre, les banques croulent sous les créances douteuses. Croissance plate, prix qui baissent à partir de 1999, chômage qui passe de 2 % à 5,4 % (2002). La BoJ descend à 0 % (1999) et invente le QE (mars 2001).']],
+ E:[[1989,'29 déc. 1989 · sommet du Nikkei','38 915 points : sommet de la bulle. Il ne sera dépassé qu\'en février 2024.'],[1991,'1990-1991 · la bulle éclate','La BoJ a monté ses taux, la Bourse et l\'immobilier s\'effondrent.'],[1993,'1993 · croissance nulle','Les entreprises et les banques réduisent leurs dettes au lieu d\'investir.'],[1998,'1997-1998 · crise bancaire','Faillite de Yamaichi Securities (novembre 1997). Récession, le chômage dépasse 4 %.'],[1999,'1999 · taux zéro, prix en baisse','La BoJ passe à 0 % (février 1999). L\'inflation devient négative : la déflation s\'installe.'],[2001,'Mars 2001 · le premier QE','La BoJ lance le premier quantitative easing de l\'histoire.'],[2002,'2002 · chômage record','5,4 % : un record pour le Japon d\'après-guerre.'],[2009,'2009 · crise mondiale','Les prix rebaissent : la déflation n\'est toujours pas vaincue.']],
+ note:'Moyennes annuelles (sources : Cabinet Office, Statistics Bureau of Japan), arrondies.'});}
+/* ---------- 22. La spirale déflationniste ---------- */
+function spirale(host,D){var S=['Les prix|baissent','On attend|pour acheter','Les entreprises|vendent moins','Elles baissent|salaires et emplois','Les revenus|baissent','On dépense|encore moins'];
+ var N=S.length,R=78,cx=180,cy=120,a=-Math.PI/2,raf=null,run=false,brk=false,lap=0,price=100,lastI=-1;
+ var P=S.map(function(s,i){var t=-Math.PI/2+i*2*Math.PI/N;return [cx+R*Math.cos(t),cy+R*Math.sin(t),t];});
+ function arc(i){var t1=P[i][2]+0.22,t2=P[i][2]+2*Math.PI/N-0.22;return 'M'+(cx+R*Math.cos(t1)).toFixed(1)+' '+(cy+R*Math.sin(t1)).toFixed(1)+' A'+R+' '+R+' 0 0 1 '+(cx+R*Math.cos(t2)).toFixed(1)+' '+(cy+R*Math.sin(t2)).toFixed(1);}
+ host.innerHTML='<div class="an an-spi"><div class="dv-main"><svg viewBox="0 0 360 236" class="an-svg" aria-hidden="true">'+S.map(function(s,i){var p=P[i],al=Math.abs(Math.cos(p[2]))<0.3?'middle':Math.cos(p[2])>0?'start':'end',dx=Math.cos(p[2])*14,sn=Math.sin(p[2]),dy=sn*14+(sn>0.5?9:sn<-0.5?-14:-2),L=s.split('|');
+  return '<path d="'+arc(i)+'" class="spi-a"/><g class="spi-n" data-i="'+i+'"><circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="5"/><text x="'+(p[0]+dx).toFixed(1)+'" y="'+(p[1]+dy).toFixed(1)+'" style="text-anchor:'+al+'"><tspan x="'+(p[0]+dx).toFixed(1)+'">'+L[0]+'</tspan><tspan x="'+(p[0]+dx).toFixed(1)+'" dy="11">'+L[1]+'</tspan></text></g>';}).join('')+
+  '<circle r="3.4" class="spi-dot"/><text x="'+cx+'" y="'+(cy-4)+'" class="spi-pv">100</text><text x="'+cx+'" y="'+(cy+12)+'" class="spi-pl">niveau des prix</text></svg></div>'+
+  '<div class="an-side"><div class="an-scn"><button type="button" class="spi-go">▶ Lancer la spirale</button><button type="button" class="spi-br">✋ Casser la spirale</button></div><div class="an-info"></div></div></div></div>';
+ var q=function(s){return host.querySelector(s);},lastH='';
+ function info(h){if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}}
+ var base='<div class="an-it"><b>Pourquoi la déflation est si grave</b><p>Si tout coûte moins cher demain, je n\'achète pas aujourd\'hui. Mais ma dépense, c\'est le salaire de quelqu\'un d\'autre : en retardant mes achats, j\'enlève des revenus à toute la boucle de l\'économie. Touche ▶ pour voir la boucle tourner.</p></div>';
+ function place(){var x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);q('.spi-dot').setAttribute('cx',x.toFixed(1));q('.spi-dot').setAttribute('cy',y.toFixed(1));
+  var i=Math.floor((((a+Math.PI/2)%(2*Math.PI))+2*Math.PI)%(2*Math.PI)/(2*Math.PI/N)+0.08)%N;if(i!==lastI){lastI=i;host.querySelectorAll('.spi-n').forEach(function(n){n.classList.toggle('on',+n.dataset.i===i);});if(i===0&&run){lap++;price=Math.max(80,price-1.5);q('.spi-pv').textContent=price.toLocaleString('fr-FR',{maximumFractionDigits:1});}
+   if(run)info('<div class="an-it"><b>Tour '+Math.max(1,lap)+' · '+S[i].replace('|',' ')+'</b><p>'+['Tout coûte un peu moins cher… ça a l\'air d\'une bonne nouvelle.','Pourquoi acheter maintenant si ce sera moins cher plus tard ? Les achats sont reportés.','La demande s\'effondre, les stocks s\'accumulent, les entreprises baissent encore leurs prix.','Pour survivre, elles réduisent les salaires et licencient : le chômage monte.','Moins de revenus pour les ménages, et les dettes pèsent plus lourd.','La consommation recule encore… et les prix baissent de nouveau. La boucle recommence.'][i]+'</p></div>');}}
+ function loop(){if(!host.isConnected)return;if(!run)return;if(host.offsetParent&&!document.hidden){a+=brk?0:0.022;place();}raf=requestAnimationFrame(loop);}
+ q('.spi-go').onclick=function(){brk=false;run=true;host.querySelector('.an-spi').classList.remove('brk');cancelAnimationFrame(raf);if(rm()){a+=Math.PI/3;place();run=false;return;}raf=requestAnimationFrame(loop);};
+ q('.spi-br').onclick=function(){run=false;brk=true;cancelAnimationFrame(raf);host.querySelector('.an-spi').classList.add('brk');host.querySelectorAll('.spi-n').forEach(function(n){n.classList.remove('on');});lastI=-1;
+  info('<div class="an-it" style="border-color:var(--a-mt)"><b style="color:var(--a-mt)">Comment on casse la spirale</b><p>La banque centrale descend ses taux à 0 % (voire en négatif) et imprime de la monnaie (QE) pour relancer le crédit. Le gouvernement dépense (relance budgétaire). Le Japon a tout essayé : taux 0 % en 1999, premier QE en 2001… et il lui a fallu plus de 20 ans pour sortir vraiment de la déflation.</p></div>');};
+ place();lastI=-1;host.querySelectorAll('.spi-n').forEach(function(n){n.classList.remove('on');});info(base);}
+
 var SAFE=false;try{SAFE=/[?&#]secours/.test(location.href)||localStorage.getItem('mf_safe')==='1';}catch(x){}
 function safe(f){return function(h,d){if(SAFE){h.innerHTML='<div class="frm-small">Animations en pause (mode secours).</div>';return;}return f(h,d);};}
-window.__anim={gears:safe(gears),flow:flow,liquid:safe(liquid),seesaw:safe(seesaw),dotplot:safe(dotplot),stir:safe(stir),carry:safe(carry),surprise:safe(surprise),diverge:safe(diverge),cycles:safe(cycles),expect:safe(expect),rumour:safe(rumour),cycles3:safe(cycles3),phases:safe(phases),spx:safe(spx)};window.__animSafe=SAFE;
+window.__anim={gears:safe(gears),flow:flow,liquid:safe(liquid),seesaw:safe(seesaw),dotplot:safe(dotplot),stir:safe(stir),carry:safe(carry),surprise:safe(surprise),diverge:safe(diverge),cycles:safe(cycles),expect:safe(expect),rumour:safe(rumour),cycles3:safe(cycles3),phases:safe(phases),spx:safe(spx),tri:safe(tri),thermo:safe(thermo),regime:safe(regime),flux:safe(flux),usmacro:safe(usmacro),japon:safe(japon),spirale:safe(spirale)};window.__animSafe=SAFE;
 var __unused={gears:gears,flow:flow,liquid:liquid,seesaw:seesaw,dotplot:dotplot,stir:stir,carry:carry};
 })();
 
@@ -13483,8 +13688,8 @@ function wireFiche(r,id){if(r)r.querySelectorAll('[data-tv]').forEach(function(b
 window.__ficheParse=ficheParse;window.__ficheApply=ficheApply;window.__ficheExport=ficheExport;
 
 /* ---- v74 : animations + illustrations dans les fiches ---- */
-var ANK=[['gears','⚙ Engrenages'],['flow','▶ Schéma qui se joue'],['liquid','💧 Robinet QE / QT'],['seesaw','⚖ Balançoire prix / rendement'],['dotplot','• Dot plot'],['stir','▮ Probabilités STIR'],['carry','↘ Carry trade'],['surprise','☁ Thème → surprise → long terme'],['diverge','⇅ Divergence 2021-2023'],['cycles','∿ Les deux opportunités'],['expect','⎯ La barre des attentes'],['rumour','⤴ Buy the rumour, sell the fact'],['cycles3','≋ Les 3 cycles emboîtés'],['phases','◔ Les 4 phases du cycle'],['spx','↗ S&P 500 · cycle 2022-2024']];
-var ANTYPE={engrenages:'gears',engrenage:'gears',gears:'gears',robinet:'liquid',liquidite:'liquid',liquid:'liquid',balancoire:'seesaw',seesaw:'seesaw','dot plot':'dotplot',dotplot:'dotplot',probabilites:'stir',stir:'stir',carry:'carry','carry trade':'carry',schema:'flow',etapes:'flow',flow:'flow',surprise:'surprise',methode:'surprise','theme surprise':'surprise',divergence:'diverge',diverge:'diverge',cycles:'cycles',cycle:'cycles',opportunites:'cycles',attentes:'expect',barre:'expect',expect:'expect',rumeur:'rumour',rumour:'rumour','buy the rumour':'rumour','3 cycles':'cycles3',cycles3:'cycles3',phases:'phases','phases du cycle':'phases',spx:'spx','s p 500':'spx',sp500:'spx'};
+var ANK=[['gears','⚙ Engrenages'],['flow','▶ Schéma qui se joue'],['liquid','💧 Robinet QE / QT'],['seesaw','⚖ Balançoire prix / rendement'],['dotplot','• Dot plot'],['stir','▮ Probabilités STIR'],['carry','↘ Carry trade'],['surprise','☁ Thème → surprise → long terme'],['diverge','⇅ Divergence 2021-2023'],['cycles','∿ Les deux opportunités'],['expect','⎯ La barre des attentes'],['rumour','⤴ Buy the rumour, sell the fact'],['cycles3','≋ Les 3 cycles emboîtés'],['phases','◔ Les 4 phases du cycle'],['spx','↗ S&P 500 · cycle 2022-2024'],['tri','◐ Ranger croissance / inflation'],['thermo','◠ Thermostat banque centrale'],['regime','✛ Les 4 régimes'],['flux','⇄ Où va le capital'],['usmacro','∿ États-Unis 1970-2024'],['japon','∿ Japon 1985-2010'],['spirale','↻ Spirale déflationniste']];
+var ANTYPE={engrenages:'gears',engrenage:'gears',gears:'gears',robinet:'liquid',liquidite:'liquid',liquid:'liquid',balancoire:'seesaw',seesaw:'seesaw','dot plot':'dotplot',dotplot:'dotplot',probabilites:'stir',stir:'stir',carry:'carry','carry trade':'carry',schema:'flow',etapes:'flow',flow:'flow',surprise:'surprise',methode:'surprise','theme surprise':'surprise',divergence:'diverge',diverge:'diverge',cycles:'cycles',cycle:'cycles',opportunites:'cycles',attentes:'expect',barre:'expect',expect:'expect',rumeur:'rumour',rumour:'rumour','buy the rumour':'rumour','3 cycles':'cycles3',cycles3:'cycles3',phases:'phases','phases du cycle':'phases',spx:'spx','s p 500':'spx',sp500:'spx',tri:'tri',donnees:'tri',ranger:'tri',thermostat:'thermo',thermo:'thermo',regimes:'regime',regime:'regime','4 regimes':'regime',capital:'flux',flux:'flux',actifs:'flux','etats unis':'usmacro',usmacro:'usmacro',japon:'japon',spirale:'spirale',deflation:'spirale'};
 function anDefault(k,n){if(k==='gears')return {kind:k,center:'MARCHÉ',items:[{t:'Thème macro',d:''},{t:'Politique monétaire',d:''},{t:'Données économiques',d:''},{t:'Politique fiscale',d:''},{t:'Interconnexions',d:''},{t:'Géopolitique',d:''},{t:'Analyse technique',d:''},{t:'Offre et demande',d:''}],scenes:[]};
  if(k==='flow')return {kind:k,items:(n&&n.steps&&n.steps.items.length?n.steps.items:[{t:'Étape 1',d:''},{t:'Étape 2',d:''},{t:'Étape 3',d:''}]).map(function(x){return {t:x.t,d:x.d};})};
  if(k==='liquid')return {kind:k,mode:'qe'};if(k==='seesaw')return {kind:k,coupon:40,price:1000};
@@ -13499,6 +13704,7 @@ var ANSEED={
  't2-II-4':[{title:'Le dot plot qui bouge',d:{kind:'dotplot',col:'Taux prévu pour fin 2024',series:[{t:'Juin 2024',d:'Médiane à 5,1 % : une seule baisse prévue dans l\'année.',dots:[[5.375,4],[5.125,7],[4.875,8]]},{t:'Sept. 2024',d:'Médiane à 4,4 % : encore 2 baisses prévues. Ce qui s\'est passé : -0,25 % en novembre et en décembre.',dots:[[4.125,1],[4.375,9],[4.625,7],[4.875,2]]}]}}],
  't2-I-5':[{title:'Thème → surprise → long terme',d:{kind:'surprise'}}],
  't2-III-1':[{title:'Les 3 cycles emboîtés',d:{kind:'cycles3'}},{title:'Les 4 phases du cycle économique',d:{kind:'phases'}},{title:'S&P 500 · un cycle complet (2022-2024)',d:{kind:'spx'}}],
+ 't2-III-2':[{title:'Ranger les données : croissance ou inflation ?',d:{kind:'tri'}},{title:'Le thermostat de la banque centrale',d:{kind:'thermo'}},{title:'Les 4 régimes croissance / inflation',d:{kind:'regime'}},{title:'Où va le capital selon le régime',d:{kind:'flux'}},{title:'États-Unis 1970-2024 · croissance, inflation, taux',d:{kind:'usmacro'}},{title:'Japon 1985-2010 · la décennie perdue',d:{kind:'japon'}},{title:'La spirale déflationniste',d:{kind:'spirale'}}],
  't2-II-7':[{title:'La barre des attentes',d:{kind:'expect'}},{title:'Buy the rumour, sell the fact · FOMC 2022',d:{kind:'rumour'}}],
  't2-II-6':[{title:'Les deux opportunités',d:{kind:'cycles'}},{title:'La divergence en direct (2021-2023)',d:{kind:'diverge',pair:'uj'}},{title:'Le carry trade USD/JPY (août 2024)',d:{kind:'carry'}}],
  't2-II-5':[{title:'Les probabilités qui bougent',d:{kind:'stir',q:'Le CPI US vient de sortir… glisse le curseur :',rows:[{t:'Baisse 0,25 %',p:86,w:75},{t:'Pause',p:14,w:25}]}}]};
