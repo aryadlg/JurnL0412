@@ -1539,6 +1539,27 @@ html.nuit .an{--a-ink:#E6E3EE;--a-mut:#9a9fb2;--a-ln:#3a4560;--a-pkf:#3a2440;--a
 .ru-m{opacity:.35;transition:opacity .4s}.ru-m.on{opacity:1}.ru-m.on .dv-el{opacity:1;stroke-width:1}
 .an-rum .an-svg{max-width:620px}
 @media(max-width:520px){.ex-t,.ex-el,.ex-dl{font-size:10.5px}}
+/* 3 cycles */
+.c3-l{fill:none;stroke-width:1.6;transition:opacity .4s}.c3-s{fill:none;stroke:var(--a-ink);stroke-width:2;transition:opacity .4s}
+.c3-k{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.c3-k button{font:inherit;color:inherit;background:transparent;border:1px solid var(--a-ln);border-radius:8px;padding:7px 10px;display:grid;grid-template-columns:12px 1fr;column-gap:8px;text-align:left;cursor:pointer;opacity:.45;transition:opacity .3s}
+.c3-k button.on{opacity:1}.c3-k i{width:10px;height:10px;border-radius:50%;grid-row:1/3;align-self:center}.c3-k b{font-size:13px}.c3-k small{font-size:11px;opacity:.7}
+.an-c3 .an-scn button.on{background:var(--a-ink);color:var(--a-gf)}
+/* 4 phases */
+.ph-z rect{fill:transparent;stroke-width:1;stroke-dasharray:3 3;opacity:.5;transition:all .3s;cursor:pointer}
+.ph-z text{font-size:9px;text-anchor:middle;letter-spacing:.06em;opacity:.7}
+.ph-z.on rect{opacity:1;stroke-dasharray:none;fill:currentColor;fill-opacity:.06}.ph-z.on text{opacity:1;font-weight:600}
+.ph-p{fill:none;stroke:var(--a-ink);stroke-width:1.8;stroke-linecap:round}
+.ph-dot{fill:var(--a-pk)}
+.ph-g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ph-g div{border:1px solid var(--a-ln);border-radius:8px;padding:7px 9px}.ph-g small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.6}.ph-g b{font-size:13px;font-weight:500}
+.ph-g b.up{color:var(--a-mt)}.ph-g b.dn{color:var(--a-pk)}
+.an-ph .an-scn button.on{background:var(--a-ink);color:var(--a-gf);border-color:var(--a-ink)}
+/* S&P */
+.sp-b{opacity:.07}.sp-b.late{fill:#D9A85F}.sp-b.con{fill:#E46FA0}.sp-b.new{fill:#2DB8A8}
+.sp-bl{font-size:8.5px;text-anchor:middle;letter-spacing:.06em;text-transform:uppercase}.sp-bl.late{fill:#C4913F}.sp-bl.con{fill:var(--a-pk)}.sp-bl.new{fill:var(--a-mt)}
+.sp-l{fill:none;stroke:var(--a-ink);stroke-width:1.6;stroke-linejoin:round}
+@media(max-width:520px){.sp-bl,.ph-z text{font-size:10.5px}}
 /* ===== v74 : illustrations, stickers, animations dans les fiches ===== */
 .fp-titrow{display:flex;align-items:center;gap:16px;margin:4px 0 2px}
 .fp-titc{min-width:0;flex:1}
@@ -12166,7 +12187,7 @@ var DV={M:['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','
  eu:[1.213,1.207,1.173,1.202,1.223,1.186,1.187,1.181,1.158,1.156,1.133,1.137,1.123,1.122,1.107,1.054,1.073,1.048,1.022,1.005,0.98,0.988,1.04,1.07,1.086,1.058,1.084,1.102,1.069,1.091,1.1,1.084,1.057,1.057,1.089,1.104]};
 function diverge(host,D){var pair=D.pair==='eu'?'eu':'uj',N=36,k=N-1,raf=null;
  var EV={uj:[[5,'16 juin 2021','Dot plot hawkish : la Fed annonce des hausses pour 2023. Les premiers acheteurs de USD/JPY entrent.'],[14,'16 mars 2022','1re hausse de la Fed. La BoJ reste à -0,10 % : la divergence s\'ouvre, USD/JPY décolle.'],[20,'sept.-oct. 2022','USD/JPY dépasse 150 : le Japon intervient pour soutenir le yen.'],[22,'10 nov. 2022','CPI US à 7,7 % au lieu de 7,9 % : la Fed devrait ralentir. Grosse chute (l\'élastique claque).'],[30,'juil. 2023','Dernière hausse de la Fed (5,25-5,50 %). Le dollar regagne du terrain.']],
-  eu:[[5,'16 juin 2021','Dot plot hawkish de la Fed, BCE toujours dovish : EUR/USD casse et commence à baisser.'],[14,'16 mars 2022','1re hausse de la Fed, la BCE attend : la divergence est maximale.'],[18,'21 juil. 2022','La BCE monte enfin ses taux, 4 mois après la Fed.'],[20,'sept. 2022','EUR/USD passe sous la parité (plus bas vers 0,96).'],[22,'nov. 2022','CPI US plus bas et BCE qui accélère : la divergence se referme, EUR/USD remonte.']]};
+  eu:[[5,'16 juin 2021','Dot plot hawkish de la Fed, BCE toujours dovish : EUR/USD casse et commence à baisser.'],[14,'16 mars 2022','1re hausse de la Fed, la BCE attend : la divergence est maximale.'],[18,'21 juil. 2022','La BCE monte enfin ses taux, 4 mois après la Fed.'],[20,'sept. 2022','EUR/USD passe sous la parité (plus bas vers 0,95).'],[22,'nov. 2022','CPI US plus bas et BCE qui accélère : la divergence se referme, EUR/USD remonte.']]};
  var W=360,H=210,x=function(i){return 34+(W-44)*i/(N-1);},yr=function(v){return 88-(v+0.6)/6.2*74;};
  host.innerHTML='<div class="an an-dv"><div class="dv-main"><svg viewBox="0 0 '+W+' '+H+'" class="an-svg dv-svg" aria-hidden="true">'+
   '<text x="34" y="9" class="dv-ax l">Taux directeurs</text>'+[0,2,4].map(function(v){return '<line x1="34" x2="'+(W-10)+'" y1="'+yr(v).toFixed(1)+'" y2="'+yr(v).toFixed(1)+'" class="dp-g"/><text x="29" y="'+(yr(v)+3).toFixed(1)+'" class="dv-ax">'+v+' %</text>';}).join('')+
@@ -12237,9 +12258,58 @@ function rumour(host,D){var M=D.meetings||[['16 mars','+0,25'],['15 juin','+0,75
    var idx=Math.floor((pt.x-20)/seg-0.7+1);for(var j=0;j<n;j++){var mx=20+j*seg+seg*0.7;if(pt.x>=mx&&j>last){last=j;host.querySelector('.ru-m[data-i="'+j+'"]').classList.add('on');host.querySelector('.af-cnt').textContent='FOMC '+(j+1)+' / '+n;info('FOMC du '+M[j][0]+' 2022 · '+M[j][1]+' point',(j===0?'Première hausse. ':'')+'Hausse attendue par tout le monde : le dollar avait déjà monté avant. Pas de surprise → l\'USD corrige à court terme, puis la tendance haussière reprend.');}}
    if(u<1)raf=requestAnimationFrame(st);else info('Ce qu\'il faut retenir','Le thème de fond (Fed hawkish) n\'a pas changé de l\'année : l\'USD finit 2022 en hausse (DXY d\'environ 96 à 103, avec un sommet vers 114,8 fin septembre). La vraie baisse de fin d\'année vient d\'une autre surprise : l\'inflation qui ralentit (CPI de novembre). Les corrections après chaque FOMC étaient des opportunités à court terme, pas des changements de tendance.');})();};}
 
+/* ---------- 13. Les 3 cycles emboîtés ---------- */
+function cycles3(host,D){var C=[['court','Court terme','croissance + inflation · ≈ 6-24 mois','#E46FA0',0.95,12,0],['moyen','Moyen terme','cycle économique / dette · ≈ 2-8 ans','#D9A85F',0.3,32,1.2],['long','Long terme','tendance séculaire · ≈ 5-10+ ans','#2DB8A8',0.11,42,3.6]];
+ var W=360,H=170,N=180,on={court:1,moyen:1,long:1},sum=false,ph=0,raf=null;
+ function y(c,x){return Math.sin(x*c[4]*0.12+c[6]+ph*(c[0]==='court'?1:c[0]==='moyen'?0.35:0.12))*c[5];}
+ host.innerHTML='<div class="an an-c3"><div class="dv-main"><svg viewBox="0 0 '+W+' '+H+'" class="an-svg" aria-hidden="true"><line x1="10" x2="'+(W-10)+'" y1="'+(H/2)+'" y2="'+(H/2)+'" class="dp-g"/>'+C.map(function(c){return '<polyline class="c3-l" data-c="'+c[0]+'" style="stroke:'+c[3]+'"/>';}).join('')+'<polyline class="c3-s"/></svg>'+
+  '<div class="an-side"><div class="c3-k">'+C.map(function(c){return '<button type="button" data-k="'+c[0]+'" class="on"><i style="background:'+c[3]+'"></i><b>'+c[1]+'</b><small>'+c[2]+'</small></button>';}).join('')+'</div><div class="an-scn"><button type="button" class="c3-sum">＋ Additionner les 3 cycles</button></div><div class="an-info"></div></div></div></div>';
+ var q=function(s){return host.querySelector(s);};
+ function draw(){C.forEach(function(c){var p=[];for(var i=0;i<=N;i++){var x=10+(W-20)*i/N;p.push(x.toFixed(1)+','+(H/2-y(c,i)).toFixed(1));}var l=q('.c3-l[data-c="'+c[0]+'"]');l.setAttribute('points',p.join(' '));l.style.opacity=on[c[0]]?(sum?0.22:1):0;});
+  var s=[];for(var i=0;i<=N;i++){var v=0;C.forEach(function(c){if(on[c[0]])v+=y(c,i);});s.push((10+(W-20)*i/N).toFixed(1)+','+(H/2-v*0.5).toFixed(1));}var sl=q('.c3-s');sl.setAttribute('points',s.join(' '));sl.style.opacity=sum?1:0;}
+ function loop(){if(!host.isConnected)return;if(host.offsetParent&&!document.hidden){ph+=0.03;draw();raf=requestAnimationFrame(loop);}else setTimeout(function(){raf=requestAnimationFrame(loop);},700);}
+ function info(){q('.an-info').innerHTML=sum?'<div class="an-it"><b>Ce que voit le marché</b><p>Les 3 cycles s\'additionnent : un creux du cycle court peut tomber pendant une hausse du cycle long. Il faut toujours savoir dans quel cycle on se place avant d\'interpréter une donnée.</p></div>':'<div class="an-it"><b>3 cycles emboîtés</b><p>Touche un cycle pour l\'afficher ou le cacher. Le court terme bouge vite et fort, le moyen terme fait les grandes phases, le long terme donne la tendance de fond.</p></div>';}
+ host.querySelectorAll('[data-k]').forEach(function(b){b.onclick=function(){on[b.dataset.k]=on[b.dataset.k]?0:1;b.classList.toggle('on',!!on[b.dataset.k]);draw();};});
+ q('.c3-sum').onclick=function(){sum=!sum;this.classList.toggle('on',sum);this.textContent=sum?'↺ Voir les cycles séparés':'＋ Additionner les 3 cycles';draw();info();};
+ draw();info();if(!rm())raf=requestAnimationFrame(loop);}
+/* ---------- 14. Les 4 phases du cycle économique ---------- */
+function phases(host,D){var P=[['early','Early cycle','#2DB8A8','La croissance repasse de négative à positive. Taux bas, crédit facile, relance des banques centrales et des gouvernements.',[['Croissance','↗ repart','up'],['Inflation','→ basse','fl'],['Banque centrale','dovish, taux bas','fl'],['Actions','↗ forte hausse','up']]],
+  ['mid','Mid cycle','#4F78AE','Croissance positive mais moins rapide, l\'économie trouve son équilibre. Les marchés restent solides : c\'est souvent la phase la plus longue.',[['Croissance','↗ régulière','up'],['Inflation','↗ modérée','fl'],['Banque centrale','neutre','fl'],['Actions','↗ hausse plus calme','up']]],
+  ['late','Late cycle','#D9A85F','Surchauffe : l\'inflation accélère. Les banques centrales anticipent et montent leurs taux, ce qui freine l\'économie.',[['Croissance','→ au maximum, ralentit','fl'],['Inflation','↗ forte','dn'],['Banque centrale','hawkish, hausses','fl'],['Actions','→ nerveuses','fl']]],
+  ['contraction','Contraction','#E46FA0','La croissance baisse vite, le crédit, la consommation et l\'investissement ralentissent. Contraction ne veut pas dire récession : ce qui compte, c\'est la direction et la vitesse.',[['Croissance','↘ ralentit fort','dn'],['Inflation','↘ reflue','fl'],['Banque centrale','pivot dovish, baisses','fl'],['Actions','↘ puis anticipent la reprise','dn']]]];
+ var path='M14 96 C30 118 46 126 64 126 S104 104 140 74 S204 24 228 24 S280 94 310 120 S340 102 350 84';
+ var Z=[[52,124],[124,194],[194,262],[262,330]];
+ host.innerHTML='<div class="an an-ph"><div class="dv-main"><svg viewBox="0 0 360 160" class="an-svg" aria-hidden="true">'+P.map(function(p,i){return '<g class="ph-z" data-i="'+i+'"><rect x="'+Z[i][0]+'" y="10" width="'+(Z[i][1]-Z[i][0])+'" height="128" rx="6" style="stroke:'+p[2]+'"/><text x="'+((Z[i][0]+Z[i][1])/2)+'" y="152" style="fill:'+p[2]+'">'+p[1]+'</text></g>';}).join('')+
+  '<path d="'+path+'" class="ph-p"/><circle r="4" class="ph-dot"/></svg><div class="an-side"><div class="an-scn"><button type="button" class="ph-play">▶ Parcourir le cycle</button>'+P.map(function(p,i){return '<button type="button" data-p="'+i+'">'+p[1]+'</button>';}).join('')+'</div><div class="an-info"></div></div></div></div>';
+ var pa=host.querySelector('.ph-p'),dot=host.querySelector('.ph-dot'),L=pa.getTotalLength?pa.getTotalLength():500,raf=null,cur=-1;
+ function xAt(x){var lo=0,hi=L;for(var k=0;k<22;k++){var m=(lo+hi)/2;if(pa.getPointAtLength(m).x<x)lo=m;else hi=m;}return lo;}
+ function show(i,move){cur=i;var p=P[i];host.querySelectorAll('.ph-z').forEach(function(z){z.classList.toggle('on',+z.dataset.i===i);});host.querySelectorAll('[data-p]').forEach(function(b){b.classList.toggle('on',+b.dataset.p===i);});
+  if(move!==false){var pt=pa.getPointAtLength(xAt((Z[i][0]+Z[i][1])/2));dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);}
+  host.querySelector('.an-info').innerHTML='<div class="an-it" style="border-color:'+p[2]+'"><b style="color:'+p[2]+'">'+p[1]+'</b><p>'+esc(p[3])+'</p></div><div class="ph-g">'+p[4].map(function(r){return '<div><small>'+r[0]+'</small><b class="'+r[2]+'">'+r[1]+'</b></div>';}).join('')+'</div>';}
+ host.querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){cancelAnimationFrame(raf);show(+b.dataset.p);};});
+ host.querySelector('.ph-play').onclick=function(){cancelAnimationFrame(raf);var s=xAt(Z[0][0]),e=xAt(Z[3][1]),t0=performance.now(),dur=8000;(function st(){if(!host.isConnected)return;var u=Math.min(1,(performance.now()-t0)/dur),pt=pa.getPointAtLength(s+(e-s)*u);dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);for(var i=0;i<4;i++)if(pt.x>=Z[i][0]&&pt.x<Z[i][1]&&cur!==i)show(i,false);if(u<1)raf=requestAnimationFrame(st);})();};
+ show(0);}
+/* ---------- 15. S&P 500 · un cycle complet (2022-2024) ---------- */
+function spx(host,D){var V=[4766,4516,4374,4530,4132,4132,3785,4130,3955,3586,3872,4080,3840,4077,3970,4109,4169,4180,4450,4589,4508,4288,4194,4568,4770,4846,5096,5254,5036,5278,5460];
+ var M=['déc.','janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+ var E=[[1,'Janv. 2022 · late cycle','Le S&P fait son sommet (vers 4 800) : l\'inflation monte, la Fed prépare ses hausses.','late'],[2,'24 févr. 2022 · Ukraine','Le choc géopolitique ajoute de la panique : énergie et inflation flambent.','late'],[3,'16 mars 2022 · 1re hausse','Resserrement monétaire : la Fed monte ses taux pour freiner l\'inflation.','con'],[9,'Sept.-oct. 2022 · contraction','Plus bas vers 3 577 (12 oct.), environ -25 % depuis le sommet. Premiers signes que la Fed va ralentir.','con'],[11,'10 nov. 2022 · CPI','L\'inflation ralentit plus vite que prévu : grosse hausse des actions, le marché anticipe la fin du cycle.','new'],[22,'Oct. 2023 · fin du cycle Fed','Inflation plus basse, la Fed a fini de monter : dernier creux avant la reprise.','new'],[24,'13 déc. 2023 · pivot','Le dot plot annonce 3 baisses en 2024 : nouveau cycle, le S&P repart vers des records.','new']];
+ var W=360,H=180,N=V.length,mn=3400,mx=5600,x=function(i){return 30+(W-40)*i/(N-1);},y=function(v){return 150-(v-mn)/(mx-mn)*130;};
+ var bands=[[0,3,'late','Late'],[3,11,'con','Contraction'],[11,N-1,'new','Nouveau cycle']];
+ host.innerHTML='<div class="an an-spx"><div class="dv-main"><svg viewBox="0 0 '+W+' '+H+'" class="an-svg" aria-hidden="true">'+bands.map(function(b){return '<rect x="'+x(b[0])+'" y="14" width="'+(x(b[1])-x(b[0]))+'" height="138" class="sp-b '+b[2]+'"/><text x="'+((x(b[0])+x(b[1]))/2)+'" y="11" class="sp-bl '+b[2]+'">'+b[3]+'</text>';}).join('')+
+  [4000,5000].map(function(v){return '<line x1="30" x2="'+(W-10)+'" y1="'+y(v)+'" y2="'+y(v)+'" class="dp-g"/><text x="26" y="'+(y(v)+3)+'" class="dv-ax">'+v.toLocaleString('fr-FR')+'</text>';}).join('')+
+  [1,13,25].map(function(i){return '<text x="'+x(i)+'" y="'+(H-12)+'" class="dv-ax" style="text-anchor:middle">'+(2021+Math.ceil(i/12))+'</text>';}).join('')+'<polyline class="sp-l"/><g class="sp-ev"></g><circle r="3.2" class="dv-dot"/></svg>'+
+  '<div class="an-side"><div class="af-ctl"><button type="button" class="sp-play">▶ Rejouer 2022-2024</button></div><input type="range" min="0" max="'+(N-1)+'" value="'+(N-1)+'" class="se-rg sp-rg"><div class="dv-now"></div><div class="an-info"></div></div></div></div>';
+ var q=function(s){return host.querySelector(s);},k=N-1,raf=null,lastH='';
+ function draw(){var p=[];for(var i=0;i<=k;i++)p.push(x(i).toFixed(1)+','+y(V[i]).toFixed(1));q('.sp-l').setAttribute('points',p.join(' '));q('.dv-dot').setAttribute('cx',x(k));q('.dv-dot').setAttribute('cy',y(V[k]));
+  var last=null;q('.sp-ev').innerHTML=E.filter(function(e){return e[0]<=k;}).map(function(e){last=e;return '<circle cx="'+x(e[0])+'" cy="'+y(V[e[0]])+'" r="2.6" class="dv-em"/>';}).join('');
+  q('.dv-now').innerHTML='<b>'+M[k%12]+' '+(2021+Math.ceil(k/12))+'</b> · S&P 500 ≈ '+V[k].toLocaleString('fr-FR')+' (clôture du mois)';
+  var h=last?'<div class="an-it"><b>'+esc(last[1])+'</b><p>'+esc(last[2])+'</p></div>':'';if(h!==lastH){lastH=h;q('.an-info').innerHTML=h;}q('.sp-rg').value=k;}
+ q('.sp-play').onclick=function(){cancelAnimationFrame(raf);var t0=performance.now();(function st(){if(!host.isConnected)return;k=Math.min(N-1,Math.floor((performance.now()-t0)/230));draw();if(k<N-1)raf=requestAnimationFrame(st);})();};
+ q('.sp-rg').oninput=function(){cancelAnimationFrame(raf);k=+this.value;draw();};draw();}
+
 var SAFE=false;try{SAFE=/[?&#]secours/.test(location.href)||localStorage.getItem('mf_safe')==='1';}catch(x){}
 function safe(f){return function(h,d){if(SAFE){h.innerHTML='<div class="frm-small">Animations en pause (mode secours).</div>';return;}return f(h,d);};}
-window.__anim={gears:safe(gears),flow:flow,liquid:safe(liquid),seesaw:safe(seesaw),dotplot:safe(dotplot),stir:safe(stir),carry:safe(carry),surprise:safe(surprise),diverge:safe(diverge),cycles:safe(cycles),expect:safe(expect),rumour:safe(rumour)};window.__animSafe=SAFE;
+window.__anim={gears:safe(gears),flow:flow,liquid:safe(liquid),seesaw:safe(seesaw),dotplot:safe(dotplot),stir:safe(stir),carry:safe(carry),surprise:safe(surprise),diverge:safe(diverge),cycles:safe(cycles),expect:safe(expect),rumour:safe(rumour),cycles3:safe(cycles3),phases:safe(phases),spx:safe(spx)};window.__animSafe=SAFE;
 var __unused={gears:gears,flow:flow,liquid:liquid,seesaw:seesaw,dotplot:dotplot,stir:stir,carry:carry};
 })();
 
@@ -13413,8 +13483,8 @@ function wireFiche(r,id){if(r)r.querySelectorAll('[data-tv]').forEach(function(b
 window.__ficheParse=ficheParse;window.__ficheApply=ficheApply;window.__ficheExport=ficheExport;
 
 /* ---- v74 : animations + illustrations dans les fiches ---- */
-var ANK=[['gears','⚙ Engrenages'],['flow','▶ Schéma qui se joue'],['liquid','💧 Robinet QE / QT'],['seesaw','⚖ Balançoire prix / rendement'],['dotplot','• Dot plot'],['stir','▮ Probabilités STIR'],['carry','↘ Carry trade'],['surprise','☁ Thème → surprise → long terme'],['diverge','⇅ Divergence 2021-2023'],['cycles','∿ Les deux opportunités'],['expect','⎯ La barre des attentes'],['rumour','⤴ Buy the rumour, sell the fact']];
-var ANTYPE={engrenages:'gears',engrenage:'gears',gears:'gears',robinet:'liquid',liquidite:'liquid',liquid:'liquid',balancoire:'seesaw',seesaw:'seesaw','dot plot':'dotplot',dotplot:'dotplot',probabilites:'stir',stir:'stir',carry:'carry','carry trade':'carry',schema:'flow',etapes:'flow',flow:'flow',surprise:'surprise',methode:'surprise','theme surprise':'surprise',divergence:'diverge',diverge:'diverge',cycles:'cycles',cycle:'cycles',opportunites:'cycles',attentes:'expect',barre:'expect',expect:'expect',rumeur:'rumour',rumour:'rumour','buy the rumour':'rumour'};
+var ANK=[['gears','⚙ Engrenages'],['flow','▶ Schéma qui se joue'],['liquid','💧 Robinet QE / QT'],['seesaw','⚖ Balançoire prix / rendement'],['dotplot','• Dot plot'],['stir','▮ Probabilités STIR'],['carry','↘ Carry trade'],['surprise','☁ Thème → surprise → long terme'],['diverge','⇅ Divergence 2021-2023'],['cycles','∿ Les deux opportunités'],['expect','⎯ La barre des attentes'],['rumour','⤴ Buy the rumour, sell the fact'],['cycles3','≋ Les 3 cycles emboîtés'],['phases','◔ Les 4 phases du cycle'],['spx','↗ S&P 500 · cycle 2022-2024']];
+var ANTYPE={engrenages:'gears',engrenage:'gears',gears:'gears',robinet:'liquid',liquidite:'liquid',liquid:'liquid',balancoire:'seesaw',seesaw:'seesaw','dot plot':'dotplot',dotplot:'dotplot',probabilites:'stir',stir:'stir',carry:'carry','carry trade':'carry',schema:'flow',etapes:'flow',flow:'flow',surprise:'surprise',methode:'surprise','theme surprise':'surprise',divergence:'diverge',diverge:'diverge',cycles:'cycles',cycle:'cycles',opportunites:'cycles',attentes:'expect',barre:'expect',expect:'expect',rumeur:'rumour',rumour:'rumour','buy the rumour':'rumour','3 cycles':'cycles3',cycles3:'cycles3',phases:'phases','phases du cycle':'phases',spx:'spx','s p 500':'spx',sp500:'spx'};
 function anDefault(k,n){if(k==='gears')return {kind:k,center:'MARCHÉ',items:[{t:'Thème macro',d:''},{t:'Politique monétaire',d:''},{t:'Données économiques',d:''},{t:'Politique fiscale',d:''},{t:'Interconnexions',d:''},{t:'Géopolitique',d:''},{t:'Analyse technique',d:''},{t:'Offre et demande',d:''}],scenes:[]};
  if(k==='flow')return {kind:k,items:(n&&n.steps&&n.steps.items.length?n.steps.items:[{t:'Étape 1',d:''},{t:'Étape 2',d:''},{t:'Étape 3',d:''}]).map(function(x){return {t:x.t,d:x.d};})};
  if(k==='liquid')return {kind:k,mode:'qe'};if(k==='seesaw')return {kind:k,coupon:40,price:1000};
@@ -13428,6 +13498,7 @@ var ANSEED={
  't2-II-3':[{title:'Le robinet de liquidité',d:{kind:'liquid',mode:'qt',note:'En QT, la liquidité repart : le bilan fond, les rendements montent.'}},{title:'Prix ↔ rendement',d:{kind:'seesaw',coupon:40,price:1000}}],
  't2-II-4':[{title:'Le dot plot qui bouge',d:{kind:'dotplot',col:'Taux prévu pour fin 2024',series:[{t:'Juin 2024',d:'Médiane à 5,1 % : une seule baisse prévue dans l\'année.',dots:[[5.375,4],[5.125,7],[4.875,8]]},{t:'Sept. 2024',d:'Médiane à 4,4 % : encore 2 baisses prévues. Ce qui s\'est passé : -0,25 % en novembre et en décembre.',dots:[[4.125,1],[4.375,9],[4.625,7],[4.875,2]]}]}}],
  't2-I-5':[{title:'Thème → surprise → long terme',d:{kind:'surprise'}}],
+ 't2-III-1':[{title:'Les 3 cycles emboîtés',d:{kind:'cycles3'}},{title:'Les 4 phases du cycle économique',d:{kind:'phases'}},{title:'S&P 500 · un cycle complet (2022-2024)',d:{kind:'spx'}}],
  't2-II-7':[{title:'La barre des attentes',d:{kind:'expect'}},{title:'Buy the rumour, sell the fact · FOMC 2022',d:{kind:'rumour'}}],
  't2-II-6':[{title:'Les deux opportunités',d:{kind:'cycles'}},{title:'La divergence en direct (2021-2023)',d:{kind:'diverge',pair:'uj'}},{title:'Le carry trade USD/JPY (août 2024)',d:{kind:'carry'}}],
  't2-II-5':[{title:'Les probabilités qui bougent',d:{kind:'stir',q:'Le CPI US vient de sortir… glisse le curseur :',rows:[{t:'Baisse 0,25 %',p:86,w:75},{t:'Pause',p:14,w:25}]}}]};
@@ -13458,7 +13529,7 @@ function anParse(lines,title){var k=null,D={},items=[],scenes=[],series=[],rows=
   items.push({t:pp[0].trim(),d:(pp.slice(1).join(' | ')||'').trim()});});
  if(!k)k=series.length?'dotplot':rows.length?'stir':items.length>=6?'gears':items.length?'flow':'liquid';
  var o=anDefault(k);Object.keys(D).forEach(function(x){o[x]=D[x];});if(items.length&&(k==='gears'||k==='flow'))o.items=items;if(scenes.length)o.scenes=scenes;if(series.length)o.series=series;if(rows.length)o.rows=rows;o.kind=k;return {title:title||'Animation',d:o};}
-function anExport(w){var d=w.d||{},o=['','## Animation : '+(w.title||'Animation'),'type: '+({gears:'engrenages',flow:'schéma',liquid:'robinet',seesaw:'balançoire',dotplot:'dot plot',stir:'probabilités',carry:'carry',surprise:'surprise',diverge:'divergence',cycles:'cycles',expect:'attentes',rumour:'rumeur'}[d.kind]||'robinet')];
+function anExport(w){var d=w.d||{},o=['','## Animation : '+(w.title||'Animation'),'type: '+({gears:'engrenages',flow:'schéma',liquid:'robinet',seesaw:'balançoire',dotplot:'dot plot',stir:'probabilités',carry:'carry',surprise:'surprise',diverge:'divergence',cycles:'cycles',expect:'attentes',rumour:'rumeur',cycles3:'3 cycles',phases:'phases',spx:'sp500'}[d.kind]||'robinet')];
  if(d.center)o.push('centre: '+d.center);if(d.mode)o.push('mode: '+d.mode);if(d.note)o.push('note: '+d.note);if(d.q)o.push('question: '+d.q);if(d.col)o.push('colonne: '+d.col);
  (d.items||[]).forEach(function(x,i){o.push((i+1)+'. '+x.t+(x.d?' | '+x.d:''));});(d.scenes||[]).forEach(function(s){o.push('scène: '+s.t+' | '+(s.on||[]).join(',')+' | '+(s.d||''));});
  (d.series||[]).forEach(function(s){o.push('série: '+s.t+(s.d?' | '+s.d:''));s.dots.forEach(function(x){o.push(String(x[0]).replace('.',',')+' × '+x[1]);});});(d.rows||[]).forEach(function(r){o.push(r.t+' | '+r.p+' | '+r.w);});return o.join('\n');}
