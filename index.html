@@ -18044,7 +18044,7 @@ html.nuit #layTop{background:#e4e5e5;color:#1D1D1B}html.nuit #layTop button{bord
   /* v104 : grille 3 colonnes — les anciennes largeurs (gauche/droite/demi) sont remplacées par 1, 2 ou 3 colonnes */
   if(!L.__g3){['macro','ccySynth','ccyBank','ccyData'].forEach(function(z){if(L[z])L[z].size={};});if(!L.ccySynth)L.ccySynth={order:['mtThermoHost','mfResumeHost','stateRow','themeRow','strengthsRow','mt2Ccy'],hidden:[],size:{}};L.__g3=1;store(L);}
   var DEF={macro:{homeDateNav:'s2',moodCard:'s1',momentumBoard:'s2',macroCorr:'s1',marketBoard:'s3',homeFxText:'s1',mpCard:'s2',homeWatchText:'s2',mpqBox:'s2',homeLastWeekText:'s1',calendarCard:'s3',homeTimelineCard:'s3',yieldCard:'s3',mxBanks:'s3',v7Bias:'s2',monthCounterBtn:'s1',mt2Home:'s3',macroHomeExtras:'s3','t:Réaction des devises du jour':'s1','t:Résumé de la semaine dernière':'s1','t:À surveiller cette semaine':'s2'},
-    ccySynth:{mtThermoHost:'s3',mfResumeHost:'s3',stateRow:'s2',themeRow:'s3',strengthsRow:'s1',mt2Ccy:'s3'},ccyBank:{fedWatchCard:'s2',projCard:'s1'},ccyData:{macroFiches:'s3',groups:'s3'}};
+    ccySynth:{mtThermoHost:'s3',mfResumeHost:'s3',stateRow:'s2',themeRow:'s3',strengthsRow:'s1',mt2Ccy:'s3'},ccyBank:{fedWatchCard:'s3',projCard:'s3'},ccyData:{macroFiches:'s3',groups:'s3'}};
   function cfg(z){var c=L[z]=L[z]||{};c.order=c.order||[];c.hidden=c.hidden||[];c.size=c.size||{};return c;}
   function vis(id){return function(){var h=document.getElementById(id);return h&&h.offsetParent?h:null;};}
   var G3=['s1','s2','s3'],G3L={s1:'⅓ de largeur',s2:'⅔ de largeur',s3:'pleine largeur'};
@@ -18438,6 +18438,46 @@ html.mo .modalbg:not(.hidden),html.mo .mfq-ov,html.mo .srch-ov,html.mo .cover-ov
     var h=html();if(el.__h!==h){el.innerHTML=h;el.__h=h;}}
   document.addEventListener('click',function(e){var r=e.target.closest&&e.target.closest('#mxBanks tr[data-c]');if(!r)return;try{window.__mfGo(r.dataset.c);scrollTo({top:0,behavior:'smooth'});}catch(x){}});
   setTimeout(render,600);setInterval(function(){var r=document.getElementById('macroRoot');if(r&&r.offsetParent)render();},2000);
+})();
+</script>
+
+<style id="mx4Style">
+/* ===== v105 : tailles harmonieuses, chiffres qui s'adaptent à la fenêtre ===== */
+#lastUpdatedBlock{display:none!important}
+/* les en-têtes de fenêtre passent à la ligne au lieu d'écraser les pastilles */
+#macroRoot .card-header-row{flex-wrap:wrap;row-gap:8px}
+#macroRoot .rate-badge,#macroRoot .bias-btn,#macroRoot .momentum-chip-rate,#macroRoot .yc-val,#macroRoot .mf-val,#macroRoot .mood-value,.kpi .val,.td-k b,.rw-k b{white-space:nowrap;overflow-wrap:normal;word-break:normal}
+#macroRoot .rate-badge{flex-shrink:0;max-width:100%}
+/* réunion de taux : plus de grosse police machine à écrire */
+#macroRoot .meeting-date-display{font-family:'Jost',-apple-system,sans-serif!important;font-weight:300!important;letter-spacing:.01em!important}
+/* chaque fenêtre de grille mesure sa propre largeur : les grands chiffres suivent */
+.lay-g3>*,.td-grid>*,.fgrid>.fc,.fnav+*>.fc{container-type:inline-size}
+.lay-g3 :is(.yc-val,.mf-val,.mood-value,.meeting-date-display,.cot-num),.td-grid :is(.cs-main b,.dd-big),.fgrid :is(.frm-big,.fw-big,.fw-kpis b){font-size:clamp(15px,5.2cqi,26px)!important;line-height:1.15}
+.lay-g3 .hd-day{font-size:clamp(18px,3.2cqi,30px)!important}
+.lay-g3 .rate-badge{font-size:clamp(11px,2.6cqi,13px)!important;padding:4px 8px!important}
+/* graphiques : traits et textes fins (voir aussi le script ci-dessous) */
+svg[data-fit="1"]{display:block;margin-inline:auto;height:auto}
+svg[data-fit="1"] text{font-family:'Jost',-apple-system,sans-serif}
+#mtView .mt-grid{grid-template-columns:repeat(auto-fit,minmax(460px,1fr))!important;align-items:stretch}
+@media (max-width:980px){#mtView .mt-grid{grid-template-columns:1fr!important}}
+.lay-g3 .mood-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+.lay-g3 .mood-cell{min-width:0!important;overflow:hidden}
+.lay-g3 .mood-cell .mood-label,.lay-g3 .mood-cell .mood-updated{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lay-g3 .card table{max-width:100%}
+.lay-g3 .card:has(>table),.lay-g3 #projCard{overflow-x:auto}
+</style>
+<script>
+/* ===== v105 : les graphiques gardent leur taille naturelle (×1,3 au plus) au lieu de s'étirer sur tout l'écran ===== */
+(function(){
+  var K=1.45;
+  function fitOne(s){if(s.hasAttribute('data-fit'))return;var vb=s.viewBox&&s.viewBox.baseVal;
+    if(!vb||!vb.width||vb.width<70||s.getAttribute('preserveAspectRatio')==='none'||s.closest('button,.lay-bar,.momentum-chip,#mtThermoHost,.mood-spark,.ses-bar,.v7-clock,.v7-rings,#splash')){s.setAttribute('data-fit','0');return;}
+    var w=s.getAttribute('width');if(w&&!/%$/.test(w)){s.setAttribute('data-fit','0');return;}
+    s.setAttribute('data-fit','1');s.style.width='100%';s.style.maxWidth=Math.round(vb.width*K)+'px';s.style.height='auto';s.style.maxHeight='none';}
+  function scan(root){if(!root||!root.querySelectorAll)return;if(root.tagName==='svg')fitOne(root);root.querySelectorAll('svg[viewBox]:not([data-fit])').forEach(fitOne);}
+  scan(document.body);
+  new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){var a=ms[i].addedNodes;for(var j=0;j<a.length;j++){var n=a[j];if(n.nodeType===1&&(n.tagName==='svg'||n.firstElementChild))scan(n);}}}).observe(document.body,{childList:true,subtree:true});
+  window.__fitSvg=function(){scan(document.body);};
 })();
 </script>
 
