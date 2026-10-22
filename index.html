@@ -15825,6 +15825,7 @@ function wirePat(){var r=root(),T=TB();
  r.querySelectorAll('[data-pat]').forEach(function(b){b.onclick=function(){patModal(b.dataset.pat);};});
  var pq=r.querySelector('[data-a="patquiz"]');if(pq)pq.onclick=patQuiz;
  var ad=r.querySelector('[data-a="patadd"]');if(ad)ad.onclick=function(){var P=PT();var x={id:'u'+Date.now(),n:'Mon pattern',fam:st.pf&&st.pf!=='all'?st.pf:'pa',sig:'neutre',txt:'',ou:'',piege:'',note:''};P.push(x);persist();render();patModal(x.id);};}
+window.__frmPatterns=function(){try{return PT().map(function(p){return {id:p.id,n:p.n,fam:p.fam,sig:p.sig};});}catch(e){return [];}};
 window.__frmOpenPat=function(id){var f=F();f.view='tools';st.box='patterns';show('formation');setTimeout(function(){patModal(id);},60);};
 
 /* ---- Vue poster + image IA ---- */
@@ -16646,176 +16647,176 @@ var ANSEED={
 /* v111 : leçons du Thème 3 réécrites dans le style d'Arya (LEÇON · parties numérotées · UTILISATION · ASTUCE · BILAN) */
 var T3N={
  't3-I-1':{tags:'tendance, structure, HH HL',remember:"La tendance, c'est le sens du courant : on nage avec, pas contre.",L:[
-  ['Leçon · Analyse technique',"Avant tout indicateur, il faut savoir ==lire la tendance du marché==.\nC'est la ==1re case== de mon tableau de confluences : sans tendance claire → ==ne rien faire==."],
-  ['1. Tendance haussière',"Le marché fait des ==sommets de plus en plus hauts (HH)== et des ==creux de plus en plus hauts (HL)==.\nTant que les creux tiennent, la tendance tient : on cherche des ==achats sur les creux==."],
-  ['2. Tendance baissière',"Le marché fait des ==sommets de plus en plus bas (LH)== et des ==creux de plus en plus bas (LL)==.\nOn cherche des ==ventes sur les rebonds==."],
-  ['3. Range',"Sommets et creux à peu près ==au même niveau== : le marché ==hésite==.\nOn attend la ==cassure==, ou on travaille les bords du range."],
+  ['Leçon · Analyse technique',"Avant tout indicateur, il faut savoir lire la tendance du marché.\nC'est la 1re case de mon tableau de confluences : sans tendance claire → ne rien faire."],
+  ['1. Tendance haussière',"Le marché fait des sommets de plus en plus hauts (HH) et des creux de plus en plus hauts (HL).\nTant que les creux tiennent, la tendance tient : on cherche des achats sur les creux."],
+  ['2. Tendance baissière',"Le marché fait des sommets de plus en plus bas (LH) et des creux de plus en plus bas (LL).\nOn cherche des ventes sur les rebonds."],
+  ['3. Range',"Sommets et creux à peu près au même niveau : le marché hésite.\nOn attend la cassure, ou on travaille les bords du range."],
   'anim',
-  ['Utilisation',"1. Partir du ==weekly== puis du daily : quelle est la tendance de fond ?\n2. Descendre en ==4 h== : c'est la tendance du jour.\n3. Noter la direction ↗ ↘ → dans mon carnet du jour.\n4. Ne chercher que des trades ==dans le sens du 4 h==."],
-  ['Astuce',"Le premier signe qu'une tendance s'arrête : un ==sommet plus bas==, puis la ==cassure du dernier creux==.\nTant que ce n'est pas arrivé, on ne parie pas contre la tendance."],
-  ['Bilan',"Tendance claire = je peux passer à la suite de mon tableau.\nTendance floue = ==ne rien faire==, c'est aussi une décision."]],
+  ['Utilisation',"1. Partir du weekly puis du daily : quelle est la tendance de fond ?\n2. Descendre en 4 h : c'est la tendance du jour.\n3. Noter la direction ↗ ↘ → dans mon carnet du jour.\n4. Ne chercher que des trades dans le sens du 4 h."],
+  ['Astuce',"Le premier signe qu'une tendance s'arrête : un sommet plus bas, puis la cassure du dernier creux.\nTant que ce n'est pas arrivé, on ne parie pas contre la tendance."],
+  ['Bilan',"Tendance claire = je peux passer à la suite de mon tableau.\nTendance floue = ne rien faire, c'est aussi une décision."]],
   quiz:[{q:"Le prix fait un sommet plus bas puis casse le dernier creux : que se passe-t-il ?",a:"La tendance haussière est cassée : je n'achète plus, j'attends."}]},
  't3-I-2':{tags:'supports, résistances, zones',remember:"Un trade au milieu de nulle part n'en est pas un : il me faut un niveau.",L:[
-  ['Leçon · Analyse technique',"Un ==support== est une zone où les acheteurs reviennent.\nUne ==résistance== est une zone où les vendeurs attendent.\nC'est la ==3e case== de mon tableau de confluences."],
-  ['1. Tracer ses niveaux',"On trace des ==zones==, pas des lignes au pixel près : on englobe les ==mèches et les corps==.\nLes niveaux ==weekly et daily== sont les plus forts."],
-  ['2. Le changement de rôle',"Quand une résistance est ==cassée==, elle devient souvent un ==support== (et inversement).\nLe prix revient la tester par l'autre côté : c'est le ==pullback==."],
-  ['3. La fausse cassure',"Le prix dépasse la zone… puis revient dedans.\nCeux qui ont acheté la cassure sont ==piégés== et leurs stops accélèrent le mouvement inverse."],
+  ['Leçon · Analyse technique',"Un support est une zone où les acheteurs reviennent.\nUne résistance est une zone où les vendeurs attendent.\nC'est la 3e case de mon tableau de confluences."],
+  ['1. Tracer ses niveaux',"On trace des zones, pas des lignes au pixel près : on englobe les mèches et les corps.\nLes niveaux weekly et daily sont les plus forts."],
+  ['2. Le changement de rôle',"Quand une résistance est cassée, elle devient souvent un support (et inversement).\nLe prix revient la tester par l'autre côté : c'est le pullback."],
+  ['3. La fausse cassure',"Le prix dépasse la zone… puis revient dedans.\nCeux qui ont acheté la cassure sont piégés et leurs stops accélèrent le mouvement inverse."],
   'anim',
-  ['Utilisation',"1. Weekly → daily → 4 h : tracer les ==3 ou 4 zones== les plus visibles.\n2. Les noter dans Technique › Niveaux clés et poser une ==alerte TradingView== dessus.\n3. Attendre une ==clôture 4 h ou 1 h== au-delà de la zone pour parler de cassure.\n4. Entrer de préférence sur le ==pullback==."],
-  ['Astuce',"Plus une zone a été touchée, plus elle est surveillée… et plus sa cassure fait bouger le marché.\nUne cassure ==sans clôture franche== = méfiance."],
-  ['Bilan',"Le niveau me dit ==où== entrer. Sans niveau, j'attends que le prix vienne à moi."]]},
+  ['Utilisation',"1. Weekly → daily → 4 h : tracer les 3 ou 4 zones les plus visibles.\n2. Les noter dans Technique › Niveaux clés et poser une alerte TradingView dessus.\n3. Attendre une clôture 4 h ou 1 h au-delà de la zone pour parler de cassure.\n4. Entrer de préférence sur le pullback."],
+  ['Astuce',"Plus une zone a été touchée, plus elle est surveillée… et plus sa cassure fait bouger le marché.\nUne cassure sans clôture franche = méfiance."],
+  ['Bilan',"Le niveau me dit où entrer. Sans niveau, j'attends que le prix vienne à moi."]]},
  't3-I-3':{tags:'multi-timeframe, weekly, daily, 4h, 1h, 30 min',remember:"Je ne prends un signal 30 min que dans le sens du 4 h.",L:[
-  ['Leçon · Analyse technique',"Mes unités de temps :\n– ==weekly et daily== : le raisonnement long terme\n– ==4 h et 1 h== : suivre l'intraday\n– ==30 min== : l'entrée"],
-  ['1. Du plus grand au plus petit',"On regarde toujours ==de haut en bas== : chaque unité de temps « zoome » dans la fin de la précédente."],
-  ['2. Le rôle de chacune',"Weekly = ==le cap==.\nDaily = le décor et les grands niveaux.\n4 h = ==la tendance du jour==.\n1 h = la structure et les patterns qui se forment.\n30 min = ==le signal d'entrée==."],
+  ['Leçon · Analyse technique',"Mes unités de temps :\n– weekly et daily : le raisonnement long terme\n– 4 h et 1 h : suivre l'intraday\n– 30 min : l'entrée"],
+  ['1. Du plus grand au plus petit',"On regarde toujours de haut en bas : chaque unité de temps « zoome » dans la fin de la précédente."],
+  ['2. Le rôle de chacune',"Weekly = le cap.\nDaily = le décor et les grands niveaux.\n4 h = la tendance du jour.\n1 h = la structure et les patterns qui se forment.\n30 min = le signal d'entrée."],
   'anim',
-  ['Utilisation',"1. Weekly et daily : direction de fond + grands niveaux.\n2. 4 h : la tendance du jour et ma zone d'intérêt.\n3. 1 h : le scénario (pattern, structure).\n4. 30 min : j'attends mon signal ==dans le sens du 4 h==."],
-  ['Astuce',"Quand weekly, daily et 4 h vont dans le même sens, le trade a ==le vent dans le dos==.\nSi le daily arrive sur une grosse résistance, je ==réduis ou j'attends==, même si le 4 h monte."],
-  ['Bilan',"Le grand donne la direction, le petit donne ==le moment==."]]},
+  ['Utilisation',"1. Weekly et daily : direction de fond + grands niveaux.\n2. 4 h : la tendance du jour et ma zone d'intérêt.\n3. 1 h : le scénario (pattern, structure).\n4. 30 min : j'attends mon signal dans le sens du 4 h."],
+  ['Astuce',"Quand weekly, daily et 4 h vont dans le même sens, le trade a le vent dans le dos.\nSi le daily arrive sur une grosse résistance, je réduis ou j'attends, même si le 4 h monte."],
+  ['Bilan',"Le grand donne la direction, le petit donne le moment."]]},
  't3-II-1':{tags:'MMA, SMA 50, SMA 200, moyennes mobiles',remember:"La MMA me dit dans quel sens trader, pas quand entrer.",L:[
-  ['Leçon · Outils trading',"La ==moyenne mobile== lisse le prix sur un nombre de bougies.\nDans mon tableau de confluences : ==SMA 50 ou 200==."],
-  ['1. Lire la tendance',"Prix ==au-dessus== de la MMA = biais haussier.\nPrix ==en dessous== = biais baissier.\nMMA ==à plat== = range."],
-  ['2. Le croisement',"Quand la ==MMA 50 passe au-dessus de la MMA 200== : signal haussier (golden cross).\nEn dessous : signal baissier (death cross).\nLe signal arrive toujours ==avec du retard==."],
-  ['3. Le support dynamique',"En tendance, le prix revient souvent ==toucher la MMA 50 ou 200== avant de repartir : c'est une zone d'entrée."],
+  ['Leçon · Outils trading',"La moyenne mobile lisse le prix sur un nombre de bougies.\nDans mon tableau de confluences : SMA 50 ou 200."],
+  ['1. Lire la tendance',"Prix au-dessus de la MMA = biais haussier.\nPrix en dessous = biais baissier.\nMMA à plat = range."],
+  ['2. Le croisement',"Quand la MMA 50 passe au-dessus de la MMA 200 : signal haussier (golden cross).\nEn dessous : signal baissier (death cross).\nLe signal arrive toujours avec du retard."],
+  ['3. Le support dynamique',"En tendance, le prix revient souvent toucher la MMA 50 ou 200 avant de repartir : c'est une zone d'entrée."],
   'anim',
-  ['Utilisation',"1. Mettre la MMA 50 et la 200 sur toutes mes unités de temps, ==mêmes réglages partout==.\n2. Lire la position du prix en 4 h.\n3. Attendre que le prix revienne sur la MMA, ==dans le sens de la tendance==.\n4. Chercher le signal en 30 min (stochastique, pattern bougie)."],
-  ['Astuce',"En range, les croisements donnent ==plein de faux signaux== : on ne les utilise pas."],
-  ['Bilan',"MMA = la ==direction==. Le reste (RSI, stochastique) sert à confirmer."]]},
+  ['Utilisation',"1. Mettre la MMA 50 et la 200 sur toutes mes unités de temps, mêmes réglages partout.\n2. Lire la position du prix en 4 h.\n3. Attendre que le prix revienne sur la MMA, dans le sens de la tendance.\n4. Chercher le signal en 30 min (stochastique, pattern bougie)."],
+  ['Astuce',"En range, les croisements donnent plein de faux signaux : on ne les utilise pas."],
+  ['Bilan',"MMA = la direction. Le reste (RSI, stochastique) sert à confirmer."]]},
  't3-II-2':{tags:'RSI, surachat, survente, momentum',remember:"Surachat ne veut pas dire vendre.",L:[
-  ['Leçon · Outils trading',"Le ==RSI== mesure la ==vitesse du prix== sur 14 bougies, de 0 à 100.\nIl ne dit pas où va le prix : il dit s'il a ==encore de la force==."],
-  ['1. Les zones',"Au-dessus de ==50== : les acheteurs dominent. En dessous : les vendeurs.\nAu-delà de ==70== : surachat. Sous ==30== : survente."],
-  ['2. En tendance',"En tendance forte, le RSI peut ==rester en surachat longtemps==.\nCe n'est ==pas un signal de vente== à lui seul."],
-  ['3. En range',"En range, 70 et 30 marchent bien comme ==zones de retournement==."],
+  ['Leçon · Outils trading',"Le RSI mesure la vitesse du prix sur 14 bougies, de 0 à 100.\nIl ne dit pas où va le prix : il dit s'il a encore de la force."],
+  ['1. Les zones',"Au-dessus de 50 : les acheteurs dominent. En dessous : les vendeurs.\nAu-delà de 70 : surachat. Sous 30 : survente."],
+  ['2. En tendance',"En tendance forte, le RSI peut rester en surachat longtemps.\nCe n'est pas un signal de vente à lui seul."],
+  ['3. En range',"En range, 70 et 30 marchent bien comme zones de retournement."],
   'anim',
-  ['Utilisation',"1. Repérer si le marché est en ==tendance ou en range==.\n2. En tendance haussière : acheter quand le RSI revient vers ==40 – 50== sans casser 40.\n3. En range : vendre vers 70, acheter vers 30.\n4. Toujours confirmer avec un ==niveau ou un pattern==."],
-  ['Astuce',"Le RSI devient vraiment intéressant avec les ==divergences== (leçon suivante)."],
-  ['Bilan',"RSI = la ==force== du mouvement. Il confirme, il ne décide pas seul."]],
+  ['Utilisation',"1. Repérer si le marché est en tendance ou en range.\n2. En tendance haussière : acheter quand le RSI revient vers 40 – 50 sans casser 40.\n3. En range : vendre vers 70, acheter vers 30.\n4. Toujours confirmer avec un niveau ou un pattern."],
+  ['Astuce',"Le RSI devient vraiment intéressant avec les divergences (leçon suivante)."],
+  ['Bilan',"RSI = la force du mouvement. Il confirme, il ne décide pas seul."]],
   quiz:[{q:"RSI à 76 en forte tendance haussière : je vends ?",a:"Non : en tendance forte il peut rester en surachat. J'attends une divergence ou une cassure."}]},
  't3-II-3':{tags:'divergence, RSI',remember:"Une divergence prévient, la cassure confirme.",L:[
-  ['Leçon · Outils trading',"Une ==divergence==, c'est quand le prix et le RSI ==ne racontent plus la même histoire==.\nC'est la ==dernière case== de mon tableau de confluences."],
-  ['1. Divergence baissière',"Le prix fait un ==sommet plus haut==, le RSI un ==sommet plus bas== : la hausse ==s'essouffle==."],
-  ['2. Divergence haussière',"Le prix fait un ==creux plus bas==, le RSI un ==creux plus haut== : la baisse perd de la force."],
-  ['3. Divergences cachées',"Prix ==creux plus haut== + RSI creux plus bas → la hausse ==continue==.\nPrix ==sommet plus bas== + RSI sommet plus haut → la baisse ==continue==."],
+  ['Leçon · Outils trading',"Une divergence, c'est quand le prix et le RSI ne racontent plus la même histoire.\nC'est la dernière case de mon tableau de confluences."],
+  ['1. Divergence baissière',"Le prix fait un sommet plus haut, le RSI un sommet plus bas : la hausse s'essouffle."],
+  ['2. Divergence haussière',"Le prix fait un creux plus bas, le RSI un creux plus haut : la baisse perd de la force."],
+  ['3. Divergences cachées',"Prix creux plus haut + RSI creux plus bas → la hausse continue.\nPrix sommet plus bas + RSI sommet plus haut → la baisse continue."],
   'anim',
-  ['Utilisation',"1. Comparer ==sommet avec sommet==, ==creux avec creux==, sur les mêmes bougies.\n2. Relier les deux points sur le prix ET sur le RSI.\n3. Attendre une ==cassure de structure== pour confirmer.\n4. Les meilleures : sur un ==support ou une résistance daily==."],
-  ['Astuce',"Les ==divergences cachées== dans le sens du 4 h sont d'excellents signaux d'entrée en pullback."],
-  ['Bilan',"Divergence classique = ==retournement possible==. Divergence cachée = ==continuation==."]]},
+  ['Utilisation',"1. Comparer sommet avec sommet, creux avec creux, sur les mêmes bougies.\n2. Relier les deux points sur le prix ET sur le RSI.\n3. Attendre une cassure de structure pour confirmer.\n4. Les meilleures : sur un support ou une résistance daily."],
+  ['Astuce',"Les divergences cachées dans le sens du 4 h sont d'excellents signaux d'entrée en pullback."],
+  ['Bilan',"Divergence classique = retournement possible. Divergence cachée = continuation."]]},
  't3-II-4':{tags:'stochastique, timing, entrée',remember:"MMA = la direction, RSI = la force, stochastique = le moment.",L:[
-  ['Leçon · Outils trading',"Le ==stochastique== situe la clôture dans les plus hauts et plus bas récents.\nIl sert au ==timing== : c'est mon outil d'==entrée==."],
-  ['1. Les deux lignes',"==%K== (rapide) et ==%D== (lente).\nZones : ==au-dessus de 80== et ==en dessous de 20==."],
-  ['2. Le signal',"Achat : %K recroise %D ==vers le haut, sous 20==.\nVente : %K recroise %D ==vers le bas, au-dessus de 80==."],
-  ['3. Le piège',"Contre la tendance, le stochastique ==ment== : en forte hausse, il reste au-dessus de 80 et donne signal de vente sur signal de vente."],
+  ['Leçon · Outils trading',"Le stochastique situe la clôture dans les plus hauts et plus bas récents.\nIl sert au timing : c'est mon outil d'entrée."],
+  ['1. Les deux lignes',"%K (rapide) et %D (lente).\nZones : au-dessus de 80 et en dessous de 20."],
+  ['2. Le signal',"Achat : %K recroise %D vers le haut, sous 20.\nVente : %K recroise %D vers le bas, au-dessus de 80."],
+  ['3. Le piège',"Contre la tendance, le stochastique ment : en forte hausse, il reste au-dessus de 80 et donne signal de vente sur signal de vente."],
   'anim',
-  ['Utilisation',"1. Tendance 4 h définie.\n2. Attendre le ==pullback== en 30 min / 1 h.\n3. Stochastique dans la zone 20 (achat) ou 80 (vente).\n4. Entrer au croisement, ==stop derrière le dernier creux / sommet==."],
-  ['Astuce',"Pas d'entrée dans les ==15 minutes avant une donnée ★★★==."],
-  ['Bilan',"Je ne prends ==que les croisements dans le sens du 4 h==."]]},
+  ['Utilisation',"1. Tendance 4 h définie.\n2. Attendre le pullback en 30 min / 1 h.\n3. Stochastique dans la zone 20 (achat) ou 80 (vente).\n4. Entrer au croisement, stop derrière le dernier creux / sommet."],
+  ['Astuce',"Pas d'entrée dans les 15 minutes avant une donnée ★★★."],
+  ['Bilan',"Je ne prends que les croisements dans le sens du 4 h."]]},
  't3-II-5':{tags:'confluence, MMA, RSI, stochastique',remember:"Chaque indicateur répond à une seule question.",L:[
-  ['Leçon · Outils trading',"On n'empile pas trois indicateurs qui disent la même chose : ==chacun a son rôle==."],
-  ['1. Les trois questions',"MMA → ==dans quel sens== trader ?\nRSI → le mouvement a-t-il ==encore de la force== ? Y a-t-il une divergence ?\nStochastique → est-ce ==le bon moment== pour entrer ?"],
-  ['2. L\'ordre',"==Direction== (MMA 4 h) d'abord, ==force== (RSI) ensuite, ==timing== (stochastique 30 min) en dernier."],
+  ['Leçon · Outils trading',"On n'empile pas trois indicateurs qui disent la même chose : chacun a son rôle."],
+  ['1. Les trois questions',"MMA → dans quel sens trader ?\nRSI → le mouvement a-t-il encore de la force ? Y a-t-il une divergence ?\nStochastique → est-ce le bon moment pour entrer ?"],
+  ['2. L\'ordre',"Direction (MMA 4 h) d'abord, force (RSI) ensuite, timing (stochastique 30 min) en dernier."],
   'anim',
-  ['Astuce',"Si deux indicateurs se contredisent : ==j'attends==."],
+  ['Astuce',"Si deux indicateurs se contredisent : j'attends."],
   ['Bilan',"Mon meilleur trade : tendance 4 h + niveau clé + RSI dans le bon camp + stochastique qui croise."]]},
  't3-III-1':{tags:'triangle, biseau, drapeau, pattern marché',remember:"Triangles et drapeaux sont des pauses : on suit la cassure.",L:[
-  ['Leçon · Analyse technique',"Les ==patterns de marché== (figures chartistes) sont des dessins que le prix fait souvent avant un mouvement.\nC'est la case ==« pattern marché »== de mon tableau."],
-  ['1. Triangles',"==Triangle ascendant== : résistance plate + creux montants → cassure plutôt ==haussière==.\n==Triangle symétrique== : indécision → on suit la cassure."],
-  ['2. Biseaux',"==Biseau montant== : deux lignes qui montent et se resserrent → la hausse s'essouffle, cassure plutôt ==baissière==.\n==Biseau descendant== : l'inverse."],
-  ['3. Drapeaux',"Forte impulsion (==le mât==) puis petit canal contre la tendance (==le drapeau==) : simple pause → ==continuation==."],
+  ['Leçon · Analyse technique',"Les patterns de marché (figures chartistes) sont des dessins que le prix fait souvent avant un mouvement.\nC'est la case « pattern marché » de mon tableau."],
+  ['1. Triangles',"Triangle ascendant : résistance plate + creux montants → cassure plutôt haussière.\nTriangle symétrique : indécision → on suit la cassure."],
+  ['2. Biseaux',"Biseau montant : deux lignes qui montent et se resserrent → la hausse s'essouffle, cassure plutôt baissière.\nBiseau descendant : l'inverse."],
+  ['3. Drapeaux',"Forte impulsion (le mât) puis petit canal contre la tendance (le drapeau) : simple pause → continuation."],
   'anim',
-  ['Utilisation',"1. Repérer la figure en ==1 h ou 4 h==.\n2. Attendre la ==clôture hors de la figure==, je n'anticipe pas.\n3. Objectif = ==hauteur de la figure== (ou du mât) reportée depuis la cassure.\n4. Stop de l'autre côté de la dernière borne."],
-  ['Bilan',"La figure donne ==l'objectif==, la cassure donne ==le signal==."]]},
+  ['Utilisation',"1. Repérer la figure en 1 h ou 4 h.\n2. Attendre la clôture hors de la figure, je n'anticipe pas.\n3. Objectif = hauteur de la figure (ou du mât) reportée depuis la cassure.\n4. Stop de l'autre côté de la dernière borne."],
+  ['Bilan',"La figure donne l'objectif, la cassure donne le signal."]]},
  't3-III-2':{tags:'double sommet, double creux, double bottom',remember:"Le double sommet ne vaut qu'une fois la ligne de cou cassée.",L:[
-  ['Leçon · Analyse technique',"==Double sommet== : deux sommets au même niveau → le marché n'arrive plus à monter.\n==Double creux== (double bottom) : la version haussière."],
-  ['1. La ligne de cou',"Elle passe par le ==creux entre les deux sommets== (ou le sommet entre les deux creux).\nLa figure n'est validée qu'à sa ==cassure==."],
-  ['2. L\'objectif',"==Hauteur== entre les sommets et la ligne de cou, reportée depuis la cassure."],
+  ['Leçon · Analyse technique',"Double sommet : deux sommets au même niveau → le marché n'arrive plus à monter.\nDouble creux (double bottom) : la version haussière."],
+  ['1. La ligne de cou',"Elle passe par le creux entre les deux sommets (ou le sommet entre les deux creux).\nLa figure n'est validée qu'à sa cassure."],
+  ['2. L\'objectif',"Hauteur entre les sommets et la ligne de cou, reportée depuis la cassure."],
   'anim',
-  ['Utilisation',"1. Repérer les deux sommets (ou creux).\n2. Tracer la ligne de cou.\n3. Entrer sur la ==clôture au-delà== ou, mieux, sur le ==pullback== de la ligne de cou.\n4. Stop au-dessus du 2e sommet (ou sous le 2e creux)."],
-  ['Astuce',"Encore plus fiable avec une ==divergence RSI== entre les deux sommets."],
-  ['Bilan',"Pas de cassure = ==pas de figure==."]]},
+  ['Utilisation',"1. Repérer les deux sommets (ou creux).\n2. Tracer la ligne de cou.\n3. Entrer sur la clôture au-delà ou, mieux, sur le pullback de la ligne de cou.\n4. Stop au-dessus du 2e sommet (ou sous le 2e creux)."],
+  ['Astuce',"Encore plus fiable avec une divergence RSI entre les deux sommets."],
+  ['Bilan',"Pas de cassure = pas de figure."]]},
  't3-III-3':{tags:'tête-épaules, head and shoulders',remember:"Tête-épaules : la tendance n'arrive plus à faire de nouveau sommet, la ligne de cou décide.",L:[
-  ['Leçon · Analyse technique',"Le ==tête-épaules== (head and shoulders) annonce un ==retournement== : épaule gauche, tête plus haute, épaule droite plus basse que la tête."],
-  ['1. La ligne de cou',"Elle relie les ==deux creux==. Sa cassure = le signal."],
-  ['2. L\'objectif',"Distance ==tête → ligne de cou==, reportée depuis la cassure."],
-  ['3. La version inversée',"En bas d'une tendance baissière : ==tête-épaules inversé== → retournement haussier."],
+  ['Leçon · Analyse technique',"Le tête-épaules (head and shoulders) annonce un retournement : épaule gauche, tête plus haute, épaule droite plus basse que la tête."],
+  ['1. La ligne de cou',"Elle relie les deux creux. Sa cassure = le signal."],
+  ['2. L\'objectif',"Distance tête → ligne de cou, reportée depuis la cassure."],
+  ['3. La version inversée',"En bas d'une tendance baissière : tête-épaules inversé → retournement haussier."],
   'anim',
-  ['Utilisation',"1. Repérer la figure (souvent visible en ==30 min / 1 h== en intraday).\n2. Attendre la ==clôture sous la ligne de cou==.\n3. Entrer sur la cassure ou son pullback.\n4. Stop ==au-dessus de l'épaule droite==."],
-  ['Astuce',"Je ne vends pas l'épaule droite ==avant== la cassure : tant que la ligne de cou tient, la tendance n'est pas finie."],
-  ['Bilan',"Figure + RSI qui diverge sur la tête = ==retournement solide==."]]},
+  ['Utilisation',"1. Repérer la figure (souvent visible en 30 min / 1 h en intraday).\n2. Attendre la clôture sous la ligne de cou.\n3. Entrer sur la cassure ou son pullback.\n4. Stop au-dessus de l'épaule droite."],
+  ['Astuce',"Je ne vends pas l'épaule droite avant la cassure : tant que la ligne de cou tient, la tendance n'est pas finie."],
+  ['Bilan',"Figure + RSI qui diverge sur la tête = retournement solide."]]},
  't3-III-4':{tags:'cassure, pullback, trend line break',remember:"La cassure donne l'information, le pullback donne le meilleur prix.",L:[
-  ['Leçon · Analyse technique',"Deux façons d'entrer quand un niveau ou une ligne de tendance casse : ==sur la cassure== ou ==sur le pullback==."],
-  ['1. Le counter trend line break',"Pendant une correction, le prix forme une petite ==ligne de tendance contre la tendance principale==.\nQuand elle ==casse==, la tendance principale reprend : c'est la case ==« counter trend line break »== de mon tableau."],
-  ['2. Cassure ou pullback',"Entrer ==sur la cassure== : je ne rate pas le mouvement, mais je prends les fausses cassures.\nEntrer ==sur le pullback== : meilleur prix et meilleur risque, mais parfois le prix ne revient pas."],
+  ['Leçon · Analyse technique',"Deux façons d'entrer quand un niveau ou une ligne de tendance casse : sur la cassure ou sur le pullback."],
+  ['1. Le counter trend line break',"Pendant une correction, le prix forme une petite ligne de tendance contre la tendance principale.\nQuand elle casse, la tendance principale reprend : c'est la case « counter trend line break » de mon tableau."],
+  ['2. Cassure ou pullback',"Entrer sur la cassure : je ne rate pas le mouvement, mais je prends les fausses cassures.\nEntrer sur le pullback : meilleur prix et meilleur risque, mais parfois le prix ne revient pas."],
   'anim',
-  ['Utilisation',"1. Tracer la ligne de correction (au moins ==2 points de contact==).\n2. Attendre une ==clôture== de l'autre côté.\n3. Par défaut : ==attendre le pullback==.\n4. Stop derrière le dernier creux / sommet de la correction."],
-  ['Astuce',"Une ==fausse cassure== est souvent un excellent signal… dans l'autre sens.\nLignes de tendance ==trop verticales== : je ne trade pas leur cassure."],
-  ['Bilan',"Par défaut j'attends le pullback ; si je prends la cassure : ==taille réduite==."]]},
+  ['Utilisation',"1. Tracer la ligne de correction (au moins 2 points de contact).\n2. Attendre une clôture de l'autre côté.\n3. Par défaut : attendre le pullback.\n4. Stop derrière le dernier creux / sommet de la correction."],
+  ['Astuce',"Une fausse cassure est souvent un excellent signal… dans l'autre sens.\nLignes de tendance trop verticales : je ne trade pas leur cassure."],
+  ['Bilan',"Par défaut j'attends le pullback ; si je prends la cassure : taille réduite."]]},
  't3-III-5':{tags:'pattern bougie, engulfing, pin bar, doji',remember:"La bougie donne le signal, le niveau lui donne de la valeur.",L:[
-  ['Leçon · Analyse technique',"Les ==patterns de bougies== montrent qui a gagné la bataille sur une ou deux bougies.\nC'est la case ==« pattern bougie »== de mon tableau : souvent ==le déclencheur== de l'entrée."],
-  ['1. L\'avalement (engulfing)',"Une bougie qui ==avale entièrement== le corps de la précédente, dans l'autre sens : retournement de pression."],
-  ['2. La mèche de rejet (pin bar / marteau)',"==Longue mèche== et petit corps : le prix est allé chercher un niveau et a été ==rejeté==."],
-  ['3. Le doji et l\'étoile',"==Doji== : ouverture ≈ clôture, indécision.\n==Étoile du soir / du matin== : 3 bougies, impulsion → doji → retournement."],
+  ['Leçon · Analyse technique',"Les patterns de bougies montrent qui a gagné la bataille sur une ou deux bougies.\nC'est la case « pattern bougie » de mon tableau : souvent le déclencheur de l'entrée."],
+  ['1. L\'avalement (engulfing)',"Une bougie qui avale entièrement le corps de la précédente, dans l'autre sens : retournement de pression."],
+  ['2. La mèche de rejet (pin bar / marteau)',"Longue mèche et petit corps : le prix est allé chercher un niveau et a été rejeté."],
+  ['3. Le doji et l\'étoile',"Doji : ouverture ≈ clôture, indécision.\nÉtoile du soir / du matin : 3 bougies, impulsion → doji → retournement."],
   'anim',
-  ['Utilisation',"1. Seulement ==sur un niveau== (support, résistance, Fibonacci, MMA).\n2. Seulement ==dans le sens du 4 h==.\n3. Entrée à la clôture de la bougie ou sur un petit retour.\n4. Stop ==derrière la mèche==."],
-  ['Astuce',"Au milieu de nulle part, une bougie ne veut ==rien dire==."],
-  ['Bilan',"Niveau + bougie de rejet dans le sens de la tendance = ==mon signal==."]]},
+  ['Utilisation',"1. Seulement sur un niveau (support, résistance, Fibonacci, MMA).\n2. Seulement dans le sens du 4 h.\n3. Entrée à la clôture de la bougie ou sur un petit retour.\n4. Stop derrière la mèche."],
+  ['Astuce',"Au milieu de nulle part, une bougie ne veut rien dire."],
+  ['Bilan',"Niveau + bougie de rejet dans le sens de la tendance = mon signal."]]},
  't3-IV-1':{tags:'Fibonacci, retracement, extension, outils trading',remember:"Fibonacci n'est pas une stratégie : c'est une clé en plus dans ma caisse à outils.",L:[
-  ['Leçon · Outils trading',"Il existe plusieurs sortes d'indicateurs Fibonacci.\nLes deux plus utilisés pour optimiser ses trades sont :\n– ==FIB RETRACEMENT== (1)\n– ==FIB EXTENSION== (2)"],
-  ['1. Fibonacci retracement',"Le ==Fibonacci retracement== va nous servir à ==visualiser une CORRECTION==.\nS'il y a une ==IMPULSION==, on peut ==prendre la distance== et ==observer le retracement== à la baisse.\n\nLes données les plus intéressantes sont :\n– 1er palier : ==38,2 %==\n– 2e palier : ==50 %==\n– 3e palier : ==61,8 %=="],
+  ['Leçon · Outils trading',"Il existe plusieurs sortes d'indicateurs Fibonacci.\nLes deux plus utilisés pour optimiser ses trades sont :\n– FIB RETRACEMENT (1)\n– FIB EXTENSION (2)"],
+  ['1. Fibonacci retracement',"Le Fibonacci retracement va nous servir à visualiser une CORRECTION.\nS'il y a une IMPULSION, on peut prendre la distance et observer le retracement à la baisse.\n\nLes données les plus intéressantes sont :\n– 1er palier : 38,2 %\n– 2e palier : 50 %\n– 3e palier : 61,8 %"],
   'anim',
-  ['2. Fibonacci extension',"Le ==Fibonacci extension== va, à l'inverse, nous servir à ==visualiser une EXPANSION== : s'il y a une ==IMPULSION==, on va prendre la ==distance jusqu'à sa correction== et ==observer le retracement à la hausse==.\n\nUne extension est souvent utilisée ==jusqu'à sa donnée de 100 %==, qui est simple à prédire."],
+  ['2. Fibonacci extension',"Le Fibonacci extension va, à l'inverse, nous servir à visualiser une EXPANSION : s'il y a une IMPULSION, on va prendre la distance jusqu'à sa correction et observer le retracement à la hausse.\n\nUne extension est souvent utilisée jusqu'à sa donnée de 100 %, qui est simple à prédire."],
   'anim2',
-  ['3. Bien placer son Fibonacci',"Pour réussir à correctement placer son outil Fibonacci, il faut lire sur le graphique une ==parfaite impulsion== à la hausse ou à la baisse : c'est ==cette impulsion que l'on va « fibé »==.\n\nFibonacci est un outil qui s'utilise ==toujours de gauche à droite== sur le graphique d'un marché, mais peut être utilisé sur ==n'importe quelle time frame==."],
-  ['Utilisation',"1. Déterminer les ==résistances== du graphique.\n2. Observer une ==réelle impulsion==.\n3. ==« Fibé »== son impulsion pour obtenir la correction.\n4. Placer son ==buy limit== à partir de l'outil FIB RETRACEMENT, sur la donnée équivalente ==au 50 % idéalement==.\n    Exemple : buy limit 1.24500 = 50 % FIB\n\nSi l'analyse du marché est bonne grâce à son ==analyse fondamentale==, Fibonacci nous a aidés à trouver un ==point d'entrée favorable== pendant la correction du marché."],
+  ['3. Bien placer son Fibonacci',"Pour réussir à correctement placer son outil Fibonacci, il faut lire sur le graphique une parfaite impulsion à la hausse ou à la baisse : c'est cette impulsion que l'on va « fibé ».\n\nFibonacci est un outil qui s'utilise toujours de gauche à droite sur le graphique d'un marché, mais peut être utilisé sur n'importe quelle time frame."],
+  ['Utilisation',"1. Déterminer les résistances du graphique.\n2. Observer une réelle impulsion.\n3. « Fibé » son impulsion pour obtenir la correction.\n4. Placer son buy limit à partir de l'outil FIB RETRACEMENT, sur la donnée équivalente au 50 % idéalement.\n    Exemple : buy limit 1.24500 = 50 % FIB\n\nSi l'analyse du marché est bonne grâce à son analyse fondamentale, Fibonacci nous a aidés à trouver un point d'entrée favorable pendant la correction du marché."],
   'steps',
-  ['Astuce',"Si un marché est ==« OVERCROWDED »== (énormément d'individus sur le marché) : ne pas s'attendre à ce qu'une correction atteigne les 61,8 %. Elle atteindra ==uniquement les 38,2 %==, car les vendeurs ne laissent pas le temps aux acheteurs d'opérer.\n\nPour une optimisation du risque : placer son ==stop loss derrière la zone et le niveau 61,8 %== (en dessous pour un achat, au-dessus pour une vente)."],
-  ['Bilan',"Un marché n'atteint pas forcément ses 61,8 % de correction : il vaut mieux placer son buy limit à ==50 %==, et si le marché est overcrowded, le placer à ==38,2 %==.\n\nComprendre les marchés globalement, avec leur géopolitique, pour ne pas se servir du Fibonacci pour rien : il ==améliore les prix d'entrée== mais ==n'est pas une STRATÉGIE ni un indicateur==. C'est une ==clé en plus== que tu peux rajouter dans ta caisse à outils."]],
+  ['Astuce',"Si un marché est « OVERCROWDED » (énormément d'individus sur le marché) : ne pas s'attendre à ce qu'une correction atteigne les 61,8 %. Elle atteindra uniquement les 38,2 %, car les vendeurs ne laissent pas le temps aux acheteurs d'opérer.\n\nPour une optimisation du risque : placer son stop loss derrière la zone et le niveau 61,8 % (en dessous pour un achat, au-dessus pour une vente)."],
+  ['Bilan',"Un marché n'atteint pas forcément ses 61,8 % de correction : il vaut mieux placer son buy limit à 50 %, et si le marché est overcrowded, le placer à 38,2 %.\n\nComprendre les marchés globalement, avec leur géopolitique, pour ne pas se servir du Fibonacci pour rien : il améliore les prix d'entrée mais n'est pas une STRATÉGIE ni un indicateur. C'est une clé en plus que tu peux rajouter dans ta caisse à outils."]],
   steps:{title:'Dans TradingView',items:[{t:'Ouvrir l\'outil',d:'Barre de gauche, outils « Gann et Fibonacci » → « Retracement de Fibonacci ». Raccourci : Alt + F (⌥ + F sur Mac).'},{t:'Fibé l\'impulsion',d:'Clique au début de l\'impulsion puis à sa fin (sur les mèches), toujours de gauche à droite.'},{t:'Régler les niveaux',d:'Double-clic sur l\'outil : garde 38,2 / 50 / 61,8 (et 0 / 100), coche « Étendre les lignes vers la droite ».'},{t:'Enregistrer',d:'Modèle → Enregistrer sous… pour retrouver mes niveaux sur toutes les paires.'},{t:'Alerte',d:'Clic droit sur le 50 % → Ajouter une alerte : je suis prévenue quand le prix arrive sur mon buy limit.'}]},
   quiz:[{q:"Où placer son buy limit idéalement ?",a:"Au 50 % du retracement. À 38,2 % si le marché est overcrowded."},{q:"Fibonacci est-il une stratégie ?",a:"Non : il améliore les prix d'entrée, c'est une clé en plus dans la caisse à outils."}]},
  't3-IV-2':{tags:'Fibonacci, extension, objectifs, take profit',remember:"L'extension à 100 % : l'objectif simple à prédire.",L:[
-  ['Leçon · Outils trading',"Le ==Fibonacci extension== sert à ==visualiser une EXPANSION== : où le prix peut aller ==après== la correction.\nC'est mon outil pour placer mes ==objectifs==."],
-  ['1. Trois clics',"Dans TradingView : « Extension de Fibonacci basée sur la tendance ».\n==A== = début de l'impulsion, ==B== = fin de l'impulsion, ==C== = fin de la correction."],
-  ['2. Les niveaux',"==100 %== : même longueur que la première impulsion, l'objectif le plus simple à prédire.\n127,2 % et ==161,8 %== : objectifs des tendances fortes."],
+  ['Leçon · Outils trading',"Le Fibonacci extension sert à visualiser une EXPANSION : où le prix peut aller après la correction.\nC'est mon outil pour placer mes objectifs."],
+  ['1. Trois clics',"Dans TradingView : « Extension de Fibonacci basée sur la tendance ».\nA = début de l'impulsion, B = fin de l'impulsion, C = fin de la correction."],
+  ['2. Les niveaux',"100 % : même longueur que la première impulsion, l'objectif le plus simple à prédire.\n127,2 % et 161,8 % : objectifs des tendances fortes."],
   'anim',
-  ['Utilisation',"1. Fibé l'impulsion A → B, puis la correction jusqu'à C.\n2. Mon objectif principal : ==100 %==.\n3. Vérifier que l'objectif donne au moins ==1:3== (mon tableau fondamental : risk to reward 1:3).\n4. Sécuriser une partie à 100 %, laisser courir le reste si la tendance est forte."],
-  ['Bilan',"Je connais ==mon objectif avant d'entrer==, sinon je ne prends pas le trade."]]},
+  ['Utilisation',"1. Fibé l'impulsion A → B, puis la correction jusqu'à C.\n2. Mon objectif principal : 100 %.\n3. Vérifier que l'objectif donne au moins 1:3 (mon tableau fondamental : risk to reward 1:3).\n4. Sécuriser une partie à 100 %, laisser courir le reste si la tendance est forte."],
+  ['Bilan',"Je connais mon objectif avant d'entrer, sinon je ne prends pas le trade."]]},
  't3-IV-3':{tags:'stop, taille de position, risk management',remember:"Le stop va là où mon scénario est faux ; les lots s'adaptent pour perdre toujours le même montant.",L:[
-  ['Leçon · Risk management',"Le stop loss ne se choisit pas « au feeling » en pips : il se place ==là où mon idée est fausse==."],
-  ['1. Où placer son stop',"Achat : ==sous le dernier creux== (ou sous la zone, ou sous le 61,8 %).\nVente : ==au-dessus du dernier sommet==.\nFigure : de l'autre côté de la dernière borne."],
-  ['2. La taille de position',"Mon ==risque en € par trade est fixe==. C'est le ==nombre de lots== qui change.\nStop large = lots plus petits. Stop serré = lots plus gros.\nLots = risque en € ÷ (distance du stop en pips × valeur d'un pip pour 1 lot)."],
-  ['Utilisation',"1. Placer d'abord le stop ==sur le graphique==.\n2. Mesurer la distance (outil « Position longue / courte » de TradingView).\n3. Calculer mes lots : Technique › Calculs.\n4. Vérifier l'objectif : au moins ==1:3==."],
-  ['Astuce',"Je ne déplace ==jamais== mon stop pour éviter une perte. Je peux le remonter quand le trade avance."],
-  ['Bilan',"Même risque à chaque trade = ==je reste en vie== même dans une mauvaise série."]]},
+  ['Leçon · Risk management',"Le stop loss ne se choisit pas « au feeling » en pips : il se place là où mon idée est fausse."],
+  ['1. Où placer son stop',"Achat : sous le dernier creux (ou sous la zone, ou sous le 61,8 %).\nVente : au-dessus du dernier sommet.\nFigure : de l'autre côté de la dernière borne."],
+  ['2. La taille de position',"Mon risque en € par trade est fixe. C'est le nombre de lots qui change.\nStop large = lots plus petits. Stop serré = lots plus gros.\nLots = risque en € ÷ (distance du stop en pips × valeur d'un pip pour 1 lot)."],
+  ['Utilisation',"1. Placer d'abord le stop sur le graphique.\n2. Mesurer la distance (outil « Position longue / courte » de TradingView).\n3. Calculer mes lots : Technique › Calculs.\n4. Vérifier l'objectif : au moins 1:3."],
+  ['Astuce',"Je ne déplace jamais mon stop pour éviter une perte. Je peux le remonter quand le trade avance."],
+  ['Bilan',"Même risque à chaque trade = je reste en vie même dans une mauvaise série."]]},
  't3-V-1':{tags:'TradingView, mise en page, modèles',remember:"Une mise en page 4 graphiques = toute ma lecture multi-unités d'un coup d'œil.",L:[
-  ['Leçon · TradingView',"Avec l'abonnement Premium, je peux afficher ==plusieurs graphiques synchronisés== : weekly, daily, 4 h et 30 min de la même paire."],
+  ['Leçon · TradingView',"Avec l'abonnement Premium, je peux afficher plusieurs graphiques synchronisés : weekly, daily, 4 h et 30 min de la même paire."],
   'steps',
-  ['Astuce',"Enregistrer MMA 50 / 200 + RSI + stochastique en ==modèle d'indicateurs== : un clic pour les retrouver partout."],
-  ['Bilan',"Mon écran TradingView suit ==ma méthode== : du plus grand au plus petit."]],
+  ['Astuce',"Enregistrer MMA 50 / 200 + RSI + stochastique en modèle d'indicateurs : un clic pour les retrouver partout."],
+  ['Bilan',"Mon écran TradingView suit ma méthode : du plus grand au plus petit."]],
   steps:{title:'Préparer TradingView',items:[{t:'Mise en page',d:'En haut : icône de mise en page → 4 graphiques.'},{t:'Synchroniser',d:'Synchronise le symbole, le réticule et l\'heure : changer de paire change les 4 graphiques.'},{t:'Unités de temps',d:'Weekly, daily, 4 h et 30 min.'},{t:'Modèle d\'indicateurs',d:'MMA 50 + MMA 200 + RSI + stochastique → « Modèles d\'indicateurs » → Enregistrer.'},{t:'Liste de surveillance',d:'Mes paires du moment, pour passer de l\'une à l\'autre.'},{t:'Enregistrer',d:'Nommer la mise en page (ex. « Routine multi-UT »).'}]}},
  't3-V-2':{tags:'alertes, TradingView',remember:"Une alerte sur chaque niveau : je n'ai plus besoin de surveiller l'écran.",L:[
-  ['Leçon · TradingView',"Les ==alertes== me préviennent sur mon téléphone quand le prix arrive sur ==mon niveau==, mon ==Fibonacci== ou quand le ==RSI== passe 70 / 30."],
+  ['Leçon · TradingView',"Les alertes me préviennent sur mon téléphone quand le prix arrive sur mon niveau, mon Fibonacci ou quand le RSI passe 70 / 30."],
   'steps',
-  ['Astuce',"Je nomme mes alertes avec la paire, l'unité de temps et le scénario : ==« XAU 4 h — retest 2 430 → achat »==."],
-  ['Bilan',"Je prépare mes niveaux le soir, ==les alertes travaillent pour moi== pendant la séance."]],
+  ['Astuce',"Je nomme mes alertes avec la paire, l'unité de temps et le scénario : « XAU 4 h — retest 2 430 → achat »."],
+  ['Bilan',"Je prépare mes niveaux le soir, les alertes travaillent pour moi pendant la séance."]],
   steps:{title:'Créer une alerte',items:[{t:'Sur un niveau',d:'Clic droit sur la ligne → « Ajouter une alerte ».'},{t:'Condition',d:'« Croisement » (ou franchissement vers le haut / le bas).'},{t:'Déclenchement',d:'« Une seule fois » pour un niveau, « Une fois par clôture de barre » pour un indicateur.'},{t:'Message',d:'J\'écris mon scénario dans le message.'}]}},
  't3-V-3':{tags:'replay, backtest',remember:"Le Replay : m'entraîner sur le passé avant de risquer de l'argent.",L:[
-  ['Leçon · TradingView',"Le mode ==Replay== rejoue le passé bougie par bougie : c'est mon ==simulateur==."],
+  ['Leçon · TradingView',"Le mode Replay rejoue le passé bougie par bougie : c'est mon simulateur."],
   'steps',
-  ['Astuce',"Tester un setup sur ==30 trades== minimum avant de le trader en réel, en notant chaque résultat en R."],
-  ['Bilan',"Un setup testé = de la ==confiance== pendant la séance."]],
+  ['Astuce',"Tester un setup sur 30 trades minimum avant de le trader en réel, en notant chaque résultat en R."],
+  ['Bilan',"Un setup testé = de la confiance pendant la séance."]],
   steps:{title:'Backtester un setup',items:[{t:'Lancer',d:'Bouton « Replay » en haut du graphique, choisir le point de départ.'},{t:'Avancer',d:'Bougie par bougie ou en lecture automatique.'},{t:'Trader',d:'Appliquer mon tableau de confluences à la lettre.'},{t:'Mesurer',d:'Taux de réussite, R moyen, pire série de pertes.'}]}},
  't3-V-4':{tags:'confluence, tableau, conditions trade',remember:"Minimum 4 confluences réunies avant de trader.",L:[
-  ['Leçon · Mes conditions trade',"Mes deux fiches : le ==Confluence chart== (technique) et le ==Comparison chart== (fondamental).\nChaque ligne cochée me fait avancer : ==Ne rien faire → Attendre → Définir → Trade==."],
-  ['1. Confluence chart',"Tendance du marché · Analyse technique confluence · Support et résistance · Fibonacci · SMA 50 ou 200 · Counter trend line break · Pattern bougie · Pattern marché · RSI divergence.\n==Minimum 4 confluences réunies==."],
+  ['Leçon · Mes conditions trade',"Mes deux fiches : le Confluence chart (technique) et le Comparison chart (fondamental).\nChaque ligne cochée me fait avancer : Ne rien faire → Attendre → Définir → Trade."],
+  ['1. Confluence chart',"Tendance du marché · Analyse technique confluence · Support et résistance · Fibonacci · SMA 50 ou 200 · Counter trend line break · Pattern bougie · Pattern marché · RSI divergence.\nMinimum 4 confluences réunies."],
   ['2. Comparison chart',"Fondamental santé économique · Comprendre devise trouver direction · Recherche data semaine · Recherche news économique · Analyse price action setup · Risk to reward 1:3 · Réfléchir trade management · Position réaliser avec un ordre · Filtrer ce qui pourrait nuire."],
   'anim',
-  ['Utilisation',"Dans mon ==carnet du jour==, chaque paire a son bouton « Tableau de confluences » : je coche, l'app me dit où j'en suis."],
-  ['Bilan',"Cocher la case orange ==quand les conditions sont réunies==, pas avant."]]},
+  ['Utilisation',"Dans mon carnet du jour, chaque paire a son bouton « Tableau de confluences » : je coche, l'app me dit où j'en suis."],
+  ['Bilan',"Cocher la case orange quand les conditions sont réunies, pas avant."]]},
  't3-VI-1':{tags:'quiz, analyse technique',remember:"Direction, force, moment : MMA, RSI, stochastique.",L:[
   ['Leçon · Validation',"Le quiz reprend les points clés du thème. Retourne chaque carte, réponds de tête, puis vérifie."]],
   quiz:[{q:"Quelle est mon unité de temps de référence pour la tendance du jour ?",a:"Le 4 h."},{q:"RSI à 75 en forte tendance haussière : signal de vente ?",a:"Non, il peut rester en surachat ; il faut une divergence ou une cassure."},{q:"Prix : creux plus haut ; RSI : creux plus bas. Quel signal ?",a:"Divergence cachée haussière : continuation."},{q:"Où placer mon buy limit avec Fibonacci ?",a:"Au 50 % idéalement, à 38,2 % si le marché est overcrowded."},{q:"Objectif d'un double sommet ?",a:"Hauteur sommets → ligne de cou, reportée sous la cassure."},{q:"Combien de confluences minimum avant de trader ?",a:"4."},{q:"Stochastique 30 min qui croise vers le bas à 85, 4 h haussier : je vends ?",a:"Non : je ne prends que les croisements dans le sens du 4 h."}]}
 };
-function hlx(s){return s.replace(/==([^=\n]+)==/g,'<mark class="hl">$1</mark>');}
-function t3Seed(id){var S=T3N[id];if(!S)return;var f=F();var n=note(id,true);if(n.t3===3)return;
+function hlx(s){return String(s).replace(/==/g,'');}
+function t3Seed(id){var S=T3N[id];if(!S)return;var f=F();var n=note(id,true);if(n.t3===3){(n.layout||[]).forEach(function(w){if(w.t==='text'&&w.d&&typeof w.d.text==='string'&&w.d.text.indexOf('==')>=0)w.d.text=w.d.text.replace(/==/g,'');});n.t3=4;persist();return;}if(n.t3===4)return;
  if(n.t3===1||n.t3===2||!n.layout||!fullText(n).replace(n.tags||'','').trim()||!n.t3){
   n.tags=S.tags||'';n.remember=S.remember||'';n.key=[];n.rules=[];n.defs=[];n.memos=[];
   n.steps=S.steps?{title:S.steps.title,items:S.steps.items.map(function(x){return {t:x.t,d:x.d};})}:{title:'',items:[]};
@@ -16826,7 +16827,7 @@ function t3Seed(id){var S=T3N[id];if(!S)return;var f=F();var n=note(id,true);if(
   if(S.steps&&lay.every(function(w){return w.t!=='steps';}))lay.push({id:'steps',t:'steps',w:2});
   if(n.quiz.length)lay.push({id:'quiz',t:'quiz',w:2});lay.push({id:'imgs',t:'imgs',w:2});
   n.layout=lay;n.anSeed=1;}
- n.t3=3;n.updated=n.updated||new Date().toISOString();persist();}
+ n.t3=4;n.updated=n.updated||new Date().toISOString();persist();}
 
 function anSeed(id){try{t3Seed(id);}catch(x){console.log('t3',x);}var S=ANSEED[id];if(!S)return;var n=note(id,true);if(n.anSeed)return;n.anSeed=1;var pos=n.layout.findIndex(function(w){return w.t==='steps';});if(pos<0)pos=n.layout.findIndex(function(w){return w.t==='key';});pos=pos<0?n.layout.length:pos+1;
  S.forEach(function(a,i){if(n.layout.some(function(w){return w.t==='anim'&&fnorm(w.title)===fnorm(a.title);}))return;n.layout.splice(pos+i,0,{id:uid(),t:'anim',w:2,title:a.title,d:JSON.parse(JSON.stringify(a.d))});});persist();}
@@ -18851,12 +18852,16 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
 #techRoot .tk-pair .p span{margin-left:auto;letter-spacing:0;font-family:'IBM Plex Sans','Jost',sans-serif;font-size:12px;color:var(--mut)}
 #techRoot .tk-pair .r{display:flex;gap:10px;margin-top:6px;font-size:11.5px;color:var(--mut)}
 #techRoot .tk-pair .c{display:inline-block;margin-top:6px;font-size:11px;letter-spacing:.06em;padding:2px 8px;border-radius:999px;border:1px solid var(--ln)}
+#techRoot .tk-del{position:absolute;top:8px;right:9px;font-size:11px;color:var(--mut);opacity:0;transition:opacity .2s;padding:2px 4px;border-radius:4px}
+#techRoot .tk-pair:hover .tk-del{opacity:.7}#techRoot .tk-del:hover{opacity:1!important;color:var(--red)}
+@media (hover:none){#techRoot .tk-del{opacity:.6}}
+#techRoot .tk-pair .p span{margin-right:14px}
 #techRoot .tk-add{flex:0 0 auto;border:1px dashed var(--ln);background:transparent;border-radius:6px;padding:0 16px;color:var(--mut);cursor:pointer;font:inherit}
 #techRoot .ok{color:var(--green)!important;border-color:var(--green)!important}
 #techRoot .ko{color:var(--red)!important;border-color:var(--red)!important}
 #techRoot .wait{color:#B98A2E!important;border-color:#D9B66B!important}
 #techRoot .up{color:var(--green)}#techRoot .dn{color:var(--red)}#techRoot .mut{color:var(--mut)}
-#techRoot .tk-sub{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:16px}
+#techRoot .tk-sub{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px}
 #techRoot .tk-sub button{text-align:left;background:var(--fi);border:1px solid var(--ln);border-radius:6px;padding:12px 14px 14px;cursor:pointer;color:inherit;font:inherit}
 #techRoot .tk-sub button.on{border-color:var(--ink);box-shadow:inset 0 -1.5px 0 var(--ink)}
 #techRoot .tk-sub b{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:400}
@@ -18886,7 +18891,7 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
 #techRoot .chip.dn{color:var(--red);border-color:var(--red)}
 #techRoot .chip.mid{color:var(--ink);border-color:var(--ink)}
 #techRoot .chip.hot{color:#B98A2E;border-color:#D9B66B}
-#techRoot select.pat{border:1px solid var(--ln);background:transparent;color:inherit;border-radius:6px;padding:3px 6px;font:inherit;font-size:12px;max-width:150px}
+#techRoot select.pat{border:1px solid var(--ln);background:transparent;color:inherit;border-radius:6px;padding:3px 6px;font:inherit;font-size:12px;max-width:170px}
 @container (max-width:560px){#techRoot table.mtf .hide-s{display:none}}
 #techRoot .conf{display:flex;flex-direction:column;gap:12px}
 #techRoot .conf .big{font-weight:300;font-size:clamp(20px,9cqi,30px);letter-spacing:.04em}
@@ -18951,7 +18956,7 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
   function uid(){return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
   function store(){var d=DB();if(!d)return null;if(!d.tech||typeof d.tech!=='object')d.tech={};var T=d.tech;
     if(!Array.isArray(T.pairs)){T.pairs=DEFP.map(function(x){return newPair(x[0],x[1]);});sv();}
-    T.routine=T.routine||{};T.view=T.view||'plan';if(!T.sel||!T.pairs.some(function(p){return p.id===T.sel;}))T.sel=T.pairs[0]&&T.pairs[0].id;return T;}
+    T.routine=T.routine||{};T.view=T.view||'plan';if(T.view==='calc'||T.view==='tv')T.view='plan';if(!T.sel||!T.pairs.some(function(p){return p.id===T.sel;}))T.sel=T.pairs[0]&&T.pairs[0].id;return T;}
   function newPair(sym,tv){var tf={};TFS.forEach(function(t){tf[t[0]]={t:'',rsi:'',st:'',pat:''};});var p=sym.split('/');return {id:uid(),sym:sym,tv:tv||('OANDA:'+sym.replace('/','')),base:p[0],quote:p[1]||'',price:'',tf:tf,levels:[],bull:'',bear:'',inval:'',note:'',upd:''};}
   function cyc(list,v){var i=list.findIndex(function(x){return x[0]===v;});return list[(i+1)%list.length][0];}
   function lbl(list,v){var x=list.find(function(y){return y[0]===v;});return x?x[1]:'—';}
@@ -18989,15 +18994,21 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
   function ago(d){if(!d)return '<span class="old">jamais mis à jour</span>';var n=Math.round((new Date(today()+'T12:00:00')-new Date(d+'T12:00:00'))/864e5);return n<=0?'mis à jour aujourd\'hui':n===1?'mis à jour hier':(n>3?'<span class="old">mis à jour il y a '+n+' jours</span>':'mis à jour il y a '+n+' jours');}
 
   /* ---------- rendu ---------- */
-  function navHtml(T){return '<div class="tk-nav">'+T.pairs.map(function(p){var c=confl(p);return '<button type="button" class="tk-pair'+(p.id===T.sel?' on':'')+'" data-tp="'+p.id+'"><div class="p">'+(FLAG[p.base]||'')+' '+esc(p.sym)+'<span>'+esc(p.price||'')+'</span></div><div class="r"><span>Tech <b class="'+dirCls(c.t.v)+'">'+dirTxt(c.t.v).split(' ')[0]+'</b></span><span>Macro <b class="'+dirCls(c.m.v)+'">'+(c.m.v>0?'↗':c.m.v<0?'↘':'→')+'</b></span></div><span class="c '+c.cls+'">'+c.st+'</span></button>';}).join('')+'<button type="button" class="tk-add" data-ta="add" title="Ajouter une paire">＋ paire</button></div>';}
-  function subHtml(T){var S=[['plan','Plan graphique','tendances, niveaux, scénarios'],['ensemble','Vue d\'ensemble','toutes tes paires d\'un coup'],['routine','Routine','avant la séance, du weekly au 30 min'],['calc','Calculs','Fibonacci, taille de position'],['tv','TradingView','indicateurs et leçons']];
+  function navHtml(T){return '<div class="tk-nav">'+T.pairs.map(function(p){var c=confl(p);return '<button type="button" class="tk-pair'+(p.id===T.sel?' on':'')+'" data-tp="'+p.id+'"><div class="p">'+(FLAG[p.base]||'')+' '+esc(p.sym)+'<span>'+esc(p.price||'')+'</span></div><div class="r"><span>Tech <b class="'+dirCls(c.t.v)+'">'+dirTxt(c.t.v).split(' ')[0]+'</b></span><span>Macro <b class="'+dirCls(c.m.v)+'">'+(c.m.v>0?'↗':c.m.v<0?'↘':'→')+'</b></span></div><span class="c '+c.cls+'">'+c.st+'</span><span class="tk-del" data-tdel="'+p.id+'" title="Supprimer '+esc(p.sym)+'">✕</span></button>';}).join('')+'<button type="button" class="tk-add" data-ta="add" title="Ajouter une paire">＋ paire</button></div>';}
+  function subHtml(T){var S=[['plan','Plan graphique','tendances, niveaux, scénarios'],['ensemble','Vue d\'ensemble','toutes tes paires d\'un coup'],['routine','Routine','avant la séance, du weekly au 30 min']];
     return '<div class="tk-sub">'+S.map(function(s){return '<button type="button" data-tv="'+s[0]+'" class="'+(T.view===s[0]?'on':'')+'"><b>'+s[1]+'</b><small>'+s[2]+'</small></button>';}).join('')+'</div>';}
+  var FAMN={fig:'Figures chartistes',bg:'Bougies',pa:'Price action'};
+  function patSel(tf,cur){var L=[];try{L=window.__frmPatterns?window.__frmPatterns():[];}catch(e){}
+    if(!L.length)return '<select class="pat" data-pat="'+tf+'">'+PATS.map(function(o){return '<option'+((cur||'—')===o?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';
+    var h='<select class="pat" data-pat="'+tf+'"><option value="">—</option>',seen=false;['fig','bg','pa'].concat(Object.keys(L.reduce(function(o,p){o[p.fam]=1;return o;},{})).filter(function(f){return ['fig','bg','pa'].indexOf(f)<0;})).forEach(function(f){var G=L.filter(function(p){return p.fam===f;});if(!G.length)return;h+='<optgroup label="'+esc(FAMN[f]||f)+'">'+G.map(function(p){var s=p.n===cur;if(s)seen=true;return '<option value="'+esc(p.n)+'"'+(s?' selected':'')+'>'+(p.sig==='haussier'?'↗ ':p.sig==='baissier'?'↘ ':'')+esc(p.n)+'</option>';}).join('')+'</optgroup>';});
+    if(cur&&!seen)h+='<option value="'+esc(cur)+'" selected>'+esc(cur)+'</option>';
+    return h+'</select>'+(cur?(function(){var m=L.find(function(p){return p.n===cur;});return m?'<button type="button" class="btn" data-patopen="'+esc(m.id)+'" title="Ouvrir la fiche dans la boîte à outils" style="margin-left:4px;padding:2px 8px">fiche ›</button>':'';})():'');}
   function planHtml(p){var c=confl(p),pr=num(p.price);
     var h='<div class="tk-meta">'+(FLAG[p.base]||'')+' '+esc(p.sym)+' · '+ago(p.upd)+' · <a class="btn" href="'+tvUrl(p,'240')+'" target="_blank" rel="noopener">Ouvrir dans TradingView ↗</a></div><div class="tk-g">';
     // matrice multi-unités
     h+='<div class="tk-c s2"><div class="tk-h"><b>Lecture multi-unités de temps</b><div class="x"><span class="mut" style="font-size:12px">touche une case pour la changer</span></div></div><table class="mtf"><thead><tr><th>UT</th><th>Tendance (MMA)</th><th>RSI</th><th>Stochastique</th><th class="hide-s">Pattern</th></tr></thead><tbody>';
     TFS.forEach(function(t){var x=p.tf[t[0]]||{};var tc=x.t==='up'?'up':x.t==='down'?'dn':x.t==='side'?'mid':'';var rc=x.rsi==='ob'||x.rsi==='os'?'hot':x.rsi==='hi'?'up':x.rsi==='lo'?'dn':'';var sc=x.st==='ob'||x.st==='os'?'hot':x.st==='up'?'up':x.st==='dn'?'dn':'';
-      h+='<tr><td class="tf">'+t[1]+'<a href="'+tvUrl(p,t[2])+'" target="_blank" rel="noopener" title="Ouvrir en '+t[1]+' dans TradingView">↗</a></td><td><button type="button" class="chip '+tc+'" data-cell="t" data-tf="'+t[0]+'">'+lbl(TREND,x.t)+'</button></td><td><button type="button" class="chip '+rc+'" data-cell="rsi" data-tf="'+t[0]+'">'+lbl(RSI,x.rsi)+'</button></td><td><button type="button" class="chip '+sc+'" data-cell="st" data-tf="'+t[0]+'">'+lbl(STO,x.st)+'</button></td><td class="hide-s"><select class="pat" data-pat="'+t[0]+'">'+PATS.map(function(o){return '<option'+((x.pat||'—')===o?' selected':'')+'>'+o+'</option>';}).join('')+'</select></td></tr>';});
+      h+='<tr><td class="tf">'+t[1]+'<a href="'+tvUrl(p,t[2])+'" target="_blank" rel="noopener" title="Ouvrir en '+t[1]+' dans TradingView">↗</a></td><td><button type="button" class="chip '+tc+'" data-cell="t" data-tf="'+t[0]+'">'+lbl(TREND,x.t)+'</button></td><td><button type="button" class="chip '+rc+'" data-cell="rsi" data-tf="'+t[0]+'">'+lbl(RSI,x.rsi)+'</button></td><td><button type="button" class="chip '+sc+'" data-cell="st" data-tf="'+t[0]+'">'+lbl(STO,x.st)+'</button></td><td class="hide-s">'+patSel(t[0],x.pat)+'</td></tr>';});
     h+='</tbody></table></div>';
     // confluence
     var g=c.t.v==null?50:Math.round((c.t.v+1)*50);
@@ -19012,12 +19023,13 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
     if(pr!=null&&!placed&&lv.length)rows.push('<div class="lv now"><span class="k">●</span><span class="n">'+esc(p.price)+'</span><span class="d">prix actuel</span></div>');
     h+='<div class="tk-c"><div class="tk-h"><b>Niveaux clés</b></div><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span class="mut" style="font-size:12px">Prix actuel</span><input class="in" data-f="price" value="'+esc(p.price)+'" placeholder="ex. 2 415,30" style="width:120px"></div>'+(rows.join('')||'<div class="mut" style="font-size:13px">Ajoute tes résistances (R), supports (S) et pivots (P).</div>')
       +'<div class="lv-add"><select class="in" id="lvK"><option value="R">R</option><option value="S">S</option><option value="P">P</option></select><input class="in" id="lvP" placeholder="niveau" style="width:96px"><select class="in" id="lvT">'+TFS.map(function(t){return '<option>'+t[0]+'</option>';}).join('')+'</select><input class="in" id="lvN" placeholder="note (ex. sommet de mars)" style="flex:1;min-width:120px"><button type="button" class="btn dark" data-ta="lv">Ajouter</button></div></div>';
-    // scénarios
-    h+='<div class="tk-c s2 sc"><div class="tk-h"><b>Scénarios</b></div><label class="u">Scénario haussier · si…</label><textarea class="in" data-f="bull" placeholder="ex. cassure et clôture H4 au-dessus de 2 430 → objectif 2 455, entrée sur pullback en 30 min">'+esc(p.bull)+'</textarea><label class="d">Scénario baissier · si…</label><textarea class="in" data-f="bear" placeholder="ex. rejet sous 2 430 avec RSI qui diverge → retour vers 2 395">'+esc(p.bear)+'</textarea><label>Invalidation · je change d\'avis si…</label><textarea class="in" data-f="inval" placeholder="ex. clôture daily sous 2 380 : la tendance de fond casse">'+esc(p.inval)+'</textarea></div>';
+    h+=fibCard(p);
     // agenda éco
     var ev=events(p);
     h+='<div class="tk-c"><div class="tk-h"><b>Ce qui peut bouger la paire</b><div class="x"><button type="button" class="btn" data-go="eco">Calendrier éco ›</button></div></div>'+(ev.length?ev.map(function(e){var c=ccyOf(e);return '<div class="ev"><span class="t">'+esc(when(e))+'</span><span>'+(FLAG[c]||'')+' <b style="font-weight:500">'+esc(String(e.title||'').split('\n')[0])+'</b> '+'★'.repeat(+e.imp||1)+(e.forecast?' <span class="mut">· attendu '+esc(e.forecast)+'</span>':'')+(e.actual?' · <b>'+esc(e.actual)+'</b>':'')+'</span></div>';}).join(''):'<div class="mut" style="font-size:13px">Rien de ★★ ou ★★★ dans les 7 prochains jours pour '+esc(p.sym)+'.</div>')+'<div class="tk-tip">Avant une donnée ★★★ : pas d\'entrée dans les 15 minutes qui précèdent, ou stop élargi et taille réduite.</div></div>';
-    h+='<div class="tk-c s2"><div class="tk-h"><b>Notes</b><div class="x"><button type="button" class="btn" data-ta="del">Supprimer la paire</button></div></div><textarea class="in" data-f="note" placeholder="Ce que tu vois sur le graphique, les patterns en formation, ce que tu attends…" style="min-height:90px">'+esc(p.note)+'</textarea><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><span class="mut" style="font-size:12px;align-self:center">Symbole TradingView</span><input class="in" data-f="tv" value="'+esc(p.tv)+'" style="width:170px"></div></div>';
+    // scénarios
+    h+='<div class="tk-c s3 sc"><div class="tk-h"><b>Scénarios</b></div><label class="u">Scénario haussier · si…</label><textarea class="in" data-f="bull" placeholder="ex. cassure et clôture H4 au-dessus de 2 430 → objectif 2 455, entrée sur pullback en 30 min">'+esc(p.bull)+'</textarea><label class="d">Scénario baissier · si…</label><textarea class="in" data-f="bear" placeholder="ex. rejet sous 2 430 avec RSI qui diverge → retour vers 2 395">'+esc(p.bear)+'</textarea><label>Invalidation · je change d\'avis si…</label><textarea class="in" data-f="inval" placeholder="ex. clôture daily sous 2 380 : la tendance de fond casse">'+esc(p.inval)+'</textarea></div>';
+    h+='<div class="tk-c s3"><div class="tk-h"><b>Notes</b><div class="x"><button type="button" class="btn" data-ta="del">Supprimer la paire</button></div></div><textarea class="in" data-f="note" placeholder="Ce que tu vois sur le graphique, les patterns en formation, ce que tu attends…" style="min-height:90px">'+esc(p.note)+'</textarea><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><span class="mut" style="font-size:12px;align-self:center">Symbole TradingView</span><input class="in" data-f="tv" value="'+esc(p.tv)+'" style="width:170px"></div></div>';
     h+='</div>';return h;}
   function ensembleHtml(T){var h='<div class="tk-g"><div class="tk-c s3"><div class="tk-h"><b>Toutes tes paires</b></div><table class="ov-t"><thead><tr><th>Paire</th><th>Prix</th>'+TFS.map(function(t){return '<th>'+t[0]+'</th>';}).join('')+'<th>Technique</th><th>Macro</th><th>Confluence</th><th>Plan</th></tr></thead><tbody>';
     T.pairs.forEach(function(p){var c=confl(p);h+='<tr data-p="'+p.id+'"><td>'+(FLAG[p.base]||'')+' '+esc(p.sym)+'</td><td class="mut">'+esc(p.price||'—')+'</td>'+TFS.map(function(t){var x=p.tf[t[0]]||{};return '<td class="'+(x.t==='up'?'up':x.t==='down'?'dn':'mut')+'">'+(x.t==='up'?'↗':x.t==='down'?'↘':x.t==='side'?'→':'·')+'</td>';}).join('')+'<td class="'+dirCls(c.t.v)+'">'+dirTxt(c.t.v)+'</td><td class="'+dirCls(c.m.v)+'">'+(c.m.v>0?'↗':c.m.v<0?'↘':'→')+'</td><td><span class="btn '+c.cls+'" style="cursor:default">'+c.st+'</span></td><td class="mut" style="font-size:12px">'+ago(p.upd)+'</td></tr>';});
@@ -19034,14 +19046,15 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
   var PIPDEF={'XAU/USD':{pip:.1,val:8.6},'XAU/EUR':{pip:.1,val:10},'USD/JPY':{pip:.01,val:6.4},'AUD/USD':{pip:.0001,val:8.6}};
   function cdec(p){var v=num(p&&p.price);return v==null?2:v>500?2:v>20?3:5;}
   function fnum(v,d){return v.toLocaleString('fr-FR',{minimumFractionDigits:d,maximumFractionDigits:d});}
+  function fibCard(p){var C=p.calc=p.calc||{},d=cdec(p),h='';
+    var hi=num(C.fh),lo=num(C.fl),up=C.fd!=='down',rows='';
+    if(hi!=null&&lo!=null&&hi>lo){var R=hi-lo,L=[[0,'0 %'],[.382,'38,2 %'],[.5,'50 % · buy limit'],[.618,'61,8 % · stop derrière'],[1,'100 %'],[-1,'extension 100 %']];
+      rows=L.map(function(l){var v=up?hi-R*l[0]:lo+R*l[0];var gold=l[0]===.5;return '<div class="lv"><span class="k '+(gold?'S':'')+'" style="min-width:150px">'+l[1]+'</span><span class="n">'+fnum(v,d)+'</span><button type="button" class="btn" data-fadd="'+v.toFixed(d).replace('.',',')+'|'+l[1]+'" style="margin-left:auto;padding:2px 9px">＋ niveau</button></div>';}).join('');}
+    h+='<div class="tk-c"><div class="tk-h"><b>Fibonacci</b><div class="x"><button type="button" class="btn" data-lesson="t3-IV-1">Leçon ›</button></div></div><div style="display:flex;gap:6px;margin-bottom:8px"><button type="button" class="chip '+(up?'up':'')+'" data-fd="up">↗ haussier</button><button type="button" class="chip '+(!up?'dn':'')+'" data-fd="down">↘ baissier</button></div><div style="display:flex;gap:6px;margin-bottom:10px"><input class="in" data-c="fl" value="'+esc(C.fl||'')+'" placeholder="creux (bas)" style="flex:1"><input class="in" data-c="fh" value="'+esc(C.fh||'')+'" placeholder="sommet (haut)" style="flex:1"></div>'+(rows||'<div class="mut" style="font-size:13px">Entre le creux et le sommet du mouvement : '+(up?'en haussier, les replis se mesurent depuis le sommet.':'en baissier, les rebonds se mesurent depuis le creux.')+'</div>')+'</div>';
+    return h;}
   function calcHtml(T,p){if(!p)return '<div class="mut">Ajoute une paire.</div>';var C=p.calc=p.calc||{};var pd=PIPDEF[p.sym]||{pip:/JPY/.test(p.sym)?.01:/XAU/.test(p.sym)?.1:.0001,val:10};
     if(C.pip==null)C.pip=pd.pip;if(C.pv==null)C.pv=pd.val;var Dc=null;try{Dc=window.__discipline?window.__discipline():null;}catch(x){}if(C.risk==null&&Dc)C.risk=Math.round(Dc.riskE);var d=cdec(p);
     var h='<div class="tk-meta">'+(FLAG[p.base]||'')+' '+esc(p.sym)+' · choisis la paire en haut · les résultats peuvent être ajoutés à tes niveaux clés</div><div class="tk-g">';
-    // Fibonacci
-    var hi=num(C.fh),lo=num(C.fl),up=C.fd!=='down',rows='';
-    if(hi!=null&&lo!=null&&hi>lo){var R=hi-lo,L=[[0,'0 %'],[.236,'23,6 %'],[.382,'38,2 %'],[.5,'50 %'],[.618,'61,8 %'],[.65,'65 %'],[.786,'78,6 %'],[1,'100 %'],[-.272,'ext. 127,2 %'],[-.618,'ext. 161,8 %']];
-      rows=L.map(function(l){var v=up?hi-R*l[0]:lo+R*l[0];var gold=l[0]===.618||l[0]===.65;return '<div class="lv"><span class="k '+(gold?'S':'')+'" style="min-width:70px">'+l[1]+'</span><span class="n">'+fnum(v,d)+'</span><button type="button" class="btn" data-fadd="'+v.toFixed(d).replace('.',',')+'|'+l[1]+'" style="margin-left:auto;padding:2px 9px">＋ niveau</button></div>';}).join('');}
-    h+='<div class="tk-c"><div class="tk-h"><b>Fibonacci</b><div class="x"><button type="button" class="btn" data-lesson="t3-IV-1">Leçon ›</button></div></div><div style="display:flex;gap:6px;margin-bottom:8px"><button type="button" class="chip '+(up?'up':'')+'" data-fd="up">↗ haussier</button><button type="button" class="chip '+(!up?'dn':'')+'" data-fd="down">↘ baissier</button></div><div style="display:flex;gap:6px;margin-bottom:10px"><input class="in" data-c="fl" value="'+esc(C.fl||'')+'" placeholder="creux (bas)" style="flex:1"><input class="in" data-c="fh" value="'+esc(C.fh||'')+'" placeholder="sommet (haut)" style="flex:1"></div>'+(rows||'<div class="mut" style="font-size:13px">Entre le creux et le sommet du mouvement : '+(up?'en haussier, les replis se mesurent depuis le sommet.':'en baissier, les rebonds se mesurent depuis le creux.')+'</div>')+'</div>';
     // Taille de position
     var en=num(C.en),sl=num(C.sl),atr=null,risk=num(C.risk),pip=num(C.pip),pv=num(C.pv),out='';
     if(en!=null&&sl!=null&&risk&&pip&&pv&&en!==sl){var dist=Math.abs(en-sl),pips=dist/pip,lots=risk/(pips*pv),tp2=en+(en>sl?1:-1)*dist*2;
@@ -19051,17 +19064,19 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
     return h+'</div>';}
   function render(){var host=document.getElementById('techRoot');if(!host)return;var T=store();if(!T)return;var p=T.pairs.find(function(x){return x.id===T.sel;});
     var focus=document.activeElement&&host.contains(document.activeElement)?document.activeElement.getAttribute('data-f'):null;
-    var h=navHtml(T)+subHtml(T);if(T.view==='plan')h+=p?planHtml(p):'<div class="mut">Ajoute une paire.</div>';else if(T.view==='ensemble')h+=ensembleHtml(T);else if(T.view==='routine')h+=routineHtml(T);else if(T.view==='calc')h+=calcHtml(T,p);else h+=tvHtml();
+    var h=navHtml(T)+subHtml(T);if(T.view==='plan')h+=p?planHtml(p):'<div class="mut">Ajoute une paire.</div>';else if(T.view==='ensemble')h+=ensembleHtml(T);else if(T.view==='routine')h+=routineHtml(T);
     host.innerHTML=h;if(focus){var f=host.querySelector('[data-f="'+focus+'"]');if(f){f.focus();try{f.setSelectionRange(f.value.length,f.value.length);}catch(e){}}}}
   function touch(p){p.upd=today();sv();}
   function cur(){var T=store();return T&&T.pairs.find(function(x){return x.id===T.sel;});}
 
   /* ---------- interactions ---------- */
   document.addEventListener('click',function(e){var host=document.getElementById('techRoot');if(!host||!host.contains(e.target))return;var t=e.target,T=store(),p=cur(),b;
+    if((b=t.closest('[data-tdel]'))){var dp=T.pairs.find(function(x){return x.id===b.dataset.tdel;});if(dp&&confirm('Supprimer '+dp.sym+' et son plan graphique ?')){T.pairs=T.pairs.filter(function(x){return x!==dp;});if(T.sel===dp.id)T.sel=T.pairs[0]&&T.pairs[0].id;sv();render();}return;}
     if((b=t.closest('[data-tp]'))){T.sel=b.dataset.tp;if(T.view!=='plan'&&T.view!=='routine')T.view='plan';sv();render();return;}
     if((b=t.closest('tr[data-p]'))){T.sel=b.dataset.p;T.view='plan';sv();render();scrollTo({top:0,behavior:'smooth'});return;}
     if((b=t.closest('[data-tv]'))){T.view=b.dataset.tv;sv();render();return;}
     if((b=t.closest('[data-go]'))){try{show(b.dataset.go);}catch(x){}return;}
+    if((b=t.closest('[data-patopen]'))){try{window.__frmOpenPat(b.dataset.patopen);}catch(x){}return;}
     if((b=t.closest('[data-lesson]'))){try{window.__frmOpenLesson&&window.__frmOpenLesson(b.dataset.lesson);}catch(x){}return;}
     if((b=t.closest('[data-fd]'))&&p){p.calc=p.calc||{};p.calc.fd=b.dataset.fd;sv();render();return;}
     if((b=t.closest('[data-fadd]'))&&p){var q=b.dataset.fadd.split('|');p.levels=p.levels||[];if(p.levels.some(function(l){return l.p===q[0];})){alertTip('Ce niveau est déjà dans ton plan.');return;}var pr0=num(p.price),v0=num(q[0]);p.levels.push({id:uid(),k:/pivot P$/.test(q[1])?'P':(pr0!=null&&v0!=null?(v0>pr0?'R':'S'):'P'),p:q[0],tf:'H4',n:(/pivot/.test(q[1])?q[1]:'Fibo '+q[1])});touch(p);alertTip('Ajouté aux niveaux clés de '+p.sym+' ✓');return;}
@@ -19073,7 +19088,7 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
       if(a==='del'&&p){if(!confirm('Supprimer '+p.sym+' et son plan graphique ?'))return;T.pairs=T.pairs.filter(function(x){return x.id!==p.id;});T.sel=T.pairs[0]&&T.pairs[0].id;sv();render();return;}}});
   function alertTip(m){try{if(typeof toast==='function')toast(m);}catch(e){}}
   document.addEventListener('change',function(e){var host=document.getElementById('techRoot');if(!host||!host.contains(e.target))return;var t=e.target,T=store(),p=cur();
-    if(t.dataset.pat&&p){var c=p.tf[t.dataset.pat]=p.tf[t.dataset.pat]||{};c.pat=t.value==='—'?'':t.value;touch(p);return;}
+    if(t.dataset.pat&&p){var c=p.tf[t.dataset.pat]=p.tf[t.dataset.pat]||{};c.pat=t.value==='—'?'':t.value;touch(p);render();return;}
     if(t.dataset.rt){var q=t.dataset.rt.split('|'),d=today();T.routine[d]=T.routine[d]||{};var r=T.routine[d][q[0]]=T.routine[d][q[0]]||{};r[q[1]]=t.checked;sv();render();return;}
     if(t.dataset.f&&p){p[t.dataset.f]=t.value;touch(p);if(t.dataset.f==='price'||t.dataset.f==='tv')render();}
     if(t.dataset.c&&p){p.calc=p.calc||{};p.calc[t.dataset.c]=t.value;sv();render();}});
@@ -19364,8 +19379,10 @@ html.nuit #todayRoot .cn{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3;-
 .cn-ev{display:flex;gap:10px;align-items:baseline;padding:6px 0;border-bottom:1px dotted var(--ln);font-size:13.5px}
 .cn-ev:last-child{border-bottom:none}
 .cn-ev .t{font-family:'IBM Plex Sans','Jost',sans-serif;min-width:44px;color:var(--mut)}
-.cn-ev .pt{width:14px;height:14px;border-radius:3px;border:1px solid var(--ln);cursor:pointer;flex:0 0 auto;align-self:center;padding:0;background:transparent}
-.cn-ev .pt.g{background:#5DBB63;border-color:#5DBB63}.cn-ev .pt.o{background:#F29A4B;border-color:#F29A4B}
+.cn-ev .pt{width:8px;height:8px;border-radius:50%;flex:0 0 auto;align-self:center;background:transparent;border:1px solid var(--ln)}
+.cn-ev.up .pt{background:var(--green);border-color:var(--green)}.cn-ev.dn .pt{background:var(--red);border-color:var(--red)}.cn-ev.nt .pt{background:#9a958c;border-color:#9a958c}
+.cn-ev.up .a{color:var(--green)}.cn-ev.dn .a{color:var(--red)}.cn-ev.nt .a{color:var(--mut)}
+.cn-ev .n{flex:1;min-width:0}
 .cn-ev .a{margin-left:auto;font-family:'IBM Plex Sans','Jost',sans-serif;white-space:nowrap}
 .cn-ck label{display:flex;gap:9px;align-items:center;padding:6px 0;border-bottom:1px dotted var(--ln);font-size:13.5px;cursor:pointer}
 .cn-ck label:last-child{border-bottom:none}
@@ -19488,12 +19505,12 @@ body[data-view="today"] #carnetHead{display:none!important}
     h+='<div class="cn-add">'+rc.map(function(s){return '<button type="button" class="chip" data-addp="'+s+'">＋ '+s+'</button>';}).join('')+'<button type="button" class="chip" data-a="addo">＋ autre…</button>'+(y&&y.pairs.length&&!D.pairs.length?'<button type="button" class="cn-btn dark" data-a="yday">Reprendre les paires d\'hier</button>':'')+'</div></div></div>';
     // colonne de droite
     var db=DB(),evs=db&&Array.isArray(db.events)?db.events.filter(function(e){return e&&e.date===k&&e.kind!=='news';}).sort(function(a,b){return (a.time||'99').localeCompare(b.time||'99');}):[];
-    h+='<div class="cn-side"><div class="cn-c"><div class="cn-h"><b>Calendrier du jour</b><div class="x"><button type="button" class="cn-btn" data-go="eco">Ouvrir ›</button></div></div>'+(evs.length?evs.map(function(e){var st=(D.ev||{})[e.id]||'',c=ccyOf(e);return '<div class="cn-ev"><button type="button" class="pt '+st+'" data-pt="'+esc(e.id)+'" title="Clic : vert = vu · orange = à surveiller"></button><span class="t">'+esc(e.time||'')+'</span><span>'+(c?c+' : ':'')+esc(String(e.title||'').split('\n')[0])+' <span style="color:var(--mut)">'+'★'.repeat(+e.imp||1)+'</span></span><span class="a">'+(e.actual?esc(e.actual):'')+'</span></div>';}).join(''):'<div style="font-size:13px;color:var(--mut)">Rien dans ton calendrier éco ce jour-là.</div>')+'</div>';
+    h+='<div class="cn-side"><div class="cn-c"><div class="cn-h"><b>Calendrier du jour</b><div class="x"><button type="button" class="cn-btn" data-go="eco">Ouvrir ›</button></div></div>'+(evs.length?evs.map(function(e){var c=ccyOf(e),sg=e.actual?(e.sign==='pos'?'up':e.sign==='neg'?'dn':'nt'):'';return '<div class="cn-ev '+sg+'"><span class="pt"></span><span class="t">'+esc(e.time||'')+'</span><span class="n">'+(c?c+' : ':'')+esc(String(e.title||'').split('\n')[0])+' <span style="color:var(--mut)">'+'★'.repeat(+e.imp||1)+'</span></span><span class="a">'+(e.actual?esc(e.actual):(e.forecast?'<span style="color:var(--mut)">'+esc(e.forecast)+'</span>':''))+'</span></div>';}).join(''):'<div style="font-size:13px;color:var(--mut)">Rien dans ton calendrier éco ce jour-là.</div>')+'</div>';
     h+='<div class="cn-c"><div class="cn-h"><b>Note du jour</b></div><textarea class="cn-in cn-ta" data-f="note" placeholder="Journée importante ? Discours, ambiance du marché, ce que tu retiens…">'+esc(D.note||'')+'</textarea></div>';
     h+='<div class="cn-c cn-ck"><div class="cn-h"><b>Check-list de séance</b><div class="x"><span style="font-size:12px;color:var(--mut)">'+cn+'/'+ck.items.length+'</span></div></div>'+ck.items.map(function(x,i){return '<label class="'+(ck.cs[i]?'on':'')+'"><input type="checkbox" data-tchk="'+i+'"'+(ck.cs[i]?' checked':'')+'><span>'+esc(x)+'</span></label>';}).join('')+'</div></div></div>';
     h+='<div class="cn-w" id="cnW"></div></div>';
     host.innerHTML=h;
-    if(!document.documentElement.classList.contains('ess')){try{var w=document.getElementById('cnW');if(window.__mt3Today){var P=(window.__macroData&&window.__macroData().home.mtPins)||{};if((P.today||[]).length){w.innerHTML='<div class="cn-h"><b>Mes widgets macro</b></div><div id="tdMacroW"></div>';window.__mt3Today(document.getElementById('tdMacroW'));}}}catch(x){}}
+    {try{var w=document.getElementById('cnW');if(window.__mt3Today){var P=(window.__macroData&&window.__macroData().home.mtPins)||{};if((P.today||[]).length){w.innerHTML='<div class="cn-h"><b>Mes widgets macro</b></div><div id="tdMacroW"></div>';window.__mt3Today(document.getElementById('tdMacroW'));}}}catch(x){}}
     if(focus&&(focus.f||focus.sc)){var sel=focus.pid?'[data-pid="'+focus.pid+'"] ':'';var el=host.querySelector(sel+(focus.f?'[data-f="'+focus.f+'"]':'[data-sc="'+focus.sc+'"]'));if(el){el.focus();try{el.setSelectionRange(focus.pos,focus.pos);}catch(x){}}}}
   function P0(el){var c=el.closest('[data-pid]');if(!c)return null;var D=day(cur,true);return D.pairs.find(function(x){return x.id===c.dataset.pid;});}
   function addPair(sym){sym=String(sym||'').trim().toUpperCase().replace(/\s/g,'');if(!sym)return;if(sym.indexOf('/')<0&&sym.length===6)sym=sym.slice(0,3)+'/'+sym.slice(3);var D=day(cur,true);if(D.pairs.some(function(p){return p.sym===sym;}))return;D.pairs.push({id:uid(),sym:sym,dir:'',txt:'',sc:[]});sv();render();}
@@ -19525,36 +19542,7 @@ body[data-view="today"] #carnetHead{display:none!important}
 })();
 </script>
 
-<style id="essStyle">
-/* ===== v111 : mode essentiel ===== */
-html.ess #tabsTop button[data-v="idees"],html.ess #tabsTop button[data-v="calendrier"],html.ess #tabsBottom button[data-v="idees"],html.ess #tabsBottom button[data-v="calendrier"]{display:none!important}
-html.ess #mt2Home,html.ess #cnW,html.ess #macroHomeExtras{display:none!important}
-html.ess #mxSub button[data-mxs="taux"],html.ess #mxSub button[data-mxs="widgets"],html.ess #mxNav button[data-mx="COMPARE"],html.ess #mxNav button[data-mx="WIDGETS"],html.ess #mxNav .mx-sep:last-of-type{display:none!important}
-html.ess #mxSub{--mx-n:2!important}
-html.ess #techRoot .tk-sub button[data-tv="routine"],html.ess #techRoot .tk-sub button[data-tv="calc"],html.ess #techRoot .tk-sub button[data-tv="tv"]{display:none!important}
-html.ess #techRoot .tk-sub{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-#essFab{border:1px solid #D3CCBC;background:transparent;color:inherit;border-radius:999px;height:34px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font:400 12.5px 'Jost',sans-serif;letter-spacing:.06em;flex:0 0 auto}
-#essFab i{font-style:normal;display:inline-block;width:22px;height:12px;border-radius:999px;background:rgba(128,128,128,.3);position:relative;transition:background .25s}
-#essFab i::after{content:'';position:absolute;top:2px;left:2px;width:8px;height:8px;border-radius:50%;background:#fff;transition:left .25s cubic-bezier(.22,1,.36,1)}
-html.ess #essFab i{background:var(--green,#2DB8A8)}html.ess #essFab i::after{left:12px}
-html.nuit #essFab{border-color:#45494d}
-@media (max-width:600px){#essFab span{display:none}#essFab{padding:0 8px}}
-</style>
-<script>
-/* ===== v111 : mode essentiel — cache ce qui ne sert pas au quotidien, sans rien supprimer ===== */
-(function(){
-  var html=document.documentElement;
-  function on(){try{return localStorage.getItem('mf_ess')!=='0';}catch(e){return true;}}
-  function apply(){html.classList.toggle('ess',on());fix();var f=document.getElementById('essFab');if(f)f.title=on()?'Mode essentiel activé : clic pour tout afficher':'Tout est affiché : clic pour le mode essentiel';}
-  function fix(){if(!on())return;try{var v=document.body.dataset.view;if(v==='idees'||v==='calendrier')show('today');}catch(e){}
-    var s=document.querySelector('#mxSub button.on');if(s&&/^(taux|widgets)$/.test(s.dataset.mxs)){var j=document.querySelector('#mxSub [data-mxs="jour"]');if(j)j.click();}
-    try{var d=window.__macroData&&window.__macroData();if(d&&(d.activeCurrency==='COMPARE'||d.activeCurrency==='WIDGETS')&&document.body.dataset.view==='macro')window.__mfGo('HOME');}catch(e){}
-    var t=document.querySelector('#techRoot .tk-sub button.on');if(t&&/^(routine|calc|tv)$/.test(t.dataset.tv)){var p=document.querySelector('#techRoot .tk-sub [data-tv="plan"]');if(p)p.click();}}
-  function fab(){var ac=document.querySelector('header.app .acct');if(!ac||document.getElementById('essFab'))return;var b=document.createElement('button');b.type='button';b.id='essFab';b.innerHTML='<i></i><span>Essentiel</span>';b.onclick=function(){try{localStorage.setItem('mf_ess',on()?'0':'1');}catch(e){}apply();try{window.__todayRender&&document.body.dataset.view==='today'&&window.__todayRender();}catch(e){}try{if(typeof toast==='function')toast(on()?'Mode essentiel : l\'app va à l\'essentiel':'Tout est affiché');}catch(e){}};ac.insertBefore(b,ac.firstChild);apply();}
-  apply();fab();setInterval(function(){fab();if(on())fix();},1200);
-  window.__ess={on:on,apply:apply};
-})();
-</script>
+<script>try{localStorage.removeItem('mf_ess');document.documentElement.classList.remove('ess');}catch(e){}</script>
 
 <style id="ta2Style">
 #frmRoot .ftext,#frmRoot .pp-p{white-space:pre-line;line-height:1.6}
@@ -19602,5 +19590,24 @@ html.nuit #frmRoot mark.hl{background:linear-gradient(transparent 12%,#2a5a3e 12
 })();
 </script>
 
+<style id="v112Style">
+/* v112 : en-tête de chaque onglet au format du Carnet du jour (petit libellé + date en léger) */
+body.sobre.entete .carnet-head{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:4px;max-width:none;margin:6px 0 16px;padding:0}
+#carnetSec{font-size:12px!important;font-weight:400!important;letter-spacing:.2em!important;text-transform:uppercase;color:#7A746A}
+#carnetSec::first-letter{font-family:inherit!important;font-size:inherit!important;line-height:inherit!important;margin:0!important;font-weight:inherit!important}
+#carnetDate{font-size:30px!important;letter-spacing:.01em!important;color:#1D1D1B!important;line-height:1.15}
+#carnetDate b{font-weight:300!important;color:inherit!important}
+html.nuit #carnetSec{color:#a3a9b3}html.nuit #carnetDate{color:#e4e5e5!important}
+.cn-top h2{font-size:30px}
+/* v112 : chiffres et textes alignés et centrés */
+body{font-variant-numeric:tabular-nums lining-nums}
+button,.btn,.crumb,.chip,.cn-btn,.mt3-pin button,.mxb,.cn-dir button,.ta-scn button,.an-scn button{display:inline-flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;vertical-align:middle}
+.mxb,#mxNav button,#mxSub button,.tk-pair,.tk-sub button,.fnav button,.td-k,.frm-link,.fc.fw-prog,#mxBrief .mxb{display:block;text-align:left}
+input,select{vertical-align:middle}
+.cn-ev,.cn-scr,.cn-ph,.lv,.se-ev,.mx-t{align-items:center!important}
+.cn-ev .t,.cn-ev .a,.lv .n,.lv .d,.cn-strip b,#mxBrief b,.mx-v,.yc-val,.mood-value,.kpi .val,td.n{font-variant-numeric:tabular-nums lining-nums}
+.cn-ev .a,.lv .d{text-align:right}
+table td,table th{vertical-align:middle}
+</style>
 </body>
 </html>
