@@ -18934,6 +18934,24 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
 #techRoot .tv h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;margin:14px 0 6px}
 #techRoot .tv h4:first-child{margin-top:0}
 #techRoot .tv code{font-family:'IBM Plex Sans',monospace;background:rgba(128,128,128,.1);padding:1px 5px;border-radius:3px}
+
+#techRoot .hs-list{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
+#techRoot .hs-i{flex:0 0 150px;display:flex!important;flex-direction:column;align-items:flex-start!important;gap:3px;text-align:left;border:1px solid var(--ln);background:transparent;color:inherit;border-radius:6px;padding:8px;cursor:pointer;font:inherit}
+#techRoot .hs-i:hover{border-color:var(--pk)}
+#techRoot .hs-i img,#techRoot .hs-ph{width:100%;height:76px;object-fit:cover;border-radius:4px;background:rgba(128,128,128,.1);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mut)}
+#techRoot .hs-i b{font-weight:500;font-size:13px}#techRoot .hs-i span{font-size:12px}#techRoot .hs-i small{font-size:11px;color:var(--mut)}
+.hs-ov{position:fixed;inset:0;z-index:10040;background:rgba(29,29,27,.45);display:flex;justify-content:center;align-items:flex-start;padding:5vh 14px;overflow:auto}
+.hs-box{background:#FBFAF6;color:#1D1D1B;border-radius:8px;max-width:900px;width:100%;padding:20px 22px;font-family:'Jost',sans-serif;font-size:13.5px;--ln:#D8D2C4;--mut:#7A746A}
+html.nuit .hs-box{background:#1d2737;color:#e4e5e5;--ln:#3a4558;--mut:#a3a9b3}
+.hs-box .tk-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}.hs-box .tk-h b{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding-bottom:6px;border-bottom:1.5px solid currentColor}.hs-box .x{margin-left:auto;display:flex;gap:6px}
+.hs-box .btn{border:1px solid var(--ln)!important;background:transparent!important;color:inherit!important;border-radius:999px;padding:5px 12px;cursor:pointer;font:inherit;font-size:12.5px}.hs-box .btn.dark{background:#1D1D1B;color:#FBFAF6;border-color:#1D1D1B}
+.hs-img{width:100%;border-radius:6px;margin-bottom:12px}
+.hs-paste{display:block;border:1.5px dashed var(--ln);border-radius:6px;padding:26px;text-align:center;color:var(--mut);cursor:pointer;margin-bottom:12px}
+.hs-g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.hs-g div{border:1px solid var(--ln);border-radius:6px;padding:8px 10px}.hs-g small,.hs-box p small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}.hs-g b{font-weight:400}
+.hs-box table{width:100%;border-collapse:collapse;margin-bottom:10px}.hs-box th{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:400;text-align:left;padding:4px 6px;border-bottom:1px solid var(--ln)}.hs-box td{padding:5px 6px;border-bottom:1px dotted var(--ln)}
+.hs-lv{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.hs-lv .k{border:1px solid var(--ln);border-radius:999px;padding:2px 9px;font-size:12px}.hs-lv .k.R{color:var(--red)}.hs-lv .k.S{color:var(--green)}
+.hs-box .up{color:var(--green)}.hs-box .dn{color:var(--red)}
+@media (max-width:700px){.hs-g{grid-template-columns:1fr 1fr}}
 </style>
 <script>
 /* ===== v108 : onglet « Analyse technique » — plan graphique par paire, relié à la Macro et au calendrier éco ===== */
@@ -19029,7 +19047,7 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
     h+='<div class="tk-c"><div class="tk-h"><b>Ce qui peut bouger la paire</b><div class="x"><button type="button" class="btn" data-go="eco">Calendrier éco ›</button></div></div>'+(ev.length?ev.map(function(e){var c=ccyOf(e);return '<div class="ev"><span class="t">'+esc(when(e))+'</span><span>'+(FLAG[c]||'')+' <b style="font-weight:500">'+esc(String(e.title||'').split('\n')[0])+'</b> '+'★'.repeat(+e.imp||1)+(e.forecast?' <span class="mut">· attendu '+esc(e.forecast)+'</span>':'')+(e.actual?' · <b>'+esc(e.actual)+'</b>':'')+'</span></div>';}).join(''):'<div class="mut" style="font-size:13px">Rien de ★★ ou ★★★ dans les 7 prochains jours pour '+esc(p.sym)+'.</div>')+'<div class="tk-tip">Avant une donnée ★★★ : pas d\'entrée dans les 15 minutes qui précèdent, ou stop élargi et taille réduite.</div></div>';
     // scénarios
     h+='<div class="tk-c s3 sc"><div class="tk-h"><b>Scénarios</b></div><label class="u">Scénario haussier · si…</label><textarea class="in" data-f="bull" placeholder="ex. cassure et clôture H4 au-dessus de 2 430 → objectif 2 455, entrée sur pullback en 30 min">'+esc(p.bull)+'</textarea><label class="d">Scénario baissier · si…</label><textarea class="in" data-f="bear" placeholder="ex. rejet sous 2 430 avec RSI qui diverge → retour vers 2 395">'+esc(p.bear)+'</textarea><label>Invalidation · je change d\'avis si…</label><textarea class="in" data-f="inval" placeholder="ex. clôture daily sous 2 380 : la tendance de fond casse">'+esc(p.inval)+'</textarea></div>';
-    h+='<div class="tk-c s3"><div class="tk-h"><b>Notes</b><div class="x"><button type="button" class="btn" data-ta="del">Supprimer la paire</button></div></div><textarea class="in" data-f="note" placeholder="Ce que tu vois sur le graphique, les patterns en formation, ce que tu attends…" style="min-height:90px">'+esc(p.note)+'</textarea><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><span class="mut" style="font-size:12px;align-self:center">Symbole TradingView</span><input class="in" data-f="tv" value="'+esc(p.tv)+'" style="width:170px"></div></div>';
+    h+=histHtml(p);h+='<div class="tk-c s3"><div class="tk-h"><b>Notes</b><div class="x"><button type="button" class="btn" data-ta="del">Supprimer la paire</button></div></div><textarea class="in" data-f="note" placeholder="Ce que tu vois sur le graphique, les patterns en formation, ce que tu attends…" style="min-height:90px">'+esc(p.note)+'</textarea><div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><span class="mut" style="font-size:12px;align-self:center">Symbole TradingView</span><input class="in" data-f="tv" value="'+esc(p.tv)+'" style="width:170px"></div></div>';
     h+='</div>';return h;}
   function ensembleHtml(T){var h='<div class="tk-g"><div class="tk-c s3"><div class="tk-h"><b>Toutes tes paires</b></div><table class="ov-t"><thead><tr><th>Paire</th><th>Prix</th>'+TFS.map(function(t){return '<th>'+t[0]+'</th>';}).join('')+'<th>Technique</th><th>Macro</th><th>Confluence</th><th>Plan</th></tr></thead><tbody>';
     T.pairs.forEach(function(p){var c=confl(p);h+='<tr data-p="'+p.id+'"><td>'+(FLAG[p.base]||'')+' '+esc(p.sym)+'</td><td class="mut">'+esc(p.price||'—')+'</td>'+TFS.map(function(t){var x=p.tf[t[0]]||{};return '<td class="'+(x.t==='up'?'up':x.t==='down'?'dn':'mut')+'">'+(x.t==='up'?'↗':x.t==='down'?'↘':x.t==='side'?'→':'·')+'</td>';}).join('')+'<td class="'+dirCls(c.t.v)+'">'+dirTxt(c.t.v)+'</td><td class="'+dirCls(c.m.v)+'">'+(c.m.v>0?'↗':c.m.v<0?'↘':'→')+'</td><td><span class="btn '+c.cls+'" style="cursor:default">'+c.st+'</span></td><td class="mut" style="font-size:12px">'+ago(p.upd)+'</td></tr>';});
@@ -19066,7 +19084,29 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
     var focus=document.activeElement&&host.contains(document.activeElement)?document.activeElement.getAttribute('data-f'):null;
     var h=navHtml(T)+subHtml(T);if(T.view==='plan')h+=p?planHtml(p):'<div class="mut">Ajoute une paire.</div>';else if(T.view==='ensemble')h+=ensembleHtml(T);else if(T.view==='routine')h+=routineHtml(T);
     host.innerHTML=h;if(focus){var f=host.querySelector('[data-f="'+focus+'"]');if(f){f.focus();try{f.setSelectionRange(f.value.length,f.value.length);}catch(e){}}}}
-  function touch(p){p.upd=today();sv();}
+  /* ---------- historique des lectures ---------- */
+  function snapOf(p,d){var c=confl(p);return {id:uid(),d:d||p.upd||today(),price:p.price||'',tf:JSON.parse(JSON.stringify(p.tf||{})),levels:JSON.parse(JSON.stringify(p.levels||[])),bull:p.bull||'',bear:p.bear||'',inval:p.inval||'',note:p.note||'',fib:p.calc?{fl:p.calc.fl||'',fh:p.calc.fh||'',fd:p.calc.fd||''}:null,st:c.st,tech:dirTxt(c.t.v),macro:c.m.txt,img:''};}
+  function hasContent(p){return !!(p.price||p.bull||p.bear||p.note||(p.levels||[]).length||TFS.some(function(t){var c=(p.tf||{})[t[0]]||{};return c.t||c.rsi||c.st||c.pat;}));}
+  function autoSnap(p){/* le premier changement d'une nouvelle journée archive la lecture précédente */if(!p.upd||p.upd===today()||!hasContent(p))return;p.hist=p.hist||[];if(p.hist.some(function(h){return h.d===p.upd;}))return;p.hist.unshift(snapOf(p,p.upd));if(p.hist.length>120)p.hist.length=120;}
+  function touch(p){autoSnap(p);p.upd=today();sv();}
+  function histHtml(p){var H=p.hist||[];return '<div class="tk-c s3"><div class="tk-h"><b>Historique des lectures</b><div class="x"><span class="mut" style="font-size:12px">'+H.length+' lecture'+(H.length>1?'s':'')+'</span><button type="button" class="btn dark" data-ta="snap">📸 Enregistrer la lecture du jour</button></div></div>'
+    +(H.length?'<div class="hs-list">'+H.map(function(h,i){var dd=h.d.split('-');return '<button type="button" class="hs-i" data-hs="'+i+'">'+(h.img?'<img src="'+h.img+'" alt="">':'<span class="hs-ph">'+esc(h.price||'—')+'</span>')+'<b>'+dd[2]+'/'+dd[1]+'/'+dd[0].slice(2)+'</b><span class="'+({alignés:'up','en conflit':'dn'}[h.st]||'mut')+'">'+esc(h.st)+'</span><small>'+esc(h.tech)+'</small></button>';}).join('')+'</div>':'<div class="mut" style="font-size:13px">Chaque lecture est archivée toute seule le lendemain, dès que tu modifies le plan. Le bouton 📸 l\'archive tout de suite, avec ta capture TradingView si tu en colles une.</div>')+'</div>';}
+  function hsView(p,i){var h=p.hist[i];if(!h)return;var ov=document.createElement('div');ov.className='hs-ov';var dd=h.d.split('-');
+    ov.innerHTML='<div class="hs-box"><div class="tk-h"><b>'+(FLAG[p.base]||'')+' '+esc(p.sym)+' · '+dd[2]+'/'+dd[1]+'/'+dd[0]+'</b><div class="x"><button type="button" class="btn" data-hx="del">Supprimer</button><button type="button" class="btn dark" data-hx="x">Fermer</button></div></div>'
+      +(h.img?'<img class="hs-img" src="'+h.img+'" alt="">':'<label class="hs-paste" tabindex="0">Colle ici ta capture TradingView (⌘V) ou <u>choisis un fichier</u><input type="file" accept="image/*" hidden></label>')
+      +'<div class="hs-g"><div><small>Prix</small><b>'+esc(h.price||'—')+'</b></div><div><small>Technique</small><b>'+esc(h.tech)+'</b></div><div><small>Macro</small><b>'+esc(h.macro||'—')+'</b></div><div><small>Confluence</small><b>'+esc(h.st)+'</b></div></div>'
+      +'<table class="mtf"><thead><tr><th>UT</th><th>Tendance</th><th>RSI</th><th>Stochastique</th><th>Pattern</th></tr></thead><tbody>'+TFS.map(function(t){var c=h.tf[t[0]]||{};return '<tr><td class="tf">'+t[1]+'</td><td>'+lbl(TREND,c.t)+'</td><td>'+lbl(RSI,c.rsi)+'</td><td>'+lbl(STO,c.st)+'</td><td>'+esc(c.pat||'—')+'</td></tr>';}).join('')+'</tbody></table>'
+      +(h.levels.length?'<div class="hs-lv">'+h.levels.map(function(l){return '<span class="k '+esc(l.k)+'">'+esc(l.k)+' '+esc(l.p)+'</span>';}).join('')+'</div>':'')
+      +(h.bull?'<p><small class="up">Haussier</small> '+esc(h.bull)+'</p>':'')+(h.bear?'<p><small class="dn">Baissier</small> '+esc(h.bear)+'</p>':'')+(h.inval?'<p><small>Invalidation</small> '+esc(h.inval)+'</p>':'')+(h.note?'<p><small>Notes</small> '+esc(h.note)+'</p>':'')
+      +'<div class="tk-h" style="margin-top:14px"><b>Avec le recul</b></div><textarea class="in" data-hr style="width:100%;min-height:60px" placeholder="Ce qui s\'est vraiment passé ensuite, ce que je retiens…">'+esc(h.rev||'')+'</textarea></div>';
+    document.body.appendChild(ov);
+    function close(){ov.remove();document.removeEventListener('paste',onPaste);render();}
+    function setImg(file){if(!file||!/^image/.test(file.type))return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,1400/im.width),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);h.img=c.toDataURL('image/jpeg',.72);sv();close();hsView(p,i);};im.src=r.result;};r.readAsDataURL(file);}
+    function onPaste(e){var it=[].slice.call((e.clipboardData||{}).items||[]).find(function(x){return /^image/.test(x.type);});if(it){e.preventDefault();setImg(it.getAsFile());}}
+    document.addEventListener('paste',onPaste);
+    var fi=ov.querySelector('input[type=file]');if(fi)fi.onchange=function(){setImg(fi.files[0]);};
+    var ta=ov.querySelector('[data-hr]');ta.oninput=function(){h.rev=ta.value;clearTimeout(ta.__t);ta.__t=setTimeout(sv,500);};
+    ov.addEventListener('click',function(e){if(e.target===ov){close();return;}var b=e.target.closest('[data-hx]');if(!b)return;if(b.dataset.hx==='x')close();if(b.dataset.hx==='del'&&confirm('Supprimer cette lecture ?')){p.hist.splice(i,1);sv();close();}});}
   function cur(){var T=store();return T&&T.pairs.find(function(x){return x.id===T.sel;});}
 
   /* ---------- interactions ---------- */
@@ -19076,6 +19116,7 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
     if((b=t.closest('tr[data-p]'))){T.sel=b.dataset.p;T.view='plan';sv();render();scrollTo({top:0,behavior:'smooth'});return;}
     if((b=t.closest('[data-tv]'))){T.view=b.dataset.tv;sv();render();return;}
     if((b=t.closest('[data-go]'))){try{show(b.dataset.go);}catch(x){}return;}
+    if((b=t.closest('[data-hs]'))&&p){hsView(p,+b.dataset.hs);return;}
     if((b=t.closest('[data-patopen]'))){try{window.__frmOpenPat(b.dataset.patopen);}catch(x){}return;}
     if((b=t.closest('[data-lesson]'))){try{window.__frmOpenLesson&&window.__frmOpenLesson(b.dataset.lesson);}catch(x){}return;}
     if((b=t.closest('[data-fd]'))&&p){p.calc=p.calc||{};p.calc.fd=b.dataset.fd;sv();render();return;}
@@ -19085,6 +19126,7 @@ html.nuit #techRoot{--fi:#1d2737;--ln:#3a4558;--ink:#e4e5e5;--mut:#a3a9b3}
     if((b=t.closest('[data-ta]'))){var a=b.dataset.ta;
       if(a==='lv'&&p){var v=(document.getElementById('lvP')||{}).value;if(!v||num(v)==null){alertTip('Indique un niveau en chiffres.');return;}p.levels=p.levels||[];p.levels.push({id:uid(),k:document.getElementById('lvK').value,p:v.trim(),tf:document.getElementById('lvT').value,n:(document.getElementById('lvN').value||'').trim()});touch(p);render();return;}
       if(a==='add'){var s=prompt('Nouvelle paire (ex. EUR/USD, GBP/JPY, XAU/USD) :');if(!s)return;s=s.trim().toUpperCase().replace(/\s/g,'');if(!/^[A-Z]{3}\/?[A-Z]{3}$/.test(s)){alertTip('Format attendu : EUR/USD');return;}if(s.indexOf('/')<0)s=s.slice(0,3)+'/'+s.slice(3);var np=newPair(s);T.pairs.push(np);T.sel=np.id;T.view='plan';sv();render();return;}
+      if(a==='snap'&&p){p.hist=p.hist||[];var td=today(),k=p.hist.findIndex(function(h){return h.d===td;}),s=snapOf(p,td);if(k>=0){s.img=p.hist[k].img;s.rev=p.hist[k].rev;p.hist[k]=s;}else p.hist.unshift(s);p.upd=td;sv();render();hsView(p,k>=0?k:0);return;}
       if(a==='del'&&p){if(!confirm('Supprimer '+p.sym+' et son plan graphique ?'))return;T.pairs=T.pairs.filter(function(x){return x.id!==p.id;});T.sel=T.pairs[0]&&T.pairs[0].id;sv();render();return;}}});
   function alertTip(m){try{if(typeof toast==='function')toast(m);}catch(e){}}
   document.addEventListener('change',function(e){var host=document.getElementById('techRoot');if(!host||!host.contains(e.target))return;var t=e.target,T=store(),p=cur();
