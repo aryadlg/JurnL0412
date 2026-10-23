@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script>/* réparation 24/10 : remet la disposition des fenêtres par défaut, une seule fois (copie gardée dans mf_layout_backup_2410) */try{if(!localStorage.getItem('mf_fix_2410')){var __l=localStorage.getItem('mf_layout_v1');if(__l!=null){try{localStorage.setItem('mf_layout_backup_2410',__l);}catch(e){}localStorage.removeItem('mf_layout_v1');}localStorage.setItem('mf_fix_2410','1');}}catch(e){}</script>
+<head><script>/* réparation 24/10 : remet la disposition des fenêtres par défaut, une seule fois (copie gardée dans mf_layout_backup_2410) */try{if(!localStorage.getItem('mf_fix_2410')){var __l=localStorage.getItem('mf_layout_v1');if(__l!=null){try{localStorage.setItem('mf_layout_backup_2410',__l);}catch(e){}localStorage.removeItem('mf_layout_v1');}localStorage.setItem('mf_fix_2410','1');}}catch(e){}try{/* l'app plantait au démarrage quand elle avait été fermée sur la page Or : on redémarre toujours sur l'Accueil Macro */var __m=localStorage.getItem('macro_dashboard_v2');if(__m&&__m.indexOf('"activeCurrency":"XAU"')>=0){var __o=JSON.parse(__m);__o.activeCurrency='HOME';localStorage.setItem('macro_dashboard_v2',JSON.stringify(__o));}}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#f7f2fb">
