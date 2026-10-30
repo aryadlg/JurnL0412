@@ -21086,8 +21086,8 @@ html.v10on:not(.nuit) #macroRoot .card .card{background:#EDE7E0!important}
     if(p[0]==='ind'){if(p[1]==='y10'){var b=document.querySelector('#mxSub [data-mxs="taux"]');if(b)b.click();return;}S.edit=p[1]==='brent'?'mk:wti':'mood:'+p[1];render(true);return;}
     if(p[0]==='mk'||p[0]==='plan'||code==='fx'||code==='risk'){S.edit=code;render(true);return;}
     editAny(code,sel());}
-  function saveInl(code,val,k){k=k||sel();var p=code.split(':'),h=H();
-    if(p[0]==='mood'){var v=String(val||'').replace(/[\s ]/g,'').replace(',','.');if(!v)return;h.mood=h.mood||{};h.mood[p[1]]={value:v,updated:k,time:''};msv();}
+  function saveInl(code,val,k){var ex=!!k;k=k||sel();var p=code.split(':'),h=H();
+    if(p[0]==='mood'){var v=String(val||'').replace(/[\s ]/g,'').replace(',','.');if(!v)return;if(ex&&k<today()&&(H().history||[]).some(function(x){return x.date===k;})){var se=snapEntry(k);se.mood[p[1]]=v;se.mood[p[1]+'D']=k;}else{h.mood=h.mood||{};h.mood[p[1]]={value:v,updated:k,time:''};}msv();}
     else if(p[0]==='mk'){h.markets=h.markets||{};h.markets[p[1]]=h.markets[p[1]]||{};h.markets[p[1]].note=val;msv();}
     else if(p[0]==='plan'){var P=sheet(k,true);P[p[1]]=val;P.saved=new Date().toISOString();sv();}
     else if(code==='fx'){h.dailyFx=val;msv();}
@@ -21181,12 +21181,14 @@ html.v10on:not(.nuit) #macroRoot .card .card{background:#EDE7E0!important}
   function stageTxt(sym,tab){var n=cnt(sym,tab);return n?STG[stageN(n)]:'—';}
 
   /* ---------- morceaux ---------- */
-  function heroHtml(k){var I=window.__v9Indicators?window.__v9Indicators(V()?V().today():today()):null;if(!I)return '';
+  /* le bandeau d'une page = l'accueil de la veille au soir (ou les valeurs en cours pour la prochaine séance) */
+  function heroDay(k){var td=V()?V().today():today();if(k>td)return td;var hs=hist().filter(function(e){return e.date<k;});return hs.length?hs[hs.length-1].date:td;}
+  function heroHtml(k){var src=heroDay(k),I=window.__v9Indicators?window.__v9Indicators(src):null;if(!I)return '';
     var vz=isNaN(I.vix)?'':I.vix<20?'calme':I.vix<25?'tendu':'peur',fz=isNaN(I.fng)?'':I.fng<25?'peur extrême':I.fng<45?'peur':I.fng<55?'neutre':'avidité';
     var dch=(!isNaN(I.dxy)&&!isNaN(I.dxyP))?(I.dxy/I.dxyP-1)*100:NaN,yd=I.y10-I.y10P,RS={on:['Risk ON',UP],neu:['Neutre',NT],off:['Risk OFF',DN]},r=RS[I.risk]||['—',NT];
-    var raw=function(x){var m=M(),v=m&&m.home&&m.home.mood&&m.home.mood[x];return v&&v.value!=null?String(v.value).replace('.',','):'';};
+    var raw=function(x){var n={vix:I.vix,fng:I.fng,dxy:I.dxy}[x];return n==null||isNaN(n)?'':String(n).replace('.',',');};
     var X=[['VIX',fr(I.vix,1),(isNaN(I.vixP)?'':'veille '+fr(I.vixP,1)+' · ')+vz,I.vix<20?UP:DN,'mood:vix'],['Fear & Greed',fr(I.fng,0),(isNaN(I.fngP)?'':'veille '+fr(I.fngP,0)+' · ')+fz,I.fng<45?DN:I.fng>55?UP:NT,'mood:fng'],['DXY',fr(I.dxy,2),isNaN(dch)?'':sgn(dch),dch>0?UP:dch<0?DN:NT,'mood:dxy'],['10 ans US',isNaN(I.y10)?'—':fr(I.y10,2)+' %',(isNaN(I.y2)?'':'2 ans '+fr(I.y2,2)+' % · ')+(isNaN(yd)?'':Math.abs(yd)<0.015?'stable':(yd>0?'+':'−')+fr(Math.abs(yd),2)+' pt'),NT,'go'],['Brent',isNaN(I.brent)?'—':fr(I.brent,1)+' $',(isNaN(I.brentChg)?'':sgn(I.brentChg,1)+' · ')+(isNaN(I.wti)?'':'WTI '+fr(I.wti,1)+' $'),I.brentChg<0?DN:UP,'go'],['Or',isNaN(I.gold.v)?'—':fr(I.gold.v,0)+' $',isNaN(I.gold.chg)?'':sgn(I.gold.chg,1),I.gold.chg>0?UP:I.gold.chg<0?DN:NT,'go'],['Risque du jour',r[0],'clique pour changer',r[1],'risk']];
-    return '<section class="v9c c9-hero v9-rise" aria-label="Indicateurs de marché"><div class="v9-hd"><span class="lbl">Indicateurs de marché</span><span class="mut sm">'+(I.upd?'maj '+dd(I.upd):'')+'</span></div><div class="c9-hg">'+X.map(function(x){var ed=cEd===x[4];return '<div class="c9-hi v9-click" data-c9i="'+x[4]+'"><div class="lbl">'+x[0]+'</div>'+(ed?'<input class="v9-inl c9-inl" data-c9inl="'+x[4]+'" value="'+esc(raw(x[4].split(':')[1]))+'" inputmode="decimal">':'<div class="c9-hv">'+esc(x[1])+'</div>')+'<div class="sm" style="color:'+x[3]+'">'+esc(x[2])+'</div></div>';}).join('')+'</div></section>';}
+    return '<section class="v9c c9-hero v9-rise" aria-label="Indicateurs de marché"><div class="v9-hd"><span class="lbl">Indicateurs de marché</span><span class="mut sm">accueil du '+dd(src)+(I.upd?' · maj '+dd(I.upd):'')+'</span></div><div class="c9-hg">'+X.map(function(x){var ed=cEd===x[4];return '<div class="c9-hi v9-click" data-c9i="'+x[4]+'"><div class="lbl">'+x[0]+'</div>'+(ed?'<input class="v9-inl c9-inl" data-c9inl="'+x[4]+'" data-c9d="'+src+'" value="'+esc(raw(x[4].split(':')[1]))+'" inputmode="decimal">':'<div class="c9-hv">'+esc(x[1])+'</div>')+'<div class="sm" style="color:'+x[3]+'">'+esc(x[2])+'</div></div>';}).join('')+'</div></section>';}
   function splitHead(t){t=String(t||'').trim();var m=t.match(/^([^.:!?\n]{6,80})[:.]\s+([\s\S]+)$/);return m?{h:m[1].charAt(0).toUpperCase()+m[1].slice(1),t:m[2]}:{h:'',t:t};}
   function short(t,n){t=String(t||'').replace(/\s+/g,' ').trim();return t.length>n?t.slice(0,n-1).replace(/\s+\S*$/,'')+'…':t;}
   function planHtml(k){var pd=planDay(k)||(V()?V().nextTD(k,-1):k),db=DB(),P=(db.sheets&&db.sheets[pd])||{};
@@ -21298,7 +21300,7 @@ html.v10on:not(.nuit) #macroRoot .card .card{background:#EDE7E0!important}
     var inner=t.closest('button,a,input,textarea');
     if((b=t.closest('[data-c9i]'))&&(!inner||!b.contains(inner))){var ci=b.dataset.c9i;
       if(ci==='go'){try{show('macro');window.__mfGo&&window.__mfGo('HOME');}catch(x){}return;}
-      if(ci==='risk'){try{var td=V()?V().today():today(),I=window.__v9Indicators(td),nx={on:'neu',neu:'off',off:'on'}[I.risk]||'on';window.__v9RiskSet(td,nx);}catch(x){}render();return;}
+      if(ci==='risk'){try{var td=heroDay(cur),I=window.__v9Indicators(td),nx={on:'neu',neu:'off',off:'on'}[I.risk]||'on';window.__v9RiskSet(td,nx);}catch(x){}render();return;}
       cEd=ci;render();return;}
     if((b=t.closest('[data-c9e]'))&&(!inner||inner===b||!b.contains(inner))){try{window.__v9Edit&&window.__v9Edit(b.dataset.c9e,b.dataset.c9ed);}catch(x){}return;}
     if((b=t.closest('[data-c9x]'))&&(!inner||!b.contains(inner))){var x=b.dataset.c9x,Pc=P0(b);
