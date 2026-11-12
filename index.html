@@ -5848,6 +5848,27 @@ html.v10on #v12Journal .v12-fdots,.v12-fdots{position:absolute;z-index:3;width:1
 html.nuit .v12-fdots i{box-shadow:0 0 0 1.5px #1d2737}html.nuit .v12-fdots.sel i{box-shadow:0 0 0 1.5px #1d2737,0 0 0 3px #e4e5e5}html.nuit .v12-fdots b{color:#b8b3ab}
 .v12-segs{display:none!important}
 
+/* v131.7 · Calendrier éco : les actus prennent toute la largeur et se lisent comme une fiche */
+html.v10on section[data-view="eco"] .eco-item.news{grid-template-columns:52px minmax(0,1fr) auto auto;grid-template-areas:"t x s a" "t o o o" "t i i i"}
+html.v10on section[data-view="eco"] .eco-item.news>.t{grid-area:t}
+html.v10on section[data-view="eco"] .eco-item.news>.ttl{grid-area:x;white-space:normal;max-width:78ch}
+html.v10on section[data-view="eco"] .eco-item.news>.src{grid-area:o;font-size:12px}
+html.v10on section[data-view="eco"] .eco-item.news>.src:empty{display:none}
+html.v10on section[data-view="eco"] .eco-item.news>.stars{grid-area:s}
+html.v10on section[data-view="eco"] .eco-item.news>.ecoacts{grid-area:a}
+html.v10on section[data-view="eco"] .eco-item.news>.eco-thumb{grid-area:i;max-width:260px}
+html.v10on section[data-view="eco"] .eco-item.news .nw-h{display:block;font-weight:600;font-size:15px;line-height:1.4;margin-bottom:6px}
+html.v10on section[data-view="eco"] .eco-item.news .nw-l{display:block;position:relative;padding-left:14px;font-weight:400;font-size:14px;line-height:1.5;margin:2px 0;color:#3a3633}
+html.v10on section[data-view="eco"] .eco-item.news .nw-l::before{content:"";position:absolute;left:2px;top:.65em;width:5px;height:5px;border-radius:50%;background:#B9AE9F}
+html.v10on section[data-view="eco"] .eco-item.news .nw-c{display:block;margin-top:8px;padding:8px 12px;border-left:3px solid #C2477A;background:rgba(194,71,122,.06);border-radius:0 6px 6px 0;font-weight:400;font-size:14px;line-height:1.5}
+html.v10on section[data-view="eco"] .eco-item.news .nw-c b{font-weight:600;margin-right:6px}
+html.nuit.v10on section[data-view="eco"] .eco-item.news .nw-l{color:#c9ccd2}
+html.nuit.v10on section[data-view="eco"] .eco-item.news .nw-l::before{background:#5b6578}
+html.nuit.v10on section[data-view="eco"] .eco-item.news .nw-c{background:rgba(194,71,122,.12)}
+@media (max-width:700px){
+html.v10on section[data-view="eco"] .eco-item.news{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"t s a" "x x x" "o o o" "i i i"}
+}
+
 </style>
 </head>
 <body>
@@ -6606,7 +6627,7 @@ html.nuit .v12-fdots i{box-shadow:0 0 0 1.5px #1d2737}html.nuit .v12-fdots.sel i
   </details>
 
   <footer>
-    Outil personnel de suivi macro — usage informatif uniquement, ne constitue pas un conseil en investissement. Données saisies manuellement à partir des publications officielles. <b id="appVersion">· version v131.6</b>
+    Outil personnel de suivi macro — usage informatif uniquement, ne constitue pas un conseil en investissement. Données saisies manuellement à partir des publications officielles. <b id="appVersion">· version v131.7</b>
   </footer>
 
 </div>
@@ -22147,7 +22168,12 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(do
 /* v131.4 : étoiles d'importance en couleur (★ jaune, ★★ orange, ★★★ rouge) partout dans le fil éco */
 (function(){
   function tag(){var s=document.querySelector('section[data-view="eco"]');if(!s)return;var db=null;try{db=window.__getDB?window.__getDB():null;}catch(e){}if(!db)return;var by={};(db.events||[]).forEach(function(e){if(e&&e.id)by[e.id]=e;});
-    [].forEach.call(s.querySelectorAll('.eco-item[data-id]'),function(it){var e=by[it.dataset.id],n=e?(+e.imp||1):0;if(it.dataset.imp!==String(n))it.dataset.imp=String(n);var st=it.querySelector('.stars');if(st&&e){var h='<b>'+'★'.repeat(n)+'</b>'+'★'.repeat(3-n);if(st.__h!==h){st.innerHTML=h;st.__h=h;}}});}
+    [].forEach.call(s.querySelectorAll('.eco-item[data-id]'),function(it){var e=by[it.dataset.id],n=e?(+e.imp||1):0;if(it.dataset.imp!==String(n))it.dataset.imp=String(n);if(e&&it.classList.contains('news'))newsFmt(it,e);var st=it.querySelector('.stars');if(st&&e){var h='<b>'+'★'.repeat(n)+'</b>'+'★'.repeat(3-n);if(st.__h!==h){st.innerHTML=h;st.__h=h;}}});}
+  /* v131.7 : une actu se lit comme une fiche — 1re ligne en titre, les points en dessous, « En clair » mis à part */
+  function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function newsFmt(it,e){var t=it.querySelector('.ttl');if(!t)return;var L=String(e.title||'').split(/\n+/).map(function(x){return x.trim();}).filter(Boolean);if(!L.length)return;
+    var h='<span class="nw-h">'+esc(L[0])+'</span>';for(var i=1;i<L.length;i++){var m=/^en clair\s*:\s*/i.exec(L[i]);h+=m?'<span class="nw-c"><b>En clair</b>'+esc(L[i].slice(m[0].length))+'</span>':'<span class="nw-l">'+esc(L[i])+'</span>';}
+    if(t.__h!==h){t.innerHTML=h;t.__h=h;}}
   function go(){var s=document.querySelector('section[data-view="eco"]');if(!s){setTimeout(go,500);return;}new MutationObserver(function(){if(go.__t)return;go.__t=setTimeout(function(){go.__t=0;try{tag();}catch(e){}},0);}).observe(s,{childList:true,subtree:true});tag();}
   go();
 })();
