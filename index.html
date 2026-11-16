@@ -7041,7 +7041,7 @@ html.nuit .v12-f5:not(.last) p{color:#c9ccd1}html.nuit .v12-f5{border-top-color:
   </details>
 
   <footer>
-    Outil personnel de suivi macro — usage informatif uniquement, ne constitue pas un conseil en investissement. Données saisies manuellement à partir des publications officielles. <b id="appVersion">· version v134</b>
+    Outil personnel de suivi macro — usage informatif uniquement, ne constitue pas un conseil en investissement. Données saisies manuellement à partir des publications officielles. <b id="appVersion">· version v134.2</b>
   </footer>
 
 </div>
@@ -12832,9 +12832,22 @@ function setActiveView(){
 
 function goToCurrency(id){
   data.activeCurrency = id;
-  saveData();
+  /* comme avant : chaque devise ouverte garde sa photo du jour (prise au moment de la sauvegarde groupée) */
+  goToCurrency._v = goToCurrency._v || [];
+  if(goToCurrency._v.indexOf(id) < 0) goToCurrency._v.push(id);
+  clearTimeout(goToCurrency._t);
+  goToCurrency._t = setTimeout(goToCurrencyFlush, 500);
   renderAll();
 }
+function goToCurrencyFlush(){
+  if(!goToCurrency._t && !(goToCurrency._v && goToCurrency._v.length)) return;
+  clearTimeout(goToCurrency._t); goToCurrency._t = null;
+  var vis = goToCurrency._v || []; goToCurrency._v = [];
+  try{ vis.forEach(function(c){ if(c !== data.activeCurrency && data.currencies && data.currencies[c] && typeof mfSnapshot === 'function') mfSnapshot(c); }); }catch(e){}
+  try{ saveData(); }catch(e){}
+}
+window.addEventListener('pagehide', goToCurrencyFlush);
+document.addEventListener('visibilitychange', function(){ if(document.hidden) goToCurrencyFlush(); });
 
 function renderHomeFreeText(){
   const h = data.home;
@@ -13583,11 +13596,12 @@ function mfNum(s){if(s==null)return NaN;var m=(''+s).replace(/\s/g,'').match(/-?
 function mfISO(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function mfTodayISO(){return mfISO(new Date());}
 /* v128 : date et heure de Paris, et « journée de l'accueil » (finit à 6 h du matin) */
-function mfParisISO(){try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Paris'}).format(new Date());}catch(e){return mfTodayISO();}}
+var __mfFmtD=null,__mfFmtH=null,__mfMemo={t:0,iso:'',sd:''};function __mfFmt(){if(!__mfFmtD){try{__mfFmtD=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Paris'});__mfFmtH=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Paris',hour:'2-digit',hourCycle:'h23'});}catch(e){}}}
+function mfParisISO(){var n=Date.now();if(n-__mfMemo.t<1000&&__mfMemo.iso)return __mfMemo.iso;try{__mfFmt();var v=__mfFmtD.format(new Date(n));__mfMemo.iso=v;__mfMemo.t=n;__mfMemo.sd='';return v;}catch(e){return mfTodayISO();}}
 function mfParisHM(){try{return new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',hour:'2-digit',minute:'2-digit'}).format(new Date()).replace(':','h');}catch(e){return '';}}
-function mfSessionDay(){try{var f=JSON.parse(sessionStorage.getItem('mf_force_day')||'null');if(f&&f.day&&f.until>Date.now())return f.day;}catch(e){}var d=mfParisISO();var h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Paris',hour:'2-digit',hourCycle:'h23'}).format(new Date());if(h<6){var x=new Date(d+'T12:00:00');x.setDate(x.getDate()-1);d=mfISO(x);}return d;}
+function mfSessionDay(){try{var f=JSON.parse(sessionStorage.getItem('mf_force_day')||'null');if(f&&f.day&&f.until>Date.now())return f.day;}catch(e){}var d=mfParisISO();if(__mfMemo.sd&&Date.now()-__mfMemo.t<1000)return __mfMemo.sd;__mfFmt();var h=+__mfFmtH.format(new Date());if(h<6){var x=new Date(d+'T12:00:00');x.setDate(x.getDate()-1);d=mfISO(x);}__mfMemo.sd=d;return d;}
 window.__mfSessionDay=mfSessionDay;window.mfParisHM=mfParisHM;window.mfParisISO=mfParisISO;
-function mfDateShort(iso){try{return new Date(iso+'T00:00').toLocaleDateString('fr-FR',{day:'numeric',month:'short'});}catch(e){return iso||'';}}
+var __mfFmtS=null;function mfDateShort(iso){try{if(!__mfFmtS)__mfFmtS=new Intl.DateTimeFormat('fr-FR',{day:'numeric',month:'short'});return __mfFmtS.format(new Date(iso+'T00:00'));}catch(e){return iso||'';}}
 function mfDateFull(iso){try{var s=new Date(iso+'T00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});return s.charAt(0).toUpperCase()+s.slice(1);}catch(e){return iso||'';}}
 function mfMonday(d){var dow=(d.getDay()+6)%7;return new Date(d.getFullYear(),d.getMonth(),d.getDate()-dow);}
 function mfMoney(n){if(n===''||n==null||isNaN(n))return '–';return (n<0?'-':'')+'€'+Math.abs(n).toLocaleString('fr-FR',{minimumFractionDigits:0,maximumFractionDigits:0});}
@@ -14048,6 +14062,8 @@ function mfNoteDate(p,fallback){var m=String(p).match(/^\s*(\d{1,2})\/(\d{1,2})(
 function mfNoteNorm(t){return String(t||'').replace(/\s+/g,' ').trim().toLowerCase();}
 function mfNotesSync(){try{var C=data.currencies||{};Object.keys(C).forEach(function(c){var X=C[c];if(!Array.isArray(X.notesLog))X.notesLog=[];var seen={};X.notesLog.forEach(function(n){seen[n.k+'|'+mfNoteNorm(n.t)]=1;});
       MF_NOTE_KEYS.forEach(function(k){mfNoteParas(X[k]).forEach(function(p){var key=k+'|'+mfNoteNorm(p);if(seen[key])return;seen[key]=1;X.notesLog.push({id:'n'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),k:k,d:mfNoteDate(p,X.lastUpdated||mfSessionDay()),t:p,at:new Date().toISOString()});});});});}catch(e){}}
+var __mfNSraw=mfNotesSync;function __mfNSsig(){var C=data.currencies||{},s='';for(var c in C){var X=C[c]||{};s+=c+'\u0001'+(X.theme||'')+'\u0001'+(X.strengths||'')+'\u0001'+(X.weaknesses||'')+'\u0001'+((X.notesLog||[]).length)+'\u0002';}return s;}
+mfNotesSync=function(){var s=__mfNSsig();if(s===mfNotesSync._s)return;__mfNSraw();mfNotesSync._s=__mfNSsig();};
 window.__mfNotesSync=mfNotesSync;
 function mfNoteAdd(c,k,txt,day){var X=data.currencies&&data.currencies[c];if(!X||!txt)return;txt=String(txt).trim();var dd=day.slice(8,10)+'/'+day.slice(5,7);if(!/^\s*\d{1,2}\/\d{1,2}\s*[:：]/.test(txt))txt=dd+' : '+txt;
   var paras=mfNoteParas(X[k]);if(paras.some(function(p){return mfNoteNorm(p)===mfNoteNorm(txt);}))return;paras.unshift(txt);
@@ -18638,7 +18654,7 @@ window.__frmRender=render;window.__frmOpen=open;window.__frmLesson=function(id){
     else{var t0=c.querySelector('#dwSpTxt');if(t0)t0.textContent=kb(total)+' utilisés';}
     try{var si=document.getElementById('storageInfo');if(si){var blk=si.closest('div[style*="margin-top:14px"]');if(blk)blk.style.display='none';}}catch(e){}
     var first=sec.querySelector('.card');sec.insertBefore(c,first?first.nextSibling:null);}
-  if(typeof window.show==='function'){var _s=window.show;window.show=function(v){var r=_s.apply(this,arguments);if(v==='reglages')setTimeout(weightCard,30);setTimeout(addLinks,60);return r;};}
+  if(typeof window.show==='function'){var _s=window.show;window.show=function(v){var r=_s.apply(this,arguments);if(v==='reglages')setTimeout(function(){var sec=document.querySelector('section[data-view="reglages"]');if(!sec||document.getElementById('dataWeight'))return;var c=document.createElement('div');c.className='card';c.id='dataWeight';c.innerHTML='<div class="group-title">Poids des données</div><button type="button" class="btn-ghost btn-mini" style="margin-top:10px">Calculer le poids de mes données</button>';c.querySelector('button').onclick=function(){this.textContent='Calcul…';setTimeout(weightCard,30);};var first=sec.querySelector('.card');sec.insertBefore(c,first?first.nextSibling:null);},30);setTimeout(addLinks,60);return r;};}
 })();
 </script>
 <script>
@@ -20225,7 +20241,7 @@ html.nuit #moNight{border-color:#45494d}
 
   /* pages devise du Macro : cascade quand on change de devise */
   function hookMacro(){var mr=document.getElementById('macroRoot');if(!mr||mr.__mo)return;mr.__mo=1;var c=mr.dataset.ccy;
-    new MutationObserver(function(){if(mr.dataset.ccy===c)return;c=mr.dataset.ccy;if(mr.offsetParent!==null)setTimeout(function(){cascade(mr);},20);}).observe(mr,{attributes:true,attributeFilter:['data-ccy']});}
+    new MutationObserver(function(){if(mr.dataset.ccy===c)return;c=mr.dataset.ccy;setTimeout(function(){if(mr.offsetParent!==null)cascade(mr);},20);}).observe(mr,{attributes:true,attributeFilter:['data-ccy']});}
 
   /* ---------- ce qu'on vient d'activer rebondit ---------- */
   function desc(el){var sel=el.tagName.toLowerCase();[].forEach.call(el.attributes,function(a){if(/^data-/.test(a.name))sel+='['+a.name+'="'+(window.CSS&&CSS.escape?CSS.escape(a.value):a.value)+'"]';});
@@ -23274,7 +23290,7 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
       var pc=document.getElementById('projCard');if(pc){var pj=document.getElementById('v12Proj');if(!pj){pj=document.createElement('div');pj.id='v12Proj';var tb=pc.querySelector('table');(tb||pc.lastChild).insertAdjacentElement(tb?'beforebegin':'afterend',pj);}if(!pj.contains(document.activeElement))put(pj,projHtml(c));}}
     var dh=document.querySelector('#ccyData>.mf-sec-h');if(dh&&!dh.querySelector('.v12-leg')){var lg=document.createElement('span');lg.className='v12-leg';lg.innerHTML='<span><i style="background:#5AAF9F"></i>au-dessus de la prév.</span><span><i style="background:#DA5182"></i>en dessous</span><span><i style="background:#D8CFC2"></i>égale</span><span><i class="v12-lf"></i>prévision</span><span><i class="v12-lr"></i>chiffre révisé (ancien niveau)</span>';dh.appendChild(lg);}
     var jn=document.getElementById('v12Journal');if(!jn&&wrap){jn=document.createElement('div');jn.id='v12Journal';jn.className='mf-sec v9';var fc=document.getElementById('foldCal');if(fc)fc.insertAdjacentElement('beforebegin',jn);else wrap.appendChild(jn);}
-    if(jn){if(jn.__c!==c){jn.__c=c;J.sel=null;J.ed=null;J.add=null;J.m=null;jn.innerHTML='';}if(!jn.classList.contains('mx-off'))jRender(c);}
+    if(jn){if(jn.__c!==c){jn.__c=c;J.sel=null;J.ed=null;J.add=null;J.m=null;jn.innerHTML='';}var jt='';try{jt=localStorage.getItem(c==='XAU'?'mx_xau_tab':'mx_ccy_tab')||'';}catch(e){}if(!jn.classList.contains('mx-off')&&(!jt||jt==='journal'))jRender(c);}
     ['foldTrades','foldCot'].forEach(function(id){var f=document.getElementById(id);if(f&&f.tagName==='DETAILS'&&!f.open)f.open=true;});}
   window.__v12Mount=mount;window.__v12J=J;
 
