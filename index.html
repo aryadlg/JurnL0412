@@ -6059,6 +6059,35 @@ html.nuit .v13-pc,html.nuit .v13-se input{background:#232f42;color:#e4e5e5}
 /* v132 : « aujourd'hui » ne colle plus au chiffre dans les colonnes étroites du week-end */
 .v10-dh{flex-wrap:wrap;gap:2px 8px}
 .v10-tag{white-space:nowrap}
+/* v133 · date d'une idée modifiable */
+.v11-din{width:auto!important;display:inline-block!important;padding:2px 6px!important;font:inherit;font-size:12.5px}
+/* v133 · titres en double : le sous-onglet porte déjà le titre de la section */
+html.v10on[data-mxc] #ccySynth>.mf-sec-h,html.v10on[data-mxc] #ccyBank>.mf-sec-h,html.v10on[data-mxc] #v12Journal>.mf-sec-h{display:none!important}
+html.v10on[data-mxc] #ccyData>.mf-sec-h{font-size:0!important;letter-spacing:0!important;justify-content:flex-end}
+html.v10on[data-mxc] #ccyData>.mf-sec-h .v12-leg{font-size:12px!important;letter-spacing:normal;text-transform:none}
+/* v133 · tuiles des devises : le % du jour n'est plus coupé (il passe sous le code quand la tuile est étroite) */
+@media (max-width:1680px){
+  html.v9on #mxNav .mx-row>button .mx-t{flex-wrap:wrap;row-gap:2px}
+  html.v9on #mxNav .mx-row>button .mx-t .mx-v{flex-basis:100%;margin-left:0;font-size:11.5px;letter-spacing:0;line-height:1.2}
+}
+/* v133 · speakers : fonction sous le nom, carte Décisions, non votants repliés */
+html.v10on #fedList .fed-item{grid-template-rows:auto auto auto auto 1fr auto}
+html.v10on #fedList .fed-dot{grid-row:1/4}
+html.v10on #fedList .v12-fn{grid-column:2/4;grid-row:2;font-size:12.5px;line-height:1.35;color:#6E685E;margin-top:-2px}
+html.v10on #fedList .fed-select{grid-row:3;margin-top:4px}
+html.v10on #fedList .v12-sc{grid-row:4}
+html.v10on #fedList .v12-q{grid-row:5}
+html.v10on #fedList .v12-mf{grid-row:6}
+html.v10on #fedList .v12-dname{grid-column:2;grid-row:1;align-self:end;font-weight:500;font-size:17px}
+html.v10on #fedList .v12-dec .fed-name{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+html.v10on #fedList .fed-item.v12-nv{display:none!important}
+html.v10on #fedList.v12-nvopen .fed-item.v12-nv{display:grid!important}
+html.v10on #fedList .v12-nvt{grid-column:1/-1;justify-self:start;background:#EDE7E0;color:#1D1D1B;border:1px solid #DDD5CB;border-radius:999px;padding:7px 16px;font:inherit;font-size:13px;letter-spacing:.04em;cursor:pointer}
+html.v10on #fedList .v12-nvt:hover{background:#E5DED5}
+html.nuit.v10on #fedList .v12-fn{color:#a9adb3}
+html.nuit.v10on #fedList .v12-nvt{background:#232f42;color:#e4e5e5;border-color:#45494d}
+html.v10on #fedList .fed-item{position:relative}
+html.v10on #fedList>#v12Spk{order:6}
 
 </style>
 </head>
@@ -6818,7 +6847,7 @@ html.nuit .v13-pc,html.nuit .v13-se input{background:#232f42;color:#e4e5e5}
   </details>
 
   <footer>
-    Outil personnel de suivi macro — usage informatif uniquement, ne constitue pas un conseil en investissement. Données saisies manuellement à partir des publications officielles. <b id="appVersion">· version v132</b>
+    Outil personnel de suivi macro — usage informatif uniquement, ne constitue pas un conseil en investissement. Données saisies manuellement à partir des publications officielles. <b id="appVersion">· version v133</b>
   </footer>
 
 </div>
@@ -12717,7 +12746,7 @@ function renderYieldCard(){
   if(last){var s2=ycNum(last.y2),s10=ycNum(last.y10),m1=ycNum(last.m1);
     if(s2!=null&&s10!=null){var sp=s10-s2;var txt=sp>0.05?'Courbe <b>pentue</b> : le long terme rapporte plus que le court terme. Le marché demande une prime pour prêter longtemps (inflation, dette).':(sp<-0.05?'Courbe <b>inversée</b> : le court terme rapporte plus que le long terme. Souvent un signal de ralentissement à venir.':'Courbe <b>plate</b> : court et long terme rapportent pareil.');
       h+='<div class="yc-spread">Écart 10 ans − 2 ans : <b>'+(sp>0?'+':'')+sp.toFixed(2).replace('.',',')+' point</b>'+(m1!=null?' · écart 10 ans − 1 mois : <b>'+((s10-m1)>0?'+':'')+(s10-m1).toFixed(2).replace('.',',')+' point</b>':'')+'<br>'+txt+'</div>';}}
-  if(list.length)h+='<div class="yc-hist">Relevés enregistrés ('+list.length+') — clique une date pour la corriger : '+list.slice(-10).reverse().map(function(e){return '<span data-d="'+e.date+'">'+mfEsc(ycD(e.date))+'</span>';}).join('')+'</div>';
+  if(list.length)h+='<div class="yc-hist">Relevés enregistrés ('+list.length+') : '+list.slice(-10).reverse().map(function(e){return '<span data-d="'+e.date+'">'+mfEsc(ycD(e.date))+'</span>';}).join('')+'</div>';
   box.innerHTML=h;
   var fill=function(e){document.getElementById('ycDate').value=e.date;YC_KEYS.forEach(function(x){document.getElementById('yc_'+x.k).value=e[x.k]||'';});};
   var today=list.find(function(e){return e.date===mfTodayISO();});if(today)fill(today);
@@ -14370,7 +14399,7 @@ function mt2CycleRender(el,c){var C=data.currencies[c],cy=C.cycle||{},A=mtAnalyz
  el.innerHTML='<div class="card-header-row"><div class="group-title">Phase du cycle · '+c+'</div><span class="mt-sub">leçon « Les cycles économiques » · c\'est toi qui décides</span></div><div class="an mt2-cy"><svg viewBox="0 0 360 150" class="an-svg" aria-hidden="true">'+MT2_PH.map(function(p,i){return '<g class="ph-z'+(p[0]===cur?' on':'')+'" style="color:'+p[2]+'"><rect x="'+Z[i][0]+'" y="8" width="'+(Z[i][1]-Z[i][0])+'" height="122" rx="6" style="stroke:'+p[2]+'"/><text x="'+((Z[i][0]+Z[i][1])/2)+'" y="144" style="fill:'+p[2]+'">'+p[1]+'</text></g>';}).join('')+'<path d="'+path+'" class="ph-p"/><circle r="4.5" class="ph-dot mt2-cd" style="opacity:'+(cur?1:0)+'"/></svg>'+
   '<div class="an-scn mt2-cb">'+MT2_PH.map(function(p){return '<button type="button" data-ph="'+p[0]+'" class="'+(p[0]===cur?'on':'')+'">'+p[1]+'</button>';}).join('')+'</div>'+
   (sg?'<div class="mt2-sug">Suggestion de tes données : <b>'+MT2_PH.filter(function(p){return p[0]===sg[0];})[0][1]+'</b> ('+sg[1]+').'+(cur&&cur!==sg[0]?' <span class="mt2-warn">Différent de ton choix : à vérifier.</span>':'')+'</div>':'')+
-  '<textarea class="mt2-why" rows="2" placeholder="Pourquoi cette phase ? (ex. inflation à 3,7 %, la Fed monte encore, emploi qui ralentit)">'+mtE(cy.why||'')+'</textarea><div class="mt-src">'+(cy.d?'Mis à jour le '+mt2DM(cy.d)+'. ':'')+((cy.hist||[]).length>1?'Avant : '+cy.hist.slice(-4,-1).map(function(h){return MT2_PH.filter(function(p){return p[0]===h.ph;})[0][1]+' ('+mt2DM(h.d)+')';}).join(' → ')+'.':'Touche la phase où tu situes l\'économie.')+'</div></div>';
+  '<textarea class="mt2-why" rows="2" placeholder="Pourquoi cette phase ? (ex. inflation à 3,7 %, la Fed monte encore, emploi qui ralentit)">'+mtE(cy.why||'')+'</textarea><div class="mt-src">'+(cy.d?'Mis à jour le '+mt2DM(cy.d)+'. ':'')+((cy.hist||[]).length>1?'Avant : '+cy.hist.slice(-4,-1).map(function(h){return MT2_PH.filter(function(p){return p[0]===h.ph;})[0][1]+' ('+mt2DM(h.d)+')';}).join(' → ')+'.':'')+'</div></div>';
  var pa=el.querySelector('.ph-p'),dot=el.querySelector('.mt2-cd');
  function place(ph,anim){var i=MT2_PH.findIndex(function(p){return p[0]===ph;});if(i<0||!pa.getTotalLength)return;var L=pa.getTotalLength(),tx=(Z[i][0]+Z[i][1])/2,lo=0,hi=L;for(var k=0;k<22;k++){var m=(lo+hi)/2;if(pa.getPointAtLength(m).x<tx)lo=m;else hi=m;}
   var from=dot.__l==null?lo:dot.__l,t0=performance.now();dot.style.opacity=1;(function s(){var u=anim&&!mt2Rm()?Math.min(1,(performance.now()-t0)/700):1,e=1-Math.pow(1-u,3),l=from+(lo-from)*e,p=pa.getPointAtLength(l);dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y);if(u<1)requestAnimationFrame(s);else dot.__l=lo;})();}
@@ -14482,7 +14511,7 @@ function mt2Home(){var ex=document.getElementById('macroHomeExtras'),host=docume
  try{mt2Snap(MT_CC.map(function(c){return mtAnalyze(c);}));}catch(x){}
  var P=mt3Pins(),key=JSON.stringify(P.home)+mt3Sig();if(host.__k===key)return;host.__k=key;
  var L=P.home.map(mt3W).filter(function(w){return w&&!w.ccy;});
- host.innerHTML=L.length?'<div class="mt3-zone">'+L.map(function(w){return mt3Card(w,{where:'home'});}).join('')+'</div>':'<div class="mt3-empty">Envie d\'un widget ici ? Dans <b>Macro › Widgets</b>, touche « 📌 Accueil » sur celui que tu veux.</div>';
+ host.innerHTML=L.length?'<div class="mt3-zone">'+L.map(function(w){return mt3Card(w,{where:'home'});}).join('')+'</div>':'<div class="mt3-empty">Pas de widget épinglé.</div>';
  mt3Bind(host,{});}
 function mt2Ccy(){var c=data.activeCurrency,host=document.getElementById('mt2Ccy');if(!host){var t=document.getElementById('mtThermoHost');if(!t)return;host=document.createElement('div');host.id='mt2Ccy';t.parentNode.insertBefore(host,t.nextSibling);}
  if(MT_CC.indexOf(c)<0){host.innerHTML='';host.__k='';return;}var C=data.currencies[c]||{},P=mt3Pins(),key=c+JSON.stringify([P.ccy,(C.history||[]).length,C.rateMeeting])+mt3Sig();if(host.__k===key)return;host.__k=key;
@@ -16903,7 +16932,8 @@ var COURSE=[
   ['III','🔺','Les figures chartistes',["Triangles, biseaux et drapeaux","Double sommet et double creux","Tête-épaules","Cassure ou pullback : comment entrer","Les patterns de bougies"]],
   ['IV','📐','Les outils de mesure',["Le retracement de Fibonacci","Les extensions de Fibonacci (objectifs)","Placer son stop et calculer sa taille de position"]],
   ['V','🖥','TradingView en pro',["Mise en page multi-graphiques et modèles","Les alertes","Le mode Replay pour backtester","La check-list de confluence"]],
-  ['VI','✅','Validation',["Quiz"]]]}];
+  ['VI','🧠','Les économistes',["George Soros · la réflexivité","John Maynard Keynes · le concours de beauté","Milton Friedman · l'inflation et les délais","Hyman Minsky · la stabilité crée l'instabilité"]],
+  ['VII','✅','Validation',["Quiz"]]]}];
 var LS={},ORDER=[];
 COURSE.forEach(function(T){T.ch.forEach(function(c,ci){c[3].forEach(function(t,li){var id=T.id+'-'+c[0]+'-'+(li+1);LS[id]={id:id,theme:T.id,chi:ci,num:c[0],chapter:c[0]+'. '+c[2],ic:c[1],title:t,idx:li+1};ORDER.push(id);});});});
 var DONE2={'I':[1,2,3,4,5,6],'II':[1,2,3,4,5,6,7],'III':[1,2,3,9,10],'IV':[1,2,3,4,5,6,7,8,9]};
@@ -17141,7 +17171,7 @@ function stars(n){return '<span class="tstars">'+[1,2,3].map(function(i){return 
 function boxById(id){return TB().boxes.find(function(b){return b.id===id;});}
 function tools(){var T=TB();
  if(st.box){var B=boxById(st.box);if(!B)st.box=null;else{if(B.k==='dd')return ddPage(B);if(B.k==='ses')return sessionsPage(B);if(B.k==='badge')return badgesPage(B);if(B.k==='revue')return revuePage(B);if(B.k==='goals')return '<div class="fp"><div class="fp-head"><div class="frm-crumb"><button class="crumb" data-a="hall">Boîte à outils</button> › Objectifs du mois</div><div class="ftitle">Objectifs du mois</div><div class="frm-small">'+new Date().toLocaleDateString('fr-FR',{month:'long',year:'numeric'})+' · les jauges se remplissent toutes seules. Tes objectifs sont repris le mois suivant.</div></div><section class="fc">'+goalsHTML(tdP().slice(0,7),true)+'</section><section class="fc" style="margin-top:14px"><div class="fc-h"><span>Ma régularité sur l\'année</span></div>'+heatHTML()+'</section>'+boxWindows(B)+'</div>';if(B.k==='glos')return glosPage(B);if(B.k==='fier'&&window.__fierPage)return window.__fierPage(B);if(B.k==='quo')return quotesPage(B);if(B.k==='calc')return '<div class="fp"><div class="fp-head"><div class="frm-crumb"><button class="crumb" data-a="hall">Boîte à outils</button> › Calculatrices</div><div class="ftitle">Calculatrices</div></div><div id="calcSlot"></div></div>';if(B.k==='cor')return corPage(B);if(B.k==='plan')return planPage(B);if(B.k==='ind'){if(st.ind){var x=T.ind.find(function(i){return i.id===st.ind;});if(x)return indPage(x);st.ind=null;}return indList();}return boxPage(B);}}
- var h='<div class="ftoc-head"><div class="frm-crumb">Formation</div><div class="ftitle">Boîte à outils</div><div class="frm-small">Clique sur une boîte pour l\'ouvrir. Crée tes propres boîtes avec « + Nouvelle boîte ».</div></div><div class="thall">';
+ var h='<div class="ftoc-head"><div class="frm-crumb">Formation</div><div class="ftitle">Boîte à outils</div></div><div class="thall">';
  T.boxes.forEach(function(B){var cnt=B.k==='fier'?(DB.trades||[]).filter(function(t){return t.proud;}).length+' trades':B.k==='ind'?T.ind.length+' fiches':B.k==='links'?T.links.length+' liens':B.k==='tv'?T.tick.rows.length+' tickers':B.k==='pat'?PT().length+' patterns':B.k==='dd'?'risque actuel '+pctF(ddRisk(DDS().seq,DDS()).now.risk):B.k==='ses'?'frise du jour':B.k==='revue'?'semaine du '+fmtD(monday(tdP())):B.k==='goals'?goalsOf(tdP().slice(0,7)).filter(function(g){return GM[g.m]&&GM[g.m][3](tdP().slice(0,7))>=g.t;}).length+' / '+goalsOf(tdP().slice(0,7)).length+' atteints':B.k==='badge'?badgeData().reduce(function(a,b){return a+b.lvl;},0)+' niveaux gagnés':B.k==='glos'?glosData().length+' mots':B.k==='quo'?(TB().quotes||[]).length+' citations':B.k==='calc'?'position · risque · pips':B.k==='cor'?CORS().cards.length+' corrélations':B.k==='plan'?PLAN().rules.length+' règles · '+PLAN().setups.length+' setups':(function(){var n=note('box-'+B.id,true);return n.layout.length+' fenêtres';})();
   h+='<button class="fc tbox" data-box="'+B.id+'"><span class="tbox-ic">'+B.ic+'</span><span class="tbox-n">'+e(B.n)+'</span><span class="tbox-d">'+e(B.d||'')+'</span><span class="tbox-c">'+cnt+' →</span></button>';});
  h+='<button class="fc tbox add" data-a="boxadd"><span class="tbox-ic">＋</span><span class="tbox-n">Nouvelle boîte</span><span class="tbox-d">Stratégies, sessions, psychologie…</span></button></div>';
@@ -18274,7 +18304,38 @@ var T3N={
   'anim',
   ['Utilisation',"Dans mon carnet du jour, chaque paire a son bouton « Tableau de confluences » : je coche, l'app me dit où j'en suis."],
   ['Bilan',"Cocher la case orange quand les conditions sont réunies, pas avant."]]},
- 't3-VI-1':{tags:'quiz, analyse technique',remember:"Direction, force, moment : MMA, RSI, stochastique.",L:[
+ 't3-VI-1':{tags:'Soros, réflexivité, boom, krach, GBP 1992',remember:"Le prix ne fait pas que refléter la réalité : il la change. Un récit qui fait monter le prix finit par se nourrir de lui-même… jusqu'à ce qu'il casse.",L:[
+  ['Leçon · Les économistes',"George Soros (né en 1930 à Budapest) a dirigé le Quantum Fund pendant des décennies. Il est connu pour un trade : en septembre 1992, il vend la livre sterling en masse et oblige la Banque d'Angleterre à sortir du système monétaire européen (le « mercredi noir », 16/09/1992).\nSon idée centrale, dans « L'Alchimie de la finance » (1987) : la réflexivité."],
+  ['1. Ce que dit la théorie classique',"Les prix reflètent les fondamentaux : la réalité d'abord, le prix ensuite. Le marché finit toujours par revenir à l'équilibre."],
+  ['2. Ce que dit Soros',"Les acteurs du marché ne voient jamais la réalité en entier : ils agissent sur ce qu'ils CROIENT.\nEt leurs achats ou leurs ventes changent la réalité elle-même : une action qui monte permet à l'entreprise de lever de l'argent, une devise qui baisse fait monter l'inflation importée, etc.\nLa croyance et la réalité s'influencent dans les deux sens : c'est la boucle de réflexivité."],
+  'steps',
+  ['3. Le 16 septembre 1992',"La livre est trop chère pour l'économie anglaise (récession, taux allemands élevés). Tout le monde le sait, mais la BoE jure qu'elle tiendra.\nSoros vend la livre ; plus elle baisse, plus la BoE doit dépenser ses réserves et monter ses taux, ce qui affaiblit encore l'économie… et rend la sortie inévitable. La croyance (« la livre va céder ») a fabriqué sa propre réalité."],
+  ['Utilisation',"Devant un thème qui porte le marché (le financement de l'IA en 2026, le dollar qui monte avec les taux), je me demande :\n1. Quel est le récit ?\n2. Est-ce que la hausse du prix renforce elle-même le récit (argent plus facile à lever, plus d'acheteurs) ?\n3. Où est la faille ? Quel chiffre ou quel événement peut casser la boucle ?\nLe COT m'aide : quand tout le monde est déjà du même côté, la boucle est proche de sa fin."],
+  ['Astuce',"Soros disait chercher d'abord à survivre : quand il se trompe, il sort vite. Une bonne idée avec un mauvais timing reste une perte."],
+  ['Bilan',"Un marché ne se trompe pas « au hasard » : il se trompe en suivant une histoire. Mon travail est de repérer l'histoire, de la suivre tant qu'elle se renforce, et de guetter le moment où elle ne tient plus."]],
+  steps:{title:'Le cycle boom / krach selon Soros',items:[{t:'Le début',d:'Une tendance réelle apparaît, mais peu de monde y croit.'},{t:'Le renforcement',d:'Le prix monte, le récit se répand, la hausse aide la réalité (crédit, résultats).'},{t:'Le test',d:'Une correction : si la tendance y survit, la croyance devient plus forte.'},{t:"L'excès",d:"Le prix s'éloigne de la réalité ; tout le monde est du même côté."},{t:'Le doute',d:'Le prix stagne, les acheteurs manquent.'},{t:'Le retournement',d:'La boucle tourne dans l\'autre sens, plus vite qu\'à la hausse.'}]}},
+ 't3-VI-2':{tags:'Keynes, sentiment, concours de beauté, esprits animaux',remember:"Sur un marché, il ne s'agit pas de deviner ce qui est vrai, mais ce que les autres vont croire.",L:[
+  ['Leçon · Les économistes',"John Maynard Keynes (1883-1946), économiste anglais, a inspiré les politiques de relance après la crise de 1929. Il spéculait aussi lui-même sur les devises et les matières premières, avec de grosses pertes et de gros gains."],
+  ['1. Le concours de beauté',"Keynes compare la Bourse à un jeu de journal : il faut choisir, parmi des photos, le visage que LES AUTRES lecteurs choisiront le plus.\nOn ne vote pas pour celui qu'on trouve beau, mais pour celui que les autres trouveront beau… et même pour ce que les autres pensent que les autres vont penser."],
+  ['2. Les esprits animaux',"Les décisions d'investir ne sont pas que des calculs : la confiance, la peur et l'humeur comptent. Quand la confiance s'effondre, même des taux très bas ne relancent pas l'investissement."],
+  ['Utilisation',"Avant un chiffre, je ne me demande pas seulement « bon ou mauvais ? », mais « qu'est-ce que le marché attend déjà ? ». C'est l'écart avec ce qui est déjà dans les prix (STIR, consensus) qui fait bouger la devise."],
+  ['Astuce',"Une décision attendue se vend souvent (« sell the fact ») : la RBA et la BoE en novembre 2026 l'ont montré."],
+  ['Bilan',"Le marché est un jeu d'anticipations croisées : je lis le sentiment (VIX, Fear & Greed, COT) autant que les chiffres."]]},
+ 't3-VI-3':{tags:'Friedman, monétarisme, inflation, délais',remember:"Une hausse de taux met longtemps à agir : 12 à 18 mois, et jamais au même rythme.",L:[
+  ['Leçon · Les économistes',"Milton Friedman (1912-2006), économiste américain, prix Nobel 1976. Il a montré le rôle de la monnaie et des banques centrales dans l'inflation et dans la crise de 1929."],
+  ['1. L\'inflation et la monnaie',"Pour lui, une inflation qui dure vient toujours d'une monnaie trop abondante par rapport à ce que l'économie produit. C'est donc aux banques centrales de la combattre."],
+  ['2. Les délais longs et variables',"Une décision de taux n'agit pas tout de suite : elle passe par le crédit, l'immobilier, l'emploi, puis les prix. Ça prend du temps, et ce temps change d'un cycle à l'autre."],
+  ['3. Volcker (1979-1982)',"La Fed de Paul Volcker monte ses taux très haut pour casser l'inflation des années 70 : récession dure, mais l'inflation redescend. C'est l'exemple qu'on cite quand une banque centrale « doit faire mal »."],
+  ['Utilisation',"Quand une banque centrale monte ses taux, je ne m'attends pas à voir l'inflation baisser le mois suivant. Je regarde les attentes d'inflation et le ton : ce sont eux qui bougent les devises tout de suite."],
+  ['Bilan',"Le marché réagit à la décision le jour même ; l'économie, elle, réagit des mois plus tard."]]},
+ 't3-VI-4':{tags:'Minsky, crédit, dette, krach',remember:"Les périodes calmes poussent à s'endetter toujours plus : c'est la stabilité qui prépare la crise.",L:[
+  ['Leçon · Les économistes',"Hyman Minsky (1919-1996), économiste américain, peu écouté de son vivant, redécouvert pendant la crise de 2008. On parle depuis de « moment Minsky »."],
+  ['1. Les trois étapes de la dette',"1. Prudente : on peut rembourser intérêts et capital avec ses revenus.\n2. Spéculative : on ne paie que les intérêts, on compte refinancer le reste.\n3. Fragile : on ne peut même plus payer les intérêts, on compte sur la hausse des prix pour s'en sortir."],
+  ['2. Le moment Minsky',"Quand assez d'emprunteurs sont à l'étape 3, il suffit que les prix arrêtent de monter : tout le monde vend en même temps pour rembourser, et la baisse s'emballe."],
+  ['Utilisation',"Je surveille les écarts de crédit et les annonces de dette géante (Meta et ses 825 Md$ d'engagements en octobre 2026). Quand la dette sert à acheter des actifs qui doivent continuer à monter, le risque de krach grandit."],
+  ['Astuce',"Dans ces moments, l'or peut être vendu comme une caisse (pour rembourser) avant de jouer son rôle de refuge."],
+  ['Bilan',"Minsky complète Soros : la boucle de hausse est souvent payée à crédit, et c'est le crédit qui la fait casser."]]},
+ 't3-VII-1':{tags:'quiz, analyse technique',remember:"Direction, force, moment : MMA, RSI, stochastique.",L:[
   ['Leçon · Validation',"Le quiz reprend les points clés du thème. Retourne chaque carte, réponds de tête, puis vérifie."]],
   quiz:[{q:"Quelle est mon unité de temps de référence pour la tendance du jour ?",a:"Le 4 h."},{q:"RSI à 75 en forte tendance haussière : signal de vente ?",a:"Non, il peut rester en surachat ; il faut une divergence ou une cassure."},{q:"Prix : creux plus haut ; RSI : creux plus bas. Quel signal ?",a:"Divergence cachée haussière : continuation."},{q:"Où placer mon buy limit avec Fibonacci ?",a:"Au 50 % idéalement, à 38,2 % si le marché est overcrowded."},{q:"Objectif d'un double sommet ?",a:"Hauteur sommets → ligne de cou, reportée sous la cassure."},{q:"Combien de confluences minimum avant de trader ?",a:"4."},{q:"Stochastique 30 min qui croise vers le bas à 85, 4 h haussier : je vends ?",a:"Non : je ne prends que les croisements dans le sens du 4 h."}]}
 };
@@ -19062,7 +19123,7 @@ function starsHTML(y,m,T){var W=300,H=170,D=dayPL(T),ks=Object.keys(D).sort(),nd
   var ln='';if(P.length>1)ln='<path d="'+P.map(function(p,i){return (i?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1);}).join(' ')+'" class="v7-sk-l'+(past?' done':'')+'"/>';
   var st=P.map(function(p,i){return '<g class="v7-star '+(p.v>=0?'w':'l')+'" data-v7day="'+p.k+'" style="--d:'+(i*110)+'ms;--tw:'+(2.4+hsh(p.k)*2.2).toFixed(2)+'s"><circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+(p.r*2.2).toFixed(1)+'" class="v7-st-h"/><path d="'+starP(p.x,p.y,p.r)+'"/><title>'+e(new Date(p.k+'T12:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric'})+' · '+eur(p.v,1))+'</title></g>';}).join('');
   var w=P.filter(function(p){return p.v>=0;}).length;
-  return '<div class="v7-obj"><h3>Ma constellation de '+e(moLong(y,m))+'</h3><svg viewBox="0 0 '+W+' '+H+'" class="v7-sky"><rect x="0" y="0" width="'+W+'" height="'+H+'" rx="12" class="v7-sk-bg"/>'+bg+ln+st+(P.length?'':'<text x="150" y="90" class="v7-empty sk">Le ciel attend tes premières étoiles</text>')+'</svg><div class="v7-cap">'+w+' étoile'+(w>1?'s':'')+' brillante'+(w>1?'s':'')+' · '+(P.length-w)+' pâle'+(P.length-w>1?'s':'')+(past?'':' · touche une étoile pour ouvrir la journée')+'</div></div>';}
+  return '<div class="v7-obj"><h3>Ma constellation de '+e(moLong(y,m))+'</h3><svg viewBox="0 0 '+W+' '+H+'" class="v7-sky"><rect x="0" y="0" width="'+W+'" height="'+H+'" rx="12" class="v7-sk-bg"/>'+bg+ln+st+(P.length?'':'<text x="150" y="90" class="v7-empty sk">Le ciel attend tes premières étoiles</text>')+'</svg><div class="v7-cap">'+w+' étoile'+(w>1?'s':'')+' brillante'+(w>1?'s':'')+' · '+(P.length-w)+' pâle'+(P.length-w>1?'s':'')+''+'</div></div>';}
 /* mosaïque */
 function mosaicHTML(y){var T=TR().filter(function(t){return +t.date.slice(0,4)===y;}),D=dayPL(T),mx=Math.max.apply(null,Object.keys(D).map(function(k){return Math.abs(D[k]);}).concat([1])),today=tdP(),g=0,l=0;
   var h='<div class="v7-mos">';for(var m=0;m<12;m++){h+='<div class="v7-mr"><span>'+MOIS[m]+'</span><div>';var nd=new Date(y,m+1,0).getDate();for(var d=1;d<=31;d++){if(d>nd){h+='<i class="x"></i>';continue;}var k=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'),w=new Date(k+'T12:00').getDay(),v=D[k],c;
@@ -19263,7 +19324,7 @@ setTimeout(stirTv,3000);setInterval(stirTv,5000);
     var wk=week(view,false)||{qs:[],lesson:''},sc=score(wk),evs=weekEvents(view),cur=monday(parisToday());
     var h='<div class="mpq-head"><div class="mpq-nav"><button type="button" data-a="prev" title="Semaine précédente">‹</button><div class="mpq-wk">Semaine '+wkLabel(view)+'</div><button type="button" data-a="next" title="Semaine suivante">›</button>'+(view!==cur?'<button type="button" data-a="today" title="Cette semaine" style="width:auto;padding:0 8px;font-size:11.5px">auj.</button>':'')+'</div>'
       +(wk.qs.length?'<div class="mpq-score" title="✓ = 1 · ~ = ½ · ✗ = 0 · ⏳ pas compté"><b>'+scoreTxt(sc)+'</b></div>':'')+'</div>';
-    if(!wk.qs.length)h+='<div style="opacity:.6;padding:6px 0 10px">Pas encore de questions pour cette semaine. Ajoute-les le lundi, ou colle celles de Claude.</div>';
+    if(!wk.qs.length)h+='<div style="opacity:.6;padding:6px 0 10px">Pas encore de questions pour cette semaine.</div>';
     wk.qs.forEach(function(q,i){var ev=findEv(q,view);
       h+='<div class="mpq-q" data-i="'+i+'"><div class="mpq-top"><span class="mpq-n">'+(i+1)+'.</span><div class="mpq-title" contenteditable="true" data-f="title" data-ph="La question…">'+esc(q.title)+'</div><button type="button" class="mpq-del" data-a="del" title="Supprimer la question">✕</button></div>'
         +'<div class="mpq-when" contenteditable="true" data-f="when" data-ph="jour et heure (Paris)…">'+esc(q.when)+'</div>'
@@ -19297,19 +19358,31 @@ setTimeout(stirTv,3000);setInterval(stirTv,5000);
   /* ---------- import texte / JSON ---------- */
   function parse(txt){txt=(txt||'').trim();if(!txt)return null;
     if(/^[\[{]/.test(txt)){try{var o=JSON.parse(txt);var arr=Array.isArray(o)?o:(o.qs||o.questions||[]);return {week:o.week||null,lesson:o.lesson||'',qs:arr.map(function(q){return {id:uid(),title:q.title||q.q||'',when:q.when||'',hot:q.hot||'',soft:q.soft||'',status:q.status||'',real:'',react:q.react||q.answer||'',match:q.match||'',evId:''};})};}catch(e){return null;}}
-    var qs=[],cur=null,lesson='',pend='';
+    /* v133 : comprend aussi le format « 1. Question ? ✓ — réponse », « Quand : », « Statut : », « SCORE : » */
+    var qs=[],cur=null,lesson='',score='',pend='',done=false;
+    var ST1=function(x){return x==='✔'?'✓':x==='✘'?'✗':x;};
+    var add=function(t){t=(t||'').trim();if(t)cur.react=(cur.react?cur.react+' ':'')+t;};
     txt.split(/\r?\n/).forEach(function(l){var s=l.replace(/^[\s>*•\-]+/,'').replace(/\*\*/g,'').trim();if(!s)return;var m;
+      if(/^-{3,}$/.test(l.trim())){return;}
       if(pend&&cur&&!/^(\d+)\s*[.)]\s*/.test(s)&&!/^(?:si\s+)?(?:chaud|hawkish|doux|dovish)\b/i.test(s)){cur[pend]=s;pend='';return;}pend='';
-      if((m=s.match(/^(\d+)\s*[.)]\s*(.+)$/))){cur={id:uid(),title:m[2],when:'',hot:'',soft:'',status:'',real:'',react:'',match:'',evId:''};
+      if((m=s.match(/^(\d+)\s*[.)]\s*(.+)$/))){done=false;cur={id:uid(),title:m[2],when:'',hot:'',soft:'',status:'',real:'',react:'',match:'',evId:''};
+        var t=cur.title.match(/^(.*?\?)\s*((?:\p{Extended_Pictographic}|\p{Regional_Indicator}|️|\s)*)\s*(✓|✔|✗|✘|~|⏳)\s*(.*)$/u);
+        if(t){cur.title=(t[1]+(t[2].trim()?' '+t[2].trim():'')).trim();cur.status=ST1(t[3]);add(t[4].replace(/^[—–\-:]\s*/,''));qs.push(cur);return;}
         var p=cur.title.split(/\s+[—–]\s+|\s+:\s+(?=(?:lun|mar|mer|jeu|ven|sam|dim|\d))/i);if(p.length>1){cur.title=p[0];cur.when=p.slice(1).join(' — ');}qs.push(cur);return;}
-      if(/^(à retenir|ce que j.en retiens|leçon)/i.test(s)){lesson=s.replace(/^[^:]*:\s*/,'');return;}
+      if((m=s.match(/^score(?:\s+final)?\s*:\s*(.*)$/i))){score=m[1];done=true;return;}
+      if((m=s.match(/^(?:à retenir|ce que j.en retiens|leçon)[^:]*:?\s*(.*)$/i))){if(cur&&cur.status&&!done){add('Ce que j\'en retiens : '+m[1]);return;}lesson=(lesson?lesson+'\n':'')+m[1];done=true;return;}
+      if(done){if(/^[A-ZÉÈÀ' ]{6,}$/.test(s))return;lesson=(lesson?lesson+'\n':'')+s;return;}
       if(!cur)return;
+      if((m=s.match(/^quand\s*:\s*(.*)$/i))){cur.when=m[1];return;}
+      if((m=s.match(/^statut\s*:\s*(✓|✔|✗|✘|~|⏳)/i))){cur.status=ST1(m[1]);return;}
       if((m=s.match(/^(?:si\s+)?(?:chaud|hawkish)[^→:>]*(?:→|->|:|>)?\s*(.*)$/i))&&/^(?:si\s+)?(?:chaud|hawkish)\b/i.test(s)){cur.hot=m[1];if(!m[1])pend='hot';return;}
       if((m=s.match(/^(?:si\s+)?(?:doux|dovish)[^→:>]*(?:→|->|:|>)?\s*(.*)$/i))&&/^(?:si\s+)?(?:doux|dovish)\b/i.test(s)){cur.soft=m[1];if(!m[1])pend='soft';return;}
-      if((m=s.match(/^(?:r[ée]ponse|r[ée]sultat)\s*:?\s*(.*)$/i))){var r=m[1];var st=r.match(/^(✓|✔|✗|✘|~|⏳)\s*(.*)$/);if(st){cur.status=st[1]==='✔'?'✓':st[1]==='✘'?'✗':st[1];r=st[2];}cur.react=(cur.react?cur.react+' ':'')+r.replace(/^(comme prévu|autre chose|à moitié|encore ouverte)\s*[:.—–-]?\s*/i,'');return;}
-      if((m=s.match(/^(✓|✔|✗|✘|~|⏳)\s*(.*)$/))){cur.status=m[1]==='✔'?'✓':m[1]==='✘'?'✗':m[1];cur.react=(cur.react?cur.react+' ':'')+m[2].replace(/^(comme prévu|autre chose|à moitié|encore ouverte)\s*[:.—–-]?\s*/i,'');return;}
+      if((m=s.match(/^(?:r[ée]ponse|r[ée]sultat)\s*:?\s*(.*)$/i))){var r=m[1];var st=r.match(/^(✓|✔|✗|✘|~|⏳)\s*(.*)$/);if(st){cur.status=ST1(st[1]);r=st[2];}add(r.replace(/^(comme prévu|autre chose|à moitié|encore ouverte)\s*[:.—–-]?\s*/i,''));return;}
+      if((m=s.match(/^(✓|✔|✗|✘|~|⏳)\s*(.*)$/))){cur.status=ST1(m[1]);add(m[2].replace(/^(comme prévu|autre chose|à moitié|encore ouverte)\s*[:.—–-]?\s*/i,''));return;}
+      if(cur.status){add(s);return;}
       if(!cur.hot&&!cur.soft&&!cur.when){cur.when=s;return;}
-      if(cur.status)cur.react+=(cur.react?' ':'')+s;else cur.when+=(cur.when?' · ':'')+s;});
+      cur.when+=(cur.when?' · ':'')+s;});
+    if(score)lesson='Score : '+score+(lesson?'\n'+lesson:'');
     return qs.length?{week:null,lesson:lesson,qs:qs}:null;}
 
   /* ---------- envoi vers le bilan ---------- */
@@ -21878,7 +21951,7 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(do
   /* ---------- biais des devises (glisser-déposer) ---------- */
   function biasBox(k){var m=M(),cur=curBias(),sk=snap(k),live=sk.live,B=live?cur:(sk.has&&Object.keys(sk.bias||{}).length?sk.bias:cur);
     var cols=[['haussier','haussières',UP],['neutre','neutres',NT],['baissier','baissières',DN]];
-    var h='<section class="v9c" aria-label="Biais des devises"><div class="v9-hd"><h2 class="ttl">Biais des devises</h2><span class="mut sm">'+(live?'glisse ou clique une devise pour changer son biais':'biais du '+dd(k)+' · lecture seule')+'</span></div><div class="v9-bcols">';
+    var h='<section class="v9c" aria-label="Biais des devises"><div class="v9-hd"><h2 class="ttl">Biais des devises</h2>'+(live?'':'<span class="mut sm">biais du '+dd(k)+' · lecture seule</span>')+'</div><div class="v9-bcols">';
     cols.forEach(function(c){var list=CC.concat(['XAU']).filter(function(x){return (B[x]||'neutre')===c[0]&&(x!=='XAU'||(m&&m.currencies&&m.currencies.XAU));});
       h+='<div class="v9-bcol" data-v9drop="'+c[0]+'"><div class="v9-bn" style="color:'+c[2]+'">'+list.length+'</div><div class="v9-bl" style="color:'+c[2]+'">'+c[1]+'</div>'
         +list.map(function(x){var r=(m&&m.currencies&&m.currencies[x]&&m.currencies[x].policyRate)||'';return '<div class="v9-bi"'+(live?' draggable="true" data-v9drag="'+x+'" title="Glisser vers une autre colonne"':'')+'><span class="v9-bc">'+FLAG[x]+' '+(x==='XAU'?'OR':x)+'</span><span class="mut v9-br">'+esc(String(r).replace(/\s*\(.*\)/,'').replace(/\s+/g,' ').replace('.',','))+'</span></div>';}).join('')+'</div>';});
@@ -21893,7 +21966,7 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(do
 
   /* ---------- réaction des devises ---------- */
   function fxBox(k){var s=snap(k),L=parseFx(s.fx),B=s.bias&&Object.keys(s.bias).length?s.bias:curBias();if(S.fx>=L.length)S.fx=0;var mx=Math.max.apply(null,L.map(function(x){return Math.abs(x.chg)||0;}).concat([0.2]));
-    var h='<section class="v9c" aria-label="Réaction des devises du jour"><div class="v9-hd"><h2 class="ttl">Réaction des devises du jour</h2><span class="mut sm">clique une devise</span></div>';
+    var h='<section class="v9c" aria-label="Réaction des devises du jour"><div class="v9-hd"><h2 class="ttl">Réaction des devises du jour</h2></div>';
     if(S.edit==='fx')return h+'<textarea class="v9-inl v9-inlta" data-v9inl="fx" rows="12" style="margin-top:12px">'+esc(s.fx||'')+'</textarea><div class="mut sm">Une ligne par devise : « AUD 🇦🇺 +0,40 % (0,7054) : raison. »</div></section>';
     if(!L.length)return h+'<div class="v9-empty v9-click" data-v9e="fx">Clique pour écrire la réaction des devises.</div></section>';
     h+='<div class="v9-fxg">'+L.map(function(x,i){var on=i===S.fx,c=x.chg>0?UP:x.chg<0?DN:NT;return '<button type="button" class="v9-fxt lift'+(on?' on':'')+'" data-v9fx="'+i+'" aria-pressed="'+on+'"><span class="v9-fxh"><b>'+FLAG[x.ccy]+' '+x.ccy+'</b><span class="mut">#'+(i+1)+'</span></span><span class="v9-fxc" style="color:'+c+'">'+(isNaN(x.chg)?'—':sgn(x.chg))+'</span><span class="v9-tr"><span class="v9-grow" style="width:'+Math.min(100,Math.abs(x.chg||0)/mx*100).toFixed(0)+'%;background:'+c+'"></span></span></button>';}).join('')+'</div>';
@@ -21908,11 +21981,11 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(do
     [['S&P 500',/S&P(?:\s*500)?\s*~?\s*([+−\-]\s?\d+(?:[.,]\d+)?)\s*%/],['AUD/JPY',/AUD\/JPY\s*([+−\-]\s?\d+(?:[.,]\d+)?)\s*%/]].forEach(function(x){var m=note.match(x[1]);if(m)bars.push([x[0],num(m[1])]);});
     var all=(H().corr||[]).filter(function(e){return e.date<=k;}).sort(function(a,b){return a.date.localeCompare(b.date);}).slice(-8);
     var lesson=note.replace(/^\s*(fragile|solide)\s*:\s*/i,'');var m2=lesson.match(/(Leçon gardée\s*:[^.]*\.|divergence\s*:[^.]*\.)/i);
-    var h='<section class="v9c" aria-label="Risque"><div class="v9-hd"><h2 class="ttl">Risque</h2><span class="mut sm">clique le titre pour changer</span></div>'
+    var h='<section class="v9c" aria-label="Risque"><div class="v9-hd"><h2 class="ttl">Risque</h2></div>'
       +'<button type="button" class="v9-risk" data-v9a="risk" aria-label="Sentiment : '+R[0]+'. Cliquer pour changer"><span class="big" style="color:'+R[1]+'">'+R[0]+'</span>'+(fr2?'<span class="v9-frag">'+esc(fr2[1].toLowerCase())+'</span>':'')+(fb?'<span class="v9-frag" style="color:#6E685E">dernier relevé : '+dd(fb.date)+'</span>':'')+'<span class="mut" aria-hidden="true" style="margin-left:auto;font-size:18px">⟳</span></button>';
     h+='<div class="v9-rs">'+[['on','Risk ON'],['neu','Neutre'],['off','Risk OFF']].map(function(x){return '<button type="button" data-v9rs="'+x[0]+'" class="'+(c&&c.state===x[0]?'on':'')+'">'+x[1]+'</button>';}).join('')+'</div>';
     h+='<div class="v9-rb">'+bars.map(function(b){var v=b[1];return '<div><div class="v9-hd sm"><span>'+b[0]+'</span><span style="font-variant-numeric:tabular-nums">'+sgn(v)+'</span></div><div class="v9-tr" style="height:6px"><span class="v9-grow" style="width:'+Math.min(100,Math.abs(v)/0.8*100).toFixed(0)+'%;background:'+(v>=0?UP:DN)+'"></span></div></div>';}).join('')+'</div>';
-    h+=S.edit==='risk'?'<textarea class="v9-inl v9-inlta" data-v9inl="risk" rows="7" style="margin-top:12px">'+esc(note)+'</textarea>':'<div class="v9-rn v9-click" data-v9e="risk">'+(note?esc(note):'<span class="mut">clique pour écrire la note du risque</span>')+'</div>';
+    h+=S.edit==='risk'?'<textarea class="v9-inl v9-inlta" data-v9inl="risk" rows="7" style="margin-top:12px">'+esc(note)+'</textarea>':'<div class="v9-rn v9-click" data-v9e="risk">'+(note?esc(note):'<span class="mut">+ note du risque</span>')+'</div>';
     h+='<div class="v9-rh" aria-label="Les 8 derniers jours">'+all.map(function(e){var on=e.state==='on',off=e.state==='off';return '<span title="'+esc(dShort(e.date)+' · '+(RS[e.state]||['—'])[0])+'" style="background:'+(on?'#D6E8E3':off?'#F6DDE5':'#E5DED5')+';border-top:3px solid '+(on?UP:off?DN:'#B7AFA4')+'"><span class="mut">'+e.date.slice(8,10)+'</span></span>';}).join('')+'</div></section>';
     return h;}
   function riskSet(k,st){var h=H();if(!Array.isArray(h.corr))h.corr=[];var c=corr(k);if(!c){c={date:k,note:''};h.corr.push(c);h.corr.sort(function(a,b){return a.date.localeCompare(b.date);});}c.state=st;riskSync();msv();}
@@ -22345,7 +22418,7 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(do
       var pics=L.filter(function(x){return x[0]!=='biais'&&!C.off[x[0]]&&cn[x[0]];}).map(function(x){return '<span class="v10-pic" title="'+cn[x[0]]+' · '+x[1]+'" style="background:'+x[3]+';color:'+x[2]+'">'+svg(x[0],x[2])+'<b style="color:'+x[2]+'">'+cn[x[0]]+'</b></span>';}).join('');
       var fr2=D.trades.length?'border:2.5px solid '+(D.pnl>=0?UP:DN):isT?'border:1.5px solid '+INK:fut?'border:1px dashed #B7AFA4':'';
       h+='<button type="button" class="v10-day'+(we?' we':'')+(isT?' today':'')+'" data-v10d="'+k+'" style="'+fr2+'"><span class="v10-dh"><span class="v10-dn">'+(+k.slice(8))+(D.risk&&RC[D.risk]?'<i title="'+RC[D.risk][1]+'" style="background:'+RC[D.risk][0]+'"></i>':'')+'</span>'+(isT?'<span class="v10-tag">aujourd\'hui</span>':fut&&has?'<span class="v10-tag mut">à venir</span>':'')+'</span><span class="v10-pics">'+pics+'</span>'+(D.trades.length?'<span class="v10-pnl '+(D.pnl>=0?'up':'dn')+'">'+eur(D.pnl)+'</span>':'')+'</button>';});
-    return h+'</div></div><div class="mut sm" style="margin-top:12px">Chaque pictogramme est un calque, le chiffre dit combien de choses tu y as notées ce jour-là. Clique un jour pour sa fiche complète.</div></section>';}
+    return h+'</div></div></section>';}
 
   /* ---------- vue semaine ---------- */
   function weekHtml(){var mo=C.wk,td=today(),ks=[0,1,2,3,4,5].map(function(i){return addD(mo,i);});
@@ -22375,7 +22448,7 @@ document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;if(do
   function biasAt(c,k){var m=M(),C2=m&&m.currencies&&m.currencies[c];if(!C2)return null;var H=(C2.history||[]).filter(function(x){return x.date<=k;});var b=H.length?H[H.length-1].bias:null;var db=DB(),L2=(db&&db.biasLog||[]).filter(function(x){return x.c===c&&x.d<=k;}).sort(function(a,b){return (a.d+a.ts).localeCompare(b.d+b.ts);});if(L2.length){var l=L2[L2.length-1];if(!H.length||l.d>=H[H.length-1].date)b=l.t;}return b||C2.bias||'neutre';}
   function lowerHtml(){var y=C.y,m=C.m,ks=monthDays(y,m),mons=[];ks.forEach(function(k){var mo=monday(k);if(mons.indexOf(mo)<0&&wd(k)>0&&wd(k)<6)mons.push(mo);});var td=today(),db=DB()||{};
     var HB={haussier:['#CFE8E1',UP],baissier:['#F3D3DC',DN],neutre:['#E5E1DA',NT]};
-    var h='<div class="v10-low"><section class="v9c"><h2 class="ttl">Les biais du mois</h2><div class="mut sm" style="margin:8px 0 12px">semaine par semaine · ↻ = changé cette semaine (survole pour le détail)</div><div class="v10-heat" style="grid-template-columns:86px repeat('+mons.length+',minmax(0,1fr))"><span></span>'+mons.map(function(mo){return '<span class="mut v10-hw">'+(+mo.slice(8))+'–'+(+addD(mo,4).slice(8))+'</span>';}).join('');
+    var h='<div class="v10-low"><section class="v9c"><h2 class="ttl">Les biais du mois</h2><div class="mut sm" style="margin:8px 0 12px">semaine par semaine · ↻ = changé cette semaine</div><div class="v10-heat" style="grid-template-columns:86px repeat('+mons.length+',minmax(0,1fr))"><span></span>'+mons.map(function(mo){return '<span class="mut v10-hw">'+(+mo.slice(8))+'–'+(+addD(mo,4).slice(8))+'</span>';}).join('');
     CC.forEach(function(c){h+='<span class="v10-hc">'+FLAG[c]+' '+(c==='XAU'?'Or':c)+'</span>';mons.forEach(function(mo){var end=addD(mo,4);if(mo>td){h+='<span class="v10-hx"></span>';return;}var b=biasAt(c,end>td?td:end)||'neutre',ch=(db.biasLog||[]).filter(function(x){return x.c===c&&x.d>=mo&&x.d<=end;}),P=HB[b]||HB.neutre;
       h+='<span class="v10-hx" title="'+esc((c==='XAU'?'Or':c)+' · '+(ch.length?ch.map(function(x){return dd(x.d)+' '+x.f+' → '+x.t;}).join(' · '):b))+'" style="background:'+P[0]+';color:'+P[1]+(ch.length?';font-weight:600;box-shadow:inset 0 0 0 1.5px '+P[1]:'')+'">'+b+(ch.length?' ↻':'')+'</span>';});});
     h+='</div></section>';
@@ -22649,6 +22722,7 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
   function sv(){try{if(typeof save==='function')save();}catch(e){}}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function today(){try{return window.__v9?window.__v9.today():new Date().toISOString().slice(0,10);}catch(e){return new Date().toISOString().slice(0,10);}}
+  function realToday(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
   function dd(k){return k?String(k).slice(8,10)+'/'+String(k).slice(5,7):'';}
   function uid(){return 'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
   function ideas(){var d=DB();if(!d)return [];d.ideas=d.ideas||[];d.ideas.forEach(function(i){if(!Array.isArray(i.signals))i.signals=[];if(!Array.isArray(i.steps))i.steps=[];if(i.genre==null)i.genre='';if(i.horizon==null)i.horizon='';});return d.ideas;}
@@ -22665,7 +22739,7 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
       +'<div class="v11-nf"><span class="v11-tags">'+(i.tags||[]).map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</span><span class="sm" style="'+(od?'color:'+DN+';font-weight:600':'color:'+NT)+'">'+(od?'● à revoir · dernier point '+dd(last(i)):(i.steps||[]).length?'dernier point le '+dd(last(i)):'écrite le '+dd(i.date))+'</span></div></button>';}
 
   function readerHtml(i){var k=K[i.genre]||K[''],e=S.ed,ed=function(f,v,rows,ph){return e===f?(rows===1?'<input class="v9-inl v11-in" data-v11f="'+f+'" value="'+esc(v||'')+'" placeholder="'+esc(ph||'')+'">':'<textarea class="v9-inl v11-ta" data-v11f="'+f+'" rows="'+rows+'" placeholder="'+esc(ph||'')+'">'+esc(v||'')+'</textarea>'):null;};
-    var h='<div class="v11-rband" style="background:'+k[0]+';color:'+k[1]+'"><div class="v11-gen">'+Object.keys(K).filter(Boolean).map(function(g){return '<button type="button" data-v11g="'+g+'" class="'+(i.genre===g?'on':'')+'">'+g+'</button>';}).join('')+'<span class="v11-hz">'+(ed('horizon',i.horizon,1,'horizon : 6 à 24 mois, quelques semaines…')||'<span class="v11-click" data-v11e="horizon">'+esc(i.horizon||'+ horizon')+'</span>')+' · écrite le '+dd(i.date)+'</span></div><div class="v9-nav"><button type="button" class="btn" data-v11a="del">Supprimer</button><button type="button" class="btn dark" data-v11a="close">Fermer</button></div></div>';
+    var h='<div class="v11-rband" style="background:'+k[0]+';color:'+k[1]+'"><div class="v11-gen">'+Object.keys(K).filter(Boolean).map(function(g){return '<button type="button" data-v11g="'+g+'" class="'+(i.genre===g?'on':'')+'">'+g+'</button>';}).join('')+'<span class="v11-hz">'+(ed('horizon',i.horizon,1,'horizon : 6 à 24 mois, quelques semaines…')||'<span class="v11-click" data-v11e="horizon">'+esc(i.horizon||'+ horizon')+'</span>')+' · '+(e==='date'?'<input type="date" class="v9-inl v11-in v11-din" data-v11f="date" value="'+esc(i.date||'')+'">':'<span class="v11-click" data-v11e="date" title="Changer la date">écrite le '+dd(i.date)+'</span>')+'</span></div><div class="v9-nav"><button type="button" class="btn" data-v11a="del">Supprimer</button><button type="button" class="btn dark" data-v11a="close">Fermer</button></div></div>';
     h+='<div class="v11-rb"><div class="v11-main">'+(ed('title',i.title,1,'Titre')?'<input class="v9-inl v11-in v11-tin" data-v11f="title" value="'+esc(i.title||'')+'" placeholder="Titre">':'<h2 class="v11-click v11-title" data-v11e="title">'+esc(i.title||'Sans titre · clique pour écrire')+'</h2>')
       +'<section class="v11-sec" style="border-left:3px solid '+k[1]+'"><div class="lbl">Où j\'en suis</div>'+(ed('etat',i.etat,2,'ex. phase de tension, pas de crise')||'<div class="v11-click" data-v11e="etat">'+esc(i.etat||'+ écrire où tu en es')+'</div>')+'</section>'
       +'<section class="v11-sec"><div class="lbl">L\'idée</div>'+(ed('text',i.text,16,'Ton idée, ton raisonnement, ce qui la confirmerait, ce qui l\'invaliderait…')||'<div class="v11-click v11-text" data-v11e="text">'+esc(i.text||'+ écrire l\'idée')+'</div>')+'</section>'
@@ -22675,7 +22749,7 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
       +sg.map(function(s,j){return '<div class="v11-sig"><button type="button" data-v11l="'+j+'" style="'+lampSt(s.v,18)+'" aria-label="'+esc(SL[s.v||0][0])+'"></button>'+(e==='sig'+j?'<input class="v9-inl v11-in" data-v11f="sig'+j+'" value="'+esc(s.t)+'">':'<span class="v11-click" data-v11e="sig'+j+'">'+esc(s.t)+'<span class="mut" style="font-size:12px"> · '+SL[s.v||0][0]+'</span></span>')+'</div>';}).join('')
       +(e==='signew'?'<input class="v9-inl v11-in" data-v11f="signew" placeholder="nouveau signal…">':'<button type="button" class="v9-lnk sm" data-v11e="signew">+ ajouter un signal</button>')+'</div>';
     h+='<div class="v9c v11-box"><div class="v9-hd" style="align-items:center"><span class="lbl">Mes points d\'étape</span>'+(e==='step'?'':'<button type="button" class="btn" data-v11e="step" style="min-height:32px;font-size:13px">+ Faire le point</button>')+'</div>'+(e==='step'?'<textarea class="v9-inl v11-ta" data-v11f="step" rows="3" placeholder="où en est l\'idée aujourd\'hui ?"></textarea>':'')
-      +(i.steps||[]).slice().sort(function(a,b){return String(b.d).localeCompare(String(a.d));}).map(function(p){return '<div class="v11-step"><span class="mut">'+dd(p.d)+'</span><span>'+esc(p.t)+'</span></div>';}).join('')+'</div></aside></div>';
+      +(i.steps||[]).map(function(p,j){return {p:p,j:j};}).sort(function(a,b){return String(b.p.d).localeCompare(String(a.p.d));}).map(function(o){var p=o.p;return '<div class="v11-step">'+(e==='stepd'+o.j?'<input type="date" class="v9-inl v11-in v11-din" data-v11f="stepd'+o.j+'" value="'+esc(p.d||'')+'">':'<span class="mut v11-click" data-v11e="stepd'+o.j+'" title="Changer la date">'+dd(p.d)+'</span>')+'<span>'+esc(p.t)+'</span></div>';}).join('')+'</div></aside></div>';
     return h;}
 
   function render(){var sec=document.querySelector('section[data-view="idees"]');if(!sec)return;var r=document.getElementById('v11Ideas');if(!r){r=document.createElement('div');r.id='v11Ideas';r.className='v9 v11';sec.insertBefore(r,sec.firstChild);}sec.classList.add('v11-on');
@@ -22702,13 +22776,15 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
     ov.addEventListener('pointerdown',function(){S.pd=1;});var pu=function(){setTimeout(function(){S.pd=0;if(S.pend){S.pend=0;if(!S.ed&&cur()&&document.getElementById('v11Read'))rDraw();}},0);};document.addEventListener('pointerup',pu);
     ov.addEventListener('focusout',function(e){var t=e.target;if(!t.dataset||!t.dataset.v11f||t.__c)return;var i=cur();if(!i)return;var f=t.dataset.v11f,v=t.value;
       if(f==='tags')i.tags=v.split(',').map(function(x){return x.trim();}).filter(Boolean);
-      else if(f==='step'){if(v.trim())i.steps.push({d:today(),t:v.trim()});}
+      else if(f==='step'){if(v.trim())i.steps.push({d:realToday(),t:v.trim()});}
       else if(f==='signew'){if(v.trim())i.signals.push({t:v.trim(),v:0});}
+      else if(f==='date'){if(/^\d{4}-\d{2}-\d{2}$/.test(v))i.date=v;}
+      else if(/^stepd\d+$/.test(f)){var sj=+f.slice(5);if(i.steps[sj]&&/^\d{4}-\d{2}-\d{2}$/.test(v))i.steps[sj].d=v;}
       else if(/^sig\d+$/.test(f)){var j=+f.slice(3);if(v.trim())i.signals[j].t=v.trim();else i.signals.splice(j,1);}
       else i[f]=f==='text'?v:v.trim();
       sv();S.ed=null;if(S.pd){S.pend=1;return;}setTimeout(function(){if(!S.ed)rDraw();},0);});
     ov.addEventListener('keydown',function(e){var t=e.target;if(t.dataset&&t.dataset.v11f&&t.tagName==='INPUT'&&e.key==='Enter')t.blur();});}
-  function create(genre){var d=DB();if(!d)return;var i={id:uid(),date:today(),title:'',text:'',tags:[],genre:genre||'',horizon:'',signals:[],steps:[],status:'active'};ideas().push(i);sv();render();open(i.id);S.ed='title';rDraw();}
+  function create(genre){var d=DB();if(!d)return;var i={id:uid(),date:realToday(),title:'',text:'',tags:[],genre:genre||'',horizon:'',signals:[],steps:[],status:'active'};ideas().push(i);sv();render();open(i.id);S.ed='title';rDraw();}
 
   document.addEventListener('click',function(e){var r=document.getElementById('v11Ideas');if(!r||!r.contains(e.target))return;var t=e.target,b;
     if((b=t.closest('[data-v11o]'))){open(b.dataset.v11o);return;}
@@ -22841,7 +22917,7 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
   var POS={'tres-dovish':1,'dovish':1.7,'neutre-dovish':2.4,'neutre':3,'neutre-hawkish':3.6,'hawkish':4.2,'tres-hawkish':5};
   var TON={'tres-dovish':'Très dovish','dovish':'Dovish','neutre-dovish':'Neutre / dovish','neutre':'Neutre','neutre-hawkish':'Neutre / hawkish','hawkish':'Hawkish','tres-hawkish':'Très hawkish'};
   function tint(p){return p>=3.8?DN:p>=3.3?'#B57A88':p<=2.4?'#3D6E9C':p<=2.7?'#7F93AE':NT;}
-  function ini(n){n=String(n||'').trim();if(/^consensus/i.test(n))return 'Σ';var w=n.split(/\s+/);return (w.length>1&&w[1].length>2?w[0][0]+w[1][0]:n.slice(0,2)).toUpperCase();}
+  function ini(n){n=String(n||'').trim();if(/^consensus/i.test(n)||isDec(n))return 'Σ';var w=n.split(/\s+/);return (w.length>1&&w[1].length>2?w[0][0]+w[1][0]:n.slice(0,2)).toUpperCase();}
   function fdate(k){try{return dDM(k);}catch(e){return k;}}
   function bcTopHtml(c){var m=M(),C=m.currencies[c]||{},rm=C.rateMeeting||{},t=realDay(),jl=rm.date?days(t,rm.date):null,h=+rm.hike||0,o=+rm.hold||0,u=+rm.cut||0,tot=h+o+u||1;
     var rate=String(C.policyRate||'—'),pr=rate.match(/\(([^)]*)\)/);
@@ -22853,6 +22929,22 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
     var mk=L.map(function(x,i){var p=POS[x.stance]||3;sum+=p;var tc=tint(p);return '<button type="button" class="v12-bk" data-v12mem="'+i+'" title="'+esc(x.name+' — '+(TON[x.stance]||x.stance||''))+'" style="left:calc('+((p-1)/4*100).toFixed(1)+'% - 17px);top:'+(i%2?62:6)+'px;border-color:'+tc+';color:'+tc+'">'+esc(ini(x.name))+'</button>';}).join('');
     var a=L.length?sum/L.length:3,txt=!L.length?'Ajoute les membres plus bas pour voir où penche le conseil.':a>=3.6?'Le conseil penche du côté ferme.':a>3.15?'Le conseil penche légèrement du côté ferme.':a<=2.4?'Le conseil penche du côté accommodant.':a<2.85?'Le conseil penche légèrement du côté accommodant.':'Le conseil est partagé, sans pente nette.';
     return '<section class="v9c v12-baro"><div class="v9-hd" style="align-items:baseline"><h3 class="ttl">Baromètre du conseil</h3><span class="mut sm">où se place chaque membre</span></div><div class="v12-bg"><div class="v12-bgl"></div><div class="v12-bgm"></div>'+mk+'<span class="v12-bgt" style="left:0;color:#3D6E9C">DOVISH</span><span class="v12-bgt mut" style="left:50%;transform:translateX(-50%)">NEUTRE</span><span class="v12-bgt" style="right:0;color:'+DN+'">HAWKISH</span></div><div class="v12-bt">'+txt+'</div></section>';}
+
+  /* v133 · annuaire des banquiers centraux (vérifié le 16/11/2026 ; Fed : votants 2026 = federalreserve.gov) */
+  var DIR={
+    USD:{warsh:['président de la Fed',1],powell:['gouverneur (ancien président)',1],jefferson:['vice-président du conseil des gouverneurs',1],bowman:['vice-présidente chargée de la supervision',1],waller:['gouverneur',1],barr:['gouverneur',1],cook:['gouverneure',1],
+      williams:['président de la Fed de New York, vice-président du FOMC',1],hammack:['présidente de la Fed de Cleveland',1],kashkari:['président de la Fed de Minneapolis',1],logan:['présidente de la Fed de Dallas',1],paulson:['présidente de la Fed de Philadelphie',1],
+      barkin:['président de la Fed de Richmond',0],daly:['présidente de la Fed de San Francisco',0],goolsbee:['président de la Fed de Chicago',0],collins:['présidente de la Fed de Boston',0],musalem:['président de la Fed de Saint-Louis',0],schmid:['président de la Fed de Kansas City',0],bostic:['président de la Fed d\'Atlanta',0],venable:['présidente par intérim de la Fed d\'Atlanta',0]},
+    EUR:{lagarde:['présidente de la BCE',1],lane:['chef économiste, directoire',1],schnabel:['membre du directoire',1],'de guindos':['vice-président',1],cipollone:['membre du directoire',1],elderson:['membre du directoire',1],nagel:['président de la Bundesbank (vote par rotation)',1],villeroy:['gouverneur de la Banque de France (vote par rotation)',1],holzmann:['gouverneur de la Banque d\'Autriche (vote par rotation)',1],kazaks:['gouverneur de la Banque de Lettonie (vote par rotation)',1],'šimkus':['gouverneur de la Banque de Lituanie (vote par rotation)',1],simkus:['gouverneur de la Banque de Lituanie (vote par rotation)',1],knot:['gouverneur (vote par rotation)',1],rehn:['gouverneur de la Banque de Finlande (vote par rotation)',1]},
+    GBP:{bailey:['gouverneur',1],lombardelli:['sous-gouverneure, politique monétaire',1],ramsden:['sous-gouverneur, marchés',1],breeden:['sous-gouverneure, stabilité financière',1],pill:['chef économiste',1],greene:['membre externe du MPC',1],mann:['membre externe du MPC',1],taylor:['membre externe du MPC',1],dhingra:['membre externe du MPC',1]},
+    CHF:{schlegel:['président de la BNS',1],martin:['vice-président de la BNS',1],tschudin:['membre de la direction générale',1]},
+    AUD:{bullock:['gouverneure',1],hauser:['sous-gouverneur',1],hunter:['cheffe économiste (assistante du gouverneur)',0],kent:['assistant du gouverneur, marchés',0]},
+    NZD:{breman:['gouverneure',1],conway:['chef économiste',1],gai:['membre externe du comité',1]},
+    CAD:{macklem:['gouverneur',1],rogers:['première sous-gouverneure',1],kozicki:['sous-gouverneure',1],gravelle:['sous-gouverneur',1],vincent:['sous-gouverneur',1],mendes:['sous-gouverneure',1]},
+    JPY:{ueda:['gouverneur',1],uchida:['sous-gouverneur',1],himino:['sous-gouverneur',1],takata:['membre du conseil',1],masu:['membre du conseil',1],asada:['membre du conseil',1],koeda:['membre du conseil',1],tamura:['membre du conseil',1],noguchi:['membre du conseil',1],nakagawa:['membre du conseil',1]}};
+  function isDec(n){return /^(consensus|fomc$|institution$|d[ée]cisions?$|conseil$|comit[ée]$)/i.test(String(n||'').trim());}
+  function dirOf(c,n){var D=DIR[c]||{},k=String(n||'').trim().toLowerCase();if(D[k])return D[k];var w=k.split(/\s+/);return D[w[w.length-1]]||D[w[0]]||null;}
+  var NVOPEN={};
   function decorate(c){var fl=document.getElementById('fedList');if(!fl)return;var L=((M().currencies[c]||{}).fedMembers)||[];
     [].forEach.call(fl.querySelectorAll('.fed-item'),function(it,idx){var nm=it.querySelector('.fed-name'),sel=it.querySelector('.fed-select');if(!nm||!sel)return;var mb=L.filter(function(x){return x.name===nm.textContent.trim();})[0]||L[idx]||{};
       var v=sel.value,p=POS[v]||3,col=tint(p),notes=(mb.notes||[]).slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');}),ln=notes[0];
@@ -22861,12 +22953,23 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
       sel.style.background=col;sel.style.borderColor=col;sel.style.color='#F6F3EF';
       var sc=it.querySelector('.v12-sc');if(!sc){sc=document.createElement('div');sc.className='v12-sc';it.appendChild(sc);}
       var h='';for(var k=1;k<=5;k++)h+='<span style="background:'+(k<=Math.round(p)?col:'#E5DED5')+'"></span>';sc.innerHTML=h;sc.title='Ton : '+(TON[v]||v);
-      var q=it.querySelector('.v12-q');if(!q){q=document.createElement('blockquote');q.className='v12-q';it.appendChild(q);}q.textContent=ln&&ln.text?'« '+String(ln.text).split('\n')[0]+' »':'Pas encore de note.';q.classList.toggle('mut',!ln);
+      var q=it.querySelector('.v12-q');if(!q){q=document.createElement('blockquote');q.className='v12-q';it.appendChild(q);}var l1=ln&&ln.text?String(ln.text).split('\n')[0].trim():'';q.textContent=l1?(/^«/.test(l1)?l1:'« '+l1+' »'):'Pas encore de note.';q.classList.toggle('mut',!ln);
       var ft=it.querySelector('.v12-mf');if(!ft){ft=document.createElement('div');ft.className='v12-mf';it.appendChild(ft);}
       ft.innerHTML='<span class="mut sm">'+(ln?esc(fdate(ln.date))+' · ':'')+notes.length+' note'+(notes.length>1?'s':'')+'</span><span class="v12-mfb"><button type="button" class="btn" data-v12note="h">Historique</button><button type="button" class="btn" data-v12note="n">+ Note</button></span>';});
+    /* v133 : fonction sous le nom, carte « Décisions », votants d'abord, non votants repliés */
+    var nNV=0;
+    [].forEach.call(fl.querySelectorAll('.fed-item'),function(it){var nm=it.querySelector('.fed-name');if(!nm)return;var n=nm.textContent.trim(),dec=isDec(n),dr=dec?null:dirOf(c,n);
+      var fn=it.querySelector('.v12-fn');if(!fn){fn=document.createElement('div');fn.className='v12-fn mut';nm.insertAdjacentElement('afterend',fn);}
+      var txt=dec?'décisions et communiqués du conseil':dr?dr[0]+(c==='USD'?(dr[1]?' · vote en 2026':' · ne vote pas en 2026'):(dr[1]?'':' · ne vote pas')):'';
+      if(fn.textContent!==txt)fn.textContent=txt;fn.style.display=txt?'':'none';
+      it.classList.toggle('v12-dec',dec);var dl=it.querySelector('.v12-dname');if(dec&&!dl){dl=document.createElement('span');dl.className='v12-dname';dl.textContent='Décisions';nm.insertAdjacentElement('beforebegin',dl);}if(!dec&&dl)dl.remove();
+      var nv=!dec&&dr&&!dr[1];it.classList.toggle('v12-nv',nv);if(nv)nNV++;
+      it.style.order=dec?'-2':nv?'5':'0';});
+    fl.classList.toggle('v12-nvopen',!!NVOPEN[c]);
+    var tg=fl.querySelector('.v12-nvt');if(nNV){if(!tg){tg=document.createElement('button');tg.type='button';tg.className='v12-nvt';fl.appendChild(tg);}tg.style.order='4';var lab=(NVOPEN[c]?'Masquer':'Voir')+' les non votants ('+nNV+')';if(tg.textContent!==lab)tg.textContent=lab;tg.onclick=function(){NVOPEN[c]=!NVOPEN[c];decorate(c);};}else if(tg)tg.remove();
     var fw=document.getElementById('fedWatchCard');if(fw&&!document.getElementById('v12SpkHd')){var hd=document.createElement('div');hd.id='v12SpkHd';hd.className='v9-hd';hd.innerHTML='<h3 class="ttl">Les speakers</h3><button type="button" class="btn" data-v12addm="1">+ Ajouter un membre</button>';var fl3=document.getElementById('fedList');if(fl3)fw.insertBefore(hd,fl3);}}
   function spkHtml(c){var db=DB()||{},t=realDay();var L=(db.events||[]).filter(function(e){return e&&e.date>=t&&isDisc(e)&&evOf(e,c)&&!(e.actual&&String(e.actual).trim());}).sort(function(a,b){return (a.date+(a.time||'')).localeCompare(b.date+(b.time||''));}).slice(0,4);
-    return '<div class="lbl">Prochains discours</div>'+(L.length?L.map(function(e){var n=String(e.member||String(e.title||'').replace(/^discours (de|d')\s*/i,'').split(/[ ,(]/)[0]);return '<div class="v12-ns"><span class="v12-av">'+esc(ini(n))+'</span><div><div style="font-weight:500">'+esc(String(e.title||'').split('\n')[0])+'</div><div class="mut sm">'+esc(dShort(e.date))+(e.time?' · '+esc(hh(e.time)):'')+'</div></div></div>';}).join(''):'<div class="mut sm">Aucun discours prévu dans ton calendrier éco.</div>')+'<div class="mut sm" style="margin-top:auto">Repris du calendrier éco. Après le discours, la note s\'ajoute à la carte du membre et au Journal.</div>';}
+    return '<div class="lbl">Prochains discours</div>'+(L.length?L.map(function(e){var n=String(e.member||String(e.title||'').replace(/^discours (de|d')\s*/i,'').split(/[ ,(]/)[0]);return '<div class="v12-ns"><span class="v12-av">'+esc(ini(n))+'</span><div><div style="font-weight:500">'+esc(String(e.title||'').split('\n')[0])+'</div><div class="mut sm">'+esc(dShort(e.date))+(e.time?' · '+esc(hh(e.time)):'')+'</div></div></div>';}).join(''):'<div class="mut sm">Aucun discours prévu dans ton calendrier éco.</div>')+'';}
   function projHtml(c){var C=(M().currencies||{})[c]||{},Y=C.projectionYears||{},R=C.projections||[];if(!R.length)return '';
     return R.map(function(r,ri){return '<section class="v12-pc"><div class="v12-pn">'+esc(r.label)+'</div><div class="v12-py">'+['n2','n1','n'].map(function(k){var cell=r[k]||{},v=num(cell.value),p=num(cell.prev),d=isNaN(v)||isNaN(p)?null:v-p;
       return '<div><div class="mut v12-pyy">'+esc(Y[k]||'')+'</div><div class="v12-pv" contenteditable="true" spellcheck="false" data-v12pj="'+ri+'|'+k+'|value">'+esc(cell.value||'?')+'</div><div class="v12-pd" style="color:'+(d==null?NT:d>0?UP:d<0?DN:NT)+'">'+(d==null?'':d>0?'▲':d<0?'▼':'=')+' avant <span contenteditable="true" spellcheck="false" data-v12pj="'+ri+'|'+k+'|prev">'+esc(cell.prev||'?')+'</span></div></div>';}).join('')+'</div></section>';}).join('');}
@@ -23103,6 +23206,29 @@ document.addEventListener('click',function(e){var d=e.target.closest&&e.target.c
     var n=e.target.closest&&e.target.closest('[data-v13n]');if(n){noteOpen=noteOpen===n.dataset.v13n?null:n.dataset.v13n;noteBars(cur());return;}
     var a=e.target.closest&&e.target.closest('.v13-nf .btn');if(a){var f=a.closest('.v13-nf'),card=f.closest('.card'),t=card&&card.querySelector('.freetext');addNote(t&&t.id,f.querySelector('input').value);}});
   document.addEventListener('keydown',function(e){var i=e.target;if(!i||!i.closest||!i.closest('.v13-nf'))return;if(e.key==='Enter'){e.preventDefault();var card=i.closest('.card'),t=card&&card.querySelector('.freetext');addNote(t&&t.id,i.value);}else if(e.key==='Escape'){noteOpen=null;noteBars(cur());}});
+})();
+
+</script>
+
+<script>
+/* v133 · migrations uniques du journal (une seule fois, marquées dans le journal) */
+(function(){
+  /* emojis des anciennes actus (49 titres du 01/09 au 06/11, liste préparée le 13/11, accord d'Arya) */
+  var MAP={"mthvd46ir1frj": "🇺🇸 🏦", "muvop2zii9uku": "🇺🇸 🇮🇷 🛢️", "muwxieitlnavb": "🇺🇸 🏦", "mux7njai42ffx": "🇺🇸 💵", "muyjxan779cxd": "🇮🇷 ⚔️", "muyjwl8fuse31": "🇺🇸 🛢️", "muyjy6ceohvvm": "🇺🇸 🇮🇷 ⚔️", "muzyu1ult6s9a": "🇺🇸 🛢️", "muzzizoc2qixn": "🇺🇸 🏦", "mv1d4afu6fe77": "🇮🇷 ⚔️", "mv1d5uemsc3no": "🇷🇺 🛢️", "mv1d6cslesqqe": "🇺🇸 💵", "mv75710xtvdwy": "🇦🇺 🏦", "mv758n6jd8lz2": "🇺🇸 📈", "mv758w3yokmwe": "🌍 📊", "mvavj7bfpz11u": "🇨🇳 💵", "mvh68qd4aopzh": "🇰🇷 📉", "mvh6bbzt5xs80": "🇺🇸 🏦", "mvh6c2ff153hq": "🇮🇷 🤝", "mvh6cgw99xd0u": "🇺🇸 📈", "mvim7hvmz8q5p": "🇮🇷 🤝", "mvk0z7sphobbc": "🇺🇸 📉", "mvpspyz7fyzwe": "🇸🇦 🛢️", "mvpsrf7ohuhg9": "🇺🇸 📈", "mvpsrwdbiy7xe": "🇺🇸 📈", "mvpsov6zwdr5f": "🇮🇷 🤝", "mvpssgjoedrfe": "🇨🇦 📦", "mvs6zdoo4yb44": "🇯🇵 🏦", "mvs7qgjmutpga": "🇺🇸 📈", "mvs7sk7y88488": "🇸🇦 🛢️", "emvuadauwr4i8": "🇬🇧 🏛️", "emvvqflerj9bw": "🇪🇺 🏦", "emvvqflerdgr9": "🇺🇸 📉", "emvvqflerpuv5": "🇮🇷 ⚔️", "emvvqfler9v5d": "🇺🇸 📉", "emvvrgg5ku1dm": "₿ 📉", "emvvrgg5k0pmf": "🇮🇷 🛢️", "emvvrgg5l7evn": "🇺🇸 📉", "mvzux0j7rddqo": "🛢️", "mw1c3alzqkr51": "🇺🇸 🇮🇷 ⚔️", "mw3f76vj6558f": "🇺🇸 🗳️", "mw3f7v3l93krq": "🇺🇸 🗳️", "mwdupnrg9n99y": "🛢️ ⚔️", "mwduoyc10b60g": "🇺🇸 📉", "mwdvuvbbnd6n3": "🇺🇸 ⚔️", "mwdviur7snbbj": "🇮🇷 🤝", "mwdvjeyctoy8u": "🇺🇸 📉", "mwdvtv2t8xnd8": "🇺🇸 🏛️", "mwdvuckw9e9q4": "🇺🇸 🇨🇦 📦", "mwf3ol2r3jksz": "🇺🇸 🏦"};
+  var EMO=/[\u{1F1E6}-\u{1F1FF}\u{1F300}-\u{1FAFF}☀-➿₿]/u;
+  var PRE1=/^[^:\n]{0,45}?[\u{1F1E6}-\u{1F1FF}\u{1F300}-\u{1FAFF}☀-➿][^:\n]{0,12}?\s*:\s*/u;
+  var PRE2=/^[^:\n]{0,45}:\s*(?:[\u{1F1E6}-\u{1F1FF}\u{1F300}-\u{1FAFF}☀-➿️\/\s]+):\s*/u;
+  function emojis(db){if(db.migrEmoji1611)return false;var n=0,keep=[];
+    (db.events||[]).forEach(function(e){var v=e&&MAP[e.id];if(!v||e.kind!=='news')return;var t=String(e.title||'');
+      if(/^[\u{1F1E6}-\u{1F1FF}\u{1F300}-\u{1FAFF}☀-➿₿]/u.test(t.trim()))return;
+      keep.push({id:e.id,title:t});var c=t.replace(PRE2,'');if(c===t)c=t.replace(PRE1,'');e.title=v+' '+c.replace(/^\s+/,'');n++;});
+    db.migrEmoji1611={at:new Date().toISOString(),n:n,before:keep};return true;}
+  var tries=0;
+  function run(){tries++;var db=null;try{db=window.__getDB&&window.__getDB();}catch(e){}
+    if(!db||!Array.isArray(db.events)||!db.events.length){if(tries<90)setTimeout(run,1000);return;}
+    var ch=false;try{ch=emojis(db)||ch;}catch(e){console.log('migration emojis',e);}
+    if(ch){try{if(typeof save==='function')save();}catch(e){}}}
+  setTimeout(run,2500);
 })();
 
 </script>
